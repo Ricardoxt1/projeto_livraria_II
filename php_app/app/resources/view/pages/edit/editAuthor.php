@@ -1,8 +1,8 @@
 <?php
 session_start();
 ob_start();
-include_once '../../../config.php';
-$connection = connect();
+include_once '../projetoPOO/php_app/configuration/connect.php';
+$connection = new Connect();
 
 
 $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
@@ -17,7 +17,7 @@ if (($result_authors) and ($result_authors->rowCount() != 0)) {
     $row_authors = $result_authors->fetch(PDO::FETCH_ASSOC);
 } else {
     $_SESSION['msg'] = "<p style='color: #f00;'>Erro: Autor não encontrado!</p>";
-    header("Location: /front/pages/list/listAuthors");
+    header("Location: /resources/view/pages/list/listAuthors");
     exit;
 };
 
@@ -34,10 +34,9 @@ if (($result_authors) and ($result_authors->rowCount() != 0)) {
     <meta name="generator" content="Ricardo">
     <title>Edição de autores</title>
 
-    <link href="https://getbootstrap.com/docs/5.2/examples/dashboard/" rel="canonical">
-    <link href="../../../bootstrap-5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../../../bootstrap-5.2.3/dist/css/pages.css" rel="stylesheet">
-    <link href="../dashboard/dashboard.css" rel="stylesheet">
+    <link href="https:/getbootstrap.com/docs/5.2/examples/dashboard/" rel="canonical">
+    <link href="../../bootstrap-5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../bootstrap-5.2.3/dist/css/pages.css" rel="stylesheet">
 </head>
 
 <body>
@@ -50,6 +49,7 @@ if (($result_authors) and ($result_authors->rowCount() != 0)) {
         <div class="navbar-nav">
             <div class="nav-item text-nowrap">
                 <a class="nav-link px-3" href="../../pages/list/listAuthors">Voltar a listagem</a>
+             
             </div>
         </div>
     </header>
@@ -66,6 +66,7 @@ if (($result_authors) and ($result_authors->rowCount() != 0)) {
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="../../pages/list/listCostumers">
+
                                 <span data-feather="edit_costumers" class="align-text-bottom">Usuarios</span>
 
                             </a>
