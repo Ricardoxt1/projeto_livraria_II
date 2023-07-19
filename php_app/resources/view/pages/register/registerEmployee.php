@@ -1,7 +1,7 @@
 <?php
 session_start();
-include_once('../../../config.php');
-$connection = connect();
+include_once('../../../../configuration/Connect.php');
+$connection = new Connect();
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -23,7 +23,7 @@ $connection = connect();
 <body>
 
     <?php
-    include_once '../../component/navbar.php';
+    include_once '../../../view/component/navbar.php';
     ?>
 
     <div class="container-fluid">

@@ -23,7 +23,7 @@ session_start();
 <body>
 
     <?php
-    include_once '../../component/navbar.php';
+    include_once '../../../view/component/navbar.php';
     ?>
 
     <div class="container-fluid">
@@ -102,7 +102,7 @@ session_start();
 
                                     <div class="col-md-7 col-lg-12">
                                         <h4 class="mb-3">Registro dados pessoais</h4>
-                                        <form class="needs-validation" action="../../../../app/Controller/Register" method="post">
+                                        <form class="needs-validation" action="../../../controllerDB/register/registerCostumer" method="post" novalidate="">
                                             <div class="row g-3">
                                                 <div class="col-sm-7">
                                                     <label for="nome_costumer" class="form-label">Nome completo</label>
@@ -147,7 +147,7 @@ session_start();
 
                                             <hr class="my-4">
 
-                                            <button class="w-20 btn btn-primary btn-ls" name="register" type="submit">Enviar</button>
+                                            <button class="w-20 btn btn-primary btn-ls" type="submit">Enviar</button>
                                         </form>
                                     </div>
                                 </div>

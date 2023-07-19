@@ -6,7 +6,7 @@
 
     <div class="navbar-nav">
         <div class="nav-item text-nowrap">
-            <a class="nav-link px-3" href="../../menu/menu">Voltar ao menu</a>
+            <a class="nav-link px-3" href="../menu.html">Voltar ao menu</a>
         </div>
     </div>
 </header>

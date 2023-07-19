@@ -3,6 +3,7 @@ session_start();
 ob_start();
 include_once '../../../config.php';
 $connection = connect();
+
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -11,25 +12,22 @@ $connection = connect();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listagem de Editoras</title>
+    <title>Listagem de autores</title>
 
-
-    <link rel="stylesheet" href="../../../bootstrap-5.2.3/dist/css/pages.css">
-    <link rel="stylesheet" href="../dashboard/dashboard.css">
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
     <link rel="stylesheet" href="../../../bootstrap-5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../dashboard/dashboard.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-
 
 </head>
 
 <body>
 
     <?php
-    include_once '../../component/navbar.php';
+    include_once '../../componentNavbar/navbar.php';
     ?>
 
-    <div class="container-fluid ">
+    <div class="container-fluid">
         <div class="row">
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                 <div class="position-sticky pt-3 sidebar-sticky">
@@ -37,22 +35,23 @@ $connection = connect();
                         <li>
                             <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
                                 <span>Listagem de itens</span>
+
                             </h6>
 
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="../list/listBooks">
-                                <span data-feather="listBooks" class="align-text-bottom">Livros</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="../list/listAuthors">
-                                <span data-feather="listAuthors" class="align-text-bottom">Autores</span>
+                                <span data-feather="listBooks" class="align-text-bottom"> Livros</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="../list/listCostumers">
                                 <span data-feather="listCostumers" class="align-text-bottom">Usuarios</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../list/listPublishers">
+                                <span data-feather="listPublishers" class="align-text-bottom">Editoras</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -81,60 +80,51 @@ $connection = connect();
                 </div>
             </nav>
 
-
             <main class="col-md-9 ms-sm col-lg-4 px-md-5">
-
-
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Listagem de Editoras</h1>
+                    <h1 class="h2">Listagem de Autores</h1>
                 </div>
-                <div>
-                    <?php
-                    if (isset($_SESSION['msg'])) {
-                        echo $_SESSION['msg'];
-                        unset($_SESSION['msg']);
-                    }
-                    ?>
-                </div>
+                <?php
+                if (isset($_SESSION['msg'])) {
+                    echo $_SESSION['msg'];
+                    unset($_SESSION['msg']);
+                }
+                ?>
                 <div class="table-responsive">
                     <table class="table table-striped table-ls">
                         <thead>
                             <tr>
-                                <th scope="col">Editoras</th>
+                                <th scope="col">Nome</th>
                             </tr>
                         </thead>
 
-
-
                         <?php
-                        $query_publishers = "SELECT * FROM publishers ";
-                        $result_publishers = $connection->prepare($query_publishers);
-                        $result_publishers->execute();
+                        $query_authors = "SELECT * FROM authors ";
+                        $result_authors = $connection->prepare($query_authors);
+                        $result_authors->execute();
+                        if (($result_authors) and ($result_authors->rowCount() != 0)) {
+                            while ($row_authors = $result_authors->fetch(PDO::FETCH_ASSOC)) {
+                                $id = $row_authors['id'];
 
-
-
-                        if (($result_publishers) and ($result_publishers->rowCount() != 0)) {
-                            while ($row_publishers = $result_publishers->fetch(PDO::FETCH_ASSOC)) {
-                                $id = $row_publishers['id'];
                                 echo "                             
                                 <form action='' method='get'>
                                     <tbody>
                                         <tr>
                                             <input type='hidden' name='id' value=$id />
-                                            <td name='name_publishers'>$row_publishers[name]</td>
-                                            <td name='edit_name'><a href='../edit/editPublisher.php?id=$id'><svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
-                                                                        <path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>
-                                                                        <path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z'/></svg>
-                                                                </a>
-                                                                <td name='delete_name'>
+                                            <td name='name_authors'>$row_authors[name]</td>
+
+                                            <td name='edit_name'><a href='../../pages/edit/editAuthor?id=$id'><svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
+                                                                         <path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z'/>
+                                                                         <path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z'/></svg>
+                                                                 </a>
+                                                                    <td name='delete_name'>
                                                                         <a href='#' data-toggle='modal' data-target='#confirmDeleteModal$id'>
                                                                             <svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='currentColor' class='bi bi-trash' viewBox='0 0 16 16'>
                                                                                 <path d='M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5Zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6Z' />
                                                                                 <path d='M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z' />
                                                                             </svg>
                                                                         </a>
-                    
-                                                                        <!-- Modal de confirmação de deleção -->
+                                                                    
                                                                         <div class='modal fade' id='confirmDeleteModal$id' tabindex='-1' role='dialog' aria-labelledby='confirmDeleteModalLabel' aria-hidden='true'>
                                                                             <div class='modal-dialog' role='document'>
                                                                                 <div class='modal-content'>
@@ -145,16 +135,16 @@ $connection = connect();
                                                                                         </button>
                                                                                     </div>
                                                                                     <div class='modal-body'>
-                                                                                        Tem certeza de que deseja excluir este livro?
+                                                                                        Tem certeza de que deseja excluir este autor?
                                                                                     </div>
                                                                                     <div class='modal-footer'>
                                                                                         <button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancelar</button>
-                                                                                        <a href='../../../controllerDB/delete/deletePublisher.php?id=$id' class='btn btn-danger'>Excluir</a>
+                                                                                        <a href='../../../controllerDB/delete/deleteAuthor.php?id=$id' class='btn btn-danger'>Excluir</a>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
-                                                                </td>
+                                                </td>
                                                 
                                             </td>
                                         </tr>
@@ -169,14 +159,14 @@ $connection = connect();
                         ?>
                     </table>
                 </div>
-                <footer class="text-muted text-center py-5">
-                    <div class="container">
-                        <p class="mb-1">© 2023 Biblioteca Pedbot</p>
-                    </div>
-                </footer>
             </main>
-
         </div>
+
+        <footer class="text-muted text-center py-5">
+            <div class="container">
+                <p class="mb-1">© 2023 Biblioteca Pedbot</p>
+            </div>
+        </footer>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
@@ -186,7 +176,6 @@ $connection = connect();
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
     <script src="dashboard.js"></script>
-
 </body>
 
 </html>

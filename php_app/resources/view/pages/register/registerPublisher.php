@@ -8,11 +8,11 @@ session_start();
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de autores</title>
+    <title>Cadastro de Editoras</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
-    <link href="../dashboard/dashboard.css" rel="stylesheet">
     <link href="../../../bootstrap-5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../dashboard/dashboard.css" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../bootstrap-5.2.3/dist/css/pages.css">
 
@@ -21,7 +21,7 @@ session_start();
 <body>
 
     <?php
-    include_once '../../component/navbar.php';
+    include_once '../../../view/component/navbar.php';
     ?>
 
     <div class="container-fluid">
@@ -41,24 +41,21 @@ session_start();
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../../pages/register/registerBook">
-                                <span data-feather="registerBook" class="align-text-bottom">Livros</span>
+                            <a class="nav-link" href="../../pages/register/registerAuthor">
+                                <span data-feather="registerAuthor" class="align-text-bottom">Autores</span>
 
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="../../pages/register/registerPublisher">
-                                <span data-feather="registerPublisher" class="align-text-bottom">Editoras</span>
-
+                            <a class="nav-link" href="../../pages/register/registerBook">
+                                <span data-feather="registerBook" class="align-text-bottom">Livros</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="../../pages/register/registerEmployee">
                                 <span data-feather="registerEmployee" class="align-text-bottom">Funcionário(a)</span>
-
                             </a>
                         </li>
-
                         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
                             <span>Opções</span>
                         </h6>
@@ -66,13 +63,11 @@ session_start();
                             <li class="nav-item">
                                 <a class="nav-link" href="../../pages/register/registerRental">
                                     <span name="rentals" class="align-text-bottom">Alugar livro</span>
-
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="../list/listCostumers">
                                     <span data-feather="list" class="align-text-bottom">Listagem</span>
-
                                 </a>
                             </li>
                         </ul>
@@ -88,7 +83,7 @@ session_start();
                         <div class="container">
                             <main>
                                 <div class="py-5 ml-2">
-                                    <h2>Cadastro de Autores</h2>
+                                    <h2>Cadastro de Editoras</h2>
                                     <div>
                                         <?php
                                         if (isset($_SESSION['msg'])) {
@@ -99,17 +94,16 @@ session_start();
                                     </div>
                                     <div class="row g-5 pt-5">
                                         <div class="col-md-7 col-lg-10">
-                                            <h5 class="mb-3">Informações revelantes sobre o autor</h5>
+                                            <h5 class="mb-3">Informações revelantes sobre a editora</h5>
                                         </div>
                                     </div>
-                                    <form class="needs-validation" action="../../../controllerDB/register/registerAuthor" method="post" novalidate="">
+                                    <form class="needs-validation" action="../../../controllerDB/register/registerPublisher" method="post" novalidate="">
                                         <div class="row g-3">
                                             <div class="col-sm-7">
-
-                                                <label for="name_author" class="form-label">Nome do autor</label>
-                                                <input type="text" class="form-control" name="name" id="name_author" placeholder="fulano da silva" value="" required="">
+                                                <label for="name_publisher" class="form-label">Nome da editora</label>
+                                                <input type="text" class="form-control" name="name" id="name_publisher" placeholder="Editora São Miguel" value="" required="">
                                                 <div class="invalid-feedback">
-                                                    É necessario digitar o nome do autor.
+                                                    É necessario digitar o nome da editora.
                                                 </div>
                                                 <hr class="my-4">
 
@@ -130,7 +124,6 @@ session_start();
 
                 </div>
             </main>
-
         </div>
     </div>
     <script src="../../../bootstrap-5.2.3/dist/css/bootstrap.css"></script>
@@ -138,6 +131,7 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
     <script src="dashboard.js"></script>
+
 
 </body>
 

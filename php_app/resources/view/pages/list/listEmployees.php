@@ -28,7 +28,7 @@ $connection = connect();
 <body>
 
     <?php
-    include_once '../../component/navbar.php';
+    include_once '../../componentNavbar/navbar.php';
     ?>
 
     <div class="container-fluid">
