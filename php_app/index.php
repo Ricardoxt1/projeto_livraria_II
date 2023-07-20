@@ -1,8 +1,12 @@
-<?php
+<?php 
 
-    require_once ("./controllers/CostumerController.php");
+    require __DIR__.'/vendor/autoload.php';
 
-    $action = !empty($_GET['a']) ? ($_GET['a']) : 'getAll';
+    use \App\Controller\Pages\Costumer;
+    
+    $obRequest = new \App\Http\Request;
+    
 
-    $controller = new CostumerController();
-    $controller->{$action}(); 
+    exit;
+
+    echo Costumer::getCostumer();
