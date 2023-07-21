@@ -2,7 +2,8 @@
 
 namespace App\Http;
 
-class Response{
+class Response
+{
 
     /**
      * código do status HTTP
@@ -33,28 +34,58 @@ class Response{
      * @param string $content
      * @param string $contentType
      * @param array $httpCode
-    */ 
-    public function __construct($httpCode, $content, $contentType = 'text/php'){
+     */
+    public function __construct($httpCode, $content, $contentType = 'text/php')
+    {
         $this->httpCode = $httpCode;
         $this->content = $content;
         $this->setContentType($contentType);
     }
 
-    public function setContentType($contentType){
+    public function setContentType($contentType)
+    {
         $this->contentType = $contentType;
+        // $this->addHeader('Content-Type', $contentType);
     }
 
     /**
-     * método responsável por enviar a resposta para o usuario
-     * @return string
+     * metodo responsavel por adicionar um registro no cabeçalho de response
+     * @param string $key
+     * @param mixed $value
      */
-    public function sendResponse(){
+    // public function addHeader($key, $value)
+    // {
+    //     $this->headers[$key] = $value;
+    // }
+
+    /**
+     * metodo responsavel por enviar os headers para o navegador
+     * 
+     */
+    // public function sendHeaders(){
+    //     //STATUS
+    //     http_response_code($this->httpCode);
+
+    //     //ENVIAR HEADERS
+    //     foreach($this->headers as $key => $value){
+    //         header($key, $value);
+    //     }
+    // }
+
+    /**
+     * método responsável por enviar a resposta para o usuario
+     * 
+     */
+    public function sendResponse()
+    {
+        // //ENVIA OS HEADERS
+        // $this->sendHeaders();
+        
+        //IMPRIME O CONTEUDO
         switch ($this->contentType) {
             case 'text/php':
                 echo $this->content;
                 exit;
         }
     }
-
-
 }
