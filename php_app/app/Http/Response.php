@@ -35,7 +35,7 @@ class Response
      * @param string $contentType
      * @param array $httpCode
      */
-    public function __construct($httpCode, $content, $contentType = 'text/php')
+    public function __construct($httpCode, $content, $contentType = 'text/html')
     {
         $this->httpCode = $httpCode;
         $this->content = $content;
@@ -83,7 +83,7 @@ class Response
         
         //IMPRIME O CONTEUDO
         switch ($this->contentType) {
-            case 'text/php':
+            case 'text/html':
                 echo $this->content;
                 exit;
         }
