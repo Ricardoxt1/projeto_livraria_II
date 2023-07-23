@@ -3,20 +3,20 @@
     require __DIR__.'/vendor/autoload.php';
 
     use \App\Http\Router;
-    use \App\Http\Response;
-    use \App\Controller\Pages\Costumer;
+    use \App\Utils\View;
+    
+    define('URL', 'http://app.localhost/php_app');
 
+    //define o valor padrão das variavéis
+    View::init([
+        'URL' => URL
+    ]);
 
-    define('URL', 'http://localhost/php_app');
-
+    //inicia o router
     $obRouter = new Router(URL);
 
-    //ROTA COSTUMER
-    $obRouter->get('/', [
-        function(){
-            return new Response(200, Costumer::getCostumer());
-        }
-    ]);
+    //inclui as rotas de paginas
+    include __DIR__.'/routes/pages.php';
 
     //IMPRIME O RESPONSE DA ROTA
     $obRouter->run()
