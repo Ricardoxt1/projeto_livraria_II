@@ -4,6 +4,7 @@ namespace App\Controller\Pages;
 
 use \App\Utils\View;
 
+
 class Costumer
 {
 
@@ -11,6 +12,7 @@ class Costumer
      * @return string
      *  */ 
     public static function getCostumer(){
+
         return View::render('pages/listCostumers' , [
             'id' => '1',
             'cpf' => '12312',
