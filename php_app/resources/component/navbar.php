@@ -6,7 +6,7 @@
 
     <div class="navbar-nav">
         <div class="nav-item text-nowrap">
-            <a class="nav-link px-3" href="../../views/pages/menu">Voltar ao menu</a>
+            <a class="nav-link px-3" href="{{URL}}/menu">Voltar ao menu</a>
         </div>
     </div>
 </header>

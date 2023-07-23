@@ -11,26 +11,27 @@ ob_start();
     <meta name="description" content="Um projeto voltado ao sistema de gestão para biblioteca">
     <meta name="Ricardo" content="Sistema de biblioteca">
     <meta name="generator" content="Ricardo">
-    <title>Listagem de Usuarios</title>
+    <title>Listagem de Funcionários</title>
+
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="../../../bootstrap-5.2.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./bootstrap-5.2.3/dist/css/pages.css">
+    <link rel="stylesheet" href="../../../bootstrap-5.2.3/dist/css/pages.css">
     <link rel="stylesheet" href="../dashboard/dashboard.css">
+
 
 </head>
 
 <body>
+
     <?php
-    include_once '../component/navbar.php';
+    include_once '../../componentNavbar/navbar.php';
     ?>
 
     <div class="container-fluid">
         <div class="row">
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-                <?php require_once '../components/listRedirection.php';
-                ?>
                 <div class="position-sticky pt-3 sidebar-sticky">
                     <ul class="nav flex-column">
                         <li>
@@ -56,8 +57,8 @@ ob_start();
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{URL}}/employee">
-                                <span data-feather="listEmployees" class="align-text-bottom">Funcionário(a)</span>
+                            <a class="nav-link" href="{{URL}}/costumer">
+                                <span data-feather="listCostumers" class="align-text-bottom">Usuarios</span>
                             </a>
                         </li>
 
@@ -66,7 +67,6 @@ ob_start();
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
                         <span>Opções</span>
                     </h6>
-
                     <ul class="nav flex-column mb-2">
                         <li class="nav-item">
                             <a class="nav-link" href="{{URL}}/rental">
@@ -75,16 +75,16 @@ ob_start();
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{URL}}/registerCostumer">
-                                <span data-feather="file-text" class="align-text-bottom">Cadastrar</span>
+                                <span data-feather="register" class="align-text-bottom">Cadastrar</span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </nav>
 
-            <main class="col-md-9 ms-sm col-lg-8 px-md-5">
+            <main class="col-md-9 ms-sm col-lg-7 px-md-5">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Listagem de Usuarios</h1>
+                    <h1 class="h2">Listagem de Funcionários</h1>
                 </div>
                 <div>
                     <?php
@@ -99,22 +99,23 @@ ob_start();
                         <thead>
                             <tr>
                                 <th scope="col">Nome</th>
-                                <th scope="col">Telefone</th>
-                                <th scope="col">Endereço</th>
-                                <th scope="col">Email</th>
-
+                                <th scope="col">PIS</th>
+                                <th scope="col">Cargo</th>
+                                <th scope="col">Departamento</th>
                             </tr>
                         </thead>
 
-                        <form action='' method='get'>
-                            <tbody>
-                                <?php foreach ($resultData as $key) : ?>
+                        <?php foreach ($resultData as $key) : ?>
+                            <form action='' method='get'>
+                                <tbody>
                                     <tr>
-                                        <td name='name_costumers'>{{name}}</td>
-                                        <td name='phone_number_costumers'>{{cpf}}</td>
-                                        <td name='address_costumers'>{{address}}</td>
-                                        <td name='email_costumers'>{{email}}</td>
-                                        <td name='edit_name'><a href='../edit/editCostumer.php?id=$id'><svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
+                                        <input type='hidden' name='id' value='$id'>
+                                        <td name='name_employees'>{{name}}</td>
+                                        <td name='pis_employees'>{{pis}}</td>
+                                        <td name='office_employees'>{{office}}</td>
+                                        <td name='departament'>{{departament}}</td>
+
+                                        <td name='edit_name'><a href='../edit/editEmployee.php?id=$id'><svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
                                                     <path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z' />
                                                     <path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z' />
                                                 </svg>
@@ -142,17 +143,19 @@ ob_start();
                                                         </div>
                                                         <div class='modal-footer'>
                                                             <button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancelar</button>
-                                                            <a href='../../../controllerDB/delete/deleteCostumer.php?id=$id' class='btn btn-danger'>Excluir</a>
+                                                            <a href='../../../controllerDB/delete/deleteEmployee.php?id=$id' class='btn btn-danger'>Excluir</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
-                                    </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </form>
 
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+                            </form>
+                        <?php endforeach; ?>
 
 
                     </table>
@@ -176,6 +179,7 @@ ob_start();
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
     <script src="dashboard.js"></script>
+
 </body>
 
 </html>

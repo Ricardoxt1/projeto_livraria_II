@@ -2,35 +2,34 @@
 session_start();
 ob_start();
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Um projeto voltado ao sistema de gestão para biblioteca">
-    <meta name="Ricardo" content="Sistema de biblioteca">
-    <meta name="generator" content="Ricardo">
-    <title>Listagem de Usuarios</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Editoras</title>
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../../../bootstrap-5.2.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./bootstrap-5.2.3/dist/css/pages.css">
+
+    <link rel="stylesheet" href="../../../bootstrap-5.2.3/dist/css/pages.css">
     <link rel="stylesheet" href="../dashboard/dashboard.css">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/dashboard/">
+    <link rel="stylesheet" href="../../../bootstrap-5.2.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
 
 </head>
 
 <body>
+
     <?php
-    include_once '../component/navbar.php';
+    include_once '../../componentNavbar/navbar.php';
     ?>
 
-    <div class="container-fluid">
+    <div class="container-fluid ">
         <div class="row">
             <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-                <?php require_once '../components/listRedirection.php';
-                ?>
                 <div class="position-sticky pt-3 sidebar-sticky">
                     <ul class="nav flex-column">
                         <li>
@@ -43,7 +42,6 @@ ob_start();
                             <a class="nav-link" href="{{URL}}/book">
                                 <span data-feather="listBooks" class="align-text-bottom">Livros</span>
                             </a>
-
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{URL}}/author">
@@ -51,8 +49,8 @@ ob_start();
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{URL}}/publisher">
-                                <span data-feather="listPublishers" class="align-text-bottom">Editoras</span>
+                            <a class="nav-link" href="{{URL}}/costumer">
+                                <span data-feather="listCostumers" class="align-text-bottom">Usuarios</span>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -66,7 +64,6 @@ ob_start();
                     <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
                         <span>Opções</span>
                     </h6>
-
                     <ul class="nav flex-column mb-2">
                         <li class="nav-item">
                             <a class="nav-link" href="{{URL}}/rental">
@@ -75,16 +72,19 @@ ob_start();
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{{URL}}/registerCostumer">
-                                <span data-feather="file-text" class="align-text-bottom">Cadastrar</span>
+                                <span data-feather="register" class="align-text-bottom">Cadastrar</span>
                             </a>
                         </li>
                     </ul>
                 </div>
             </nav>
 
-            <main class="col-md-9 ms-sm col-lg-8 px-md-5">
+
+            <main class="col-md-9 ms-sm col-lg-4 px-md-5">
+
+
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Listagem de Usuarios</h1>
+                    <h1 class="h2">Listagem de Editoras</h1>
                 </div>
                 <div>
                     <?php
@@ -98,23 +98,17 @@ ob_start();
                     <table class="table table-striped table-ls">
                         <thead>
                             <tr>
-                                <th scope="col">Nome</th>
-                                <th scope="col">Telefone</th>
-                                <th scope="col">Endereço</th>
-                                <th scope="col">Email</th>
-
+                                <th scope="col">Editoras</th>
                             </tr>
                         </thead>
 
-                        <form action='' method='get'>
-                            <tbody>
-                                <?php foreach ($resultData as $key) : ?>
+                        <?php foreach ($resultData as $key) : ?>
+                            <form action='' method='get'>
+                                <tbody>
                                     <tr>
-                                        <td name='name_costumers'>{{name}}</td>
-                                        <td name='phone_number_costumers'>{{cpf}}</td>
-                                        <td name='address_costumers'>{{address}}</td>
-                                        <td name='email_costumers'>{{email}}</td>
-                                        <td name='edit_name'><a href='../edit/editCostumer.php?id=$id'><svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
+                                        <input type='hidden' name='id' value=$id />
+                                        <td name='name_publishers'>{{name}}</td>
+                                        <td name='edit_name'><a href='../edit/editPublisher.php?id=$id'><svg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='currentColor' class='bi bi-pencil-square' viewBox='0 0 16 16'>
                                                     <path d='M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z' />
                                                     <path fill-rule='evenodd' d='M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z' />
                                                 </svg>
@@ -142,30 +136,29 @@ ob_start();
                                                         </div>
                                                         <div class='modal-footer'>
                                                             <button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancelar</button>
-                                                            <a href='../../../controllerDB/delete/deleteCostumer.php?id=$id' class='btn btn-danger'>Excluir</a>
+                                                            <a href='../../../controllerDB/delete/deletePublisher.php?id=$id' class='btn btn-danger'>Excluir</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </td>
+
+                                        </td>
                                     </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </form>
 
-
+                                </tbody>
+                            </form>
+                        <?php endforeach; ?>
 
                     </table>
-
-
                 </div>
                 <footer class="text-muted text-center py-5">
                     <div class="container">
                         <p class="mb-1">© 2023 Biblioteca Pedbot</p>
                     </div>
                 </footer>
-
             </main>
+
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
@@ -176,6 +169,7 @@ ob_start();
     <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
     <script src="dashboard.js"></script>
+
 </body>
 
 </html>
