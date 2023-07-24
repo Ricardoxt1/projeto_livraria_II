@@ -4,6 +4,7 @@ namespace App\Http;
 
 use \Closure;
 use \Exception;
+use \ReflectionFunction;
 
 class Router
 {
@@ -31,6 +32,8 @@ class Router
      */
     private $request;
 
+
+
     /** 
      * ( construção de do cosntructor) método responsavel por iniciar a classe 
      * @param string $url
@@ -46,7 +49,7 @@ class Router
     {
         //INFORMAÇÕES DA URL ATUAL
         $parseUrl = parse_url($this->url);
-        
+
         //DEFINE O PREFIXO
         $this->prefix = $parseUrl['path'] ?? '';
     }
@@ -59,7 +62,7 @@ class Router
      */
     private function addRoute($method, $route, $params = [])
     {
-        
+
         //VALIDAÇÃO DOS PARAMETROS
         foreach ($params as $key => $value) {
             if ($value instanceof Closure) {
@@ -69,12 +72,23 @@ class Router
             }
         }
 
+        //variáveis da rota
+        $params['variables'] = [];
+
+        //padrão de validação das variavéis das rotas
+        $patternVariable = '/{(.*?)}/';
+
+        if (preg_match_all($patternVariable, $route, $matches)) {
+            $route = preg_replace($patternVariable, '(.*?)', $route);
+            $params['variables'] = $matches[1];
+        }
+
         //PADRÃO DE VALIDAÇÃO DE URL
         $patternRoute = '/^' . str_replace('/', '\/', $route) . '$/';
 
+
         //ADICIONA A ROTA PARA DENTRO DA CLASSE
         $this->routes[$patternRoute][$method] = $params;
-
     }
 
     /**
@@ -117,11 +131,11 @@ class Router
     {
         //URI DA REQUEST
         $uri = $this->request->getUri();
-        
-       
+
+
         //FATIA A URI COM O PREFIXO
         $xURi = strlen($this->prefix) ? explode($this->prefix, $uri) : [$uri];
-       
+
         //remove último prefixo
         return end($xURi);
 
@@ -134,20 +148,31 @@ class Router
      */
     private function getRoute()
     {
+
         //uri
         $uri = $this->getUri();
-       
+
+
         //method
         $httpMethod = $this->request->getHttpMethod();
 
         //valida as rotas
-        foreach ($this->routes as $patternRoute=>$methods) {
+        foreach ($this->routes as $patternRoute => $methods) {
             //verifica se a uri bate o padrão
-            if (preg_match($patternRoute, $uri)) {
-                //verifica o método
-                if ($methods[$httpMethod]) {
+            if (preg_match($patternRoute, $uri, $matches)) {
 
+                //verifica o método
+                if (isset($methods[$httpMethod])) {
+
+                    //remove a primeira posição
+                    unset($matches[0]);
+
+                    //variadas processadas
+                    $keys = $methods[$httpMethod]['variables'];
+                    $methods[$httpMethod]['variables'] = array_combine($keys, $matches);
+                    $methods[$httpMethod]['variables']['request'] = $this->request;
                     //retorno dos parámetros da rota
+
                     return $methods[$httpMethod];
                 }
 
@@ -155,6 +180,7 @@ class Router
                 throw new Exception("Método não permitido", 405);
             }
         }
+
 
         //url não encontrada
         throw new Exception("Url não encontrada", 404);
@@ -170,18 +196,27 @@ class Router
         try {
 
             $route = $this->getRoute();
-           
+
             //VERIFICA O CONTROLADOR
-            if(!isset($route['controller'])){
+            if (!isset($route['controller'])) {
                 throw new Exception("A Url não pode ser processado", 500);
             }
 
             //ARGUMENTOS DA FUNÇÃO
             $args = [];
 
+            //reflection
+            $reflection = new ReflectionFunction($route['controller']);
+            foreach ($reflection->getParameters() as $parameter) {
+                $name = $parameter->getName();
+                $agrs[$name] = $route['variables'][$name] ?? '';
+            }
+            
+          
+
+
             //RETORNA A EXECUÇÃO DA FUNÇÃO
             return call_user_func_array($route['controller'], $args);
-
         } catch (Exception $e) {
             return new Response($e->getCode(), $e->getMessage());
         }
