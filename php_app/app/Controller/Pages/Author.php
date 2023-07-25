@@ -26,6 +26,8 @@ class Author extends Page
                         <thead>
                             <tr>
                                 <th scope="col">Nome</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <form action="" method="get">
@@ -33,7 +35,7 @@ class Author extends Page
                                 <tr>
                                     <input type="hidden" name="id" value=$id />
                                     <td  name="name_authors">{{name}}</td>
-                
+
                                     <td name="edit_name"><a href="../../pages/edit/editAuthor?id=$id"><svg
                                                 xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
                                                 class="bi bi-pencil-square" viewBox="0 0 16 16">

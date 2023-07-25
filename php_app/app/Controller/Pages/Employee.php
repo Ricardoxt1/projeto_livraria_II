@@ -30,6 +30,8 @@ class Employee extends Page
                                 <th scope="col">PIS</th>
                                 <th scope="col">Cargo</th>
                                 <th scope="col">Departamento</th>
+                                <th scope="col"></th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <form action="" method="get">
