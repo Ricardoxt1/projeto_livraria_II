@@ -14,8 +14,9 @@ class Book extends Page
     public static function getBook()
     {
 
-        $content = View::render('pages/listBooks', [
+        $content = View::render('pages/list/listBooks', [
             //view books
+            'id' => '1',
             'titule' => 'bela e a fera',
             'page' => '1982',
             'realese_date' => '1970',

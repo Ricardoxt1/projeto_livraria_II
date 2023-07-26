@@ -14,7 +14,7 @@ class Rental extends Page
     public static function getRental()
     {
 
-        $content = View::render('pages/listRentals', [
+        $content = View::render('pages/list/listRentals', [
             //view rental
             'id' => '1',
             'rental' => '26/07/2023',

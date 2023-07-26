@@ -14,8 +14,9 @@ class Author extends Page
     public static function getAuthor()
     {
 
-        $content = View::render('pages/listAuthors', [
+        $content = View::render('pages/list/listAuthors', [
             //view authors
+            'id' => '1',
             'name' => 'benedito',
         ]);
 

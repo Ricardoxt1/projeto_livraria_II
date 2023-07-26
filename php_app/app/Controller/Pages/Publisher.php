@@ -14,8 +14,9 @@ class Publisher extends Page
     public static function getPublisher()
     {
 
-        $content = View::render('pages/listPublishers', [
+        $content = View::render('pages/list/listPublishers', [
             //view publishers
+            'id' => '1',
             'name' => 'editora ld',
         ]);
 

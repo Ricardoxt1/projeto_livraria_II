@@ -14,8 +14,9 @@ class Employee extends Page
     public static function getEmployee()
     {
 
-        $content = View::render('pages/listEmployees', [
+        $content = View::render('pages/list/listEmployees', [
             //view employee
+            'id' => '1',
             'name' => 'joãozinho',
             'pis' => '542.6898.7488',
             'office' => 'vendedor',
