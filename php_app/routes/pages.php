@@ -3,6 +3,7 @@
 use \App\Http\Response;
 use \App\Controller\Pages;
 
+
 //ROTA COSTUMER
 $obRouter->get('/costumer', [
     function () {
@@ -44,6 +45,13 @@ $obRouter->get('/rental', [
         return new Response(200, Pages\Rental::getRental());
     }
 ]);
+
+// //ROTA MENU
+// $obRouter->get('/menu', [
+//     function () {
+//         return new Response(200, Pages\Menu::getMenu());
+//     }
+// ]);
 
 //ROTA DINÂMICA 
 $obRouter->get('/pagina/{idPagina}/{acao}', [
