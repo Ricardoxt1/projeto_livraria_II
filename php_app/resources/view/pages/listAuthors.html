@@ -6,7 +6,8 @@
         <table class="table table-striped table-ls ">
             <thead>
                 <tr>
-                    <th class="col-8" scope="col">Nome</th>
+                    
+                    <th class="col-9" scope="col">Nome</th>
                     <th scope="col" class="text-success text-center">Editar</th>
                     <th scope="col" class="text-danger text-center">Deletar</th>
                 </tr>
@@ -14,10 +15,10 @@
             <form action="" method="get">
                 <tbody>
                     <tr>
-                        <input type="hidden" name="id" value=$id />
+                        <input type="hidden" name="id" value={{id}} />
                         <td  name="name_authors">{{name}}</td>
 
-                        <td name="edit_name" class="text-center"><a href="{{URL}}/editAuthor?id=$id"><svg
+                        <td name="edit_name" class="text-center"><a href="{{URL}}/editAuthor.php?id={{id}}"><svg
                                     xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
                                     class="bi bi-pencil-square" viewBox="0 0 16 16">
                                     <path
@@ -53,7 +54,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancelar</button>
-                                            <a href="{{URL}}/deleteAuthor.php?id=$id"
+                                            <a href="{{URL}}/deleteAuthor.php?id={{id}}"
                                                 class="btn btn-danger">Excluir</a>
                                         </div>
                                     </div>

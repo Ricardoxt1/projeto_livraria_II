@@ -11,8 +11,8 @@
                     <th scope="col">Telefone</th>
                     <th scope="col">Endereço</th>
                     <th scope="col">Email</th>
-                    <th scope="col" class="text-success">Editar</th>
-                    <th scope="col" class="text-danger">Deletar</th>
+                    <th scope="col" class="text-success text-center">Editar</th>
+                    <th scope="col" class="text-danger text-center">Deletar</th>
 
                 </tr>
             </thead>
@@ -21,11 +21,13 @@
                 <tbody>
 
                     <tr>
+                        <input type="hidden" name="id" value="{{id}}">
                         <td name="name_costumers">{{name}}</td>
                         <td name="phone_number_costumers">{{cpf}}</td>
                         <td name="address_costumers">{{address}}</td>
                         <td name="email_costumers">{{email}}</td>
-                        <td name="edit_name"><a href="{{URL}}/editCostumer?id=$id"><svg
+
+                        <td name="edit_name" class="text-center"><a href="{{URL}}/editCostumer.php?id={{id}}"><svg
                                     xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
                                     class="bi bi-pencil-square" viewBox="0 0 16 16">
                                     <path
@@ -34,7 +36,7 @@
                                         d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
                                 </svg>
                             </a>
-                        <td name="delete_name">
+                        <td name="delete_name" class="text-center">
                             <a href="#" data-toggle="modal" data-target="#confirmDeleteModal$id">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
                                     class="bi bi-trash" viewBox="0 0 16 16">
@@ -62,7 +64,7 @@
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary"
                                                 data-dismiss="modal">Cancelar</button>
-                                            <a href="{{URL}}/editCostumer?id=$id"
+                                            <a href="{{URL}}/deleteCostumer.php?id={{id}}"
                                                 class="btn btn-danger">Excluir</a>
                                         </div>
                                     </div>
