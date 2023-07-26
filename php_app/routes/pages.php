@@ -46,12 +46,12 @@ $obRouter->get('/rental', [
     }
 ]);
 
-// //ROTA MENU
-// $obRouter->get('/menu', [
-//     function () {
-//         return new Response(200, Pages\Menu::getMenu());
-//     }
-// ]);
+//ROTA MENU
+$obRouter->get('/menu', [
+    function () {
+        return new Response(200, Pages\Menu::getMenu());
+    }
+]);
 
 //ROTA DINÂMICA 
 $obRouter->get('/pagina/{idPagina}/{acao}', [
