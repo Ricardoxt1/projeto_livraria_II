@@ -1,12 +1,12 @@
 <main class="col-md-9 ms-sm col-lg-6 px-md-5">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <div class="pt-3 pb-2 mb-5 text-center">
         <h1 class="h2">Listagem de Autores</h1>
     </div>
-    <div class="table-responsive">
+    <div class="table-responsive ">
         <table class="table table-striped table-ls ">
             <thead>
                 <tr>
-                    
+
                     <th class="col-9" scope="col">Nome</th>
                     <th scope="col" class="text-success text-center">Editar</th>
                     <th scope="col" class="text-danger text-center">Deletar</th>
@@ -16,7 +16,7 @@
                 <tbody>
                     <tr>
                         <input type="hidden" name="id" value={{id}} />
-                        <td  name="name_authors">{{name}}</td>
+                        <td name="name_authors">{{name}}</td>
 
                         <td name="edit_name" class="text-center"><a href="{{URL}}/editAuthor.php?id={{id}}"><svg
                                     xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor"
@@ -37,7 +37,7 @@
                                         d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1ZM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118ZM2.5 3h11V2h-11v1Z" />
                                 </svg>
                             </a>
-    
+
                             <div class="modal fade" id="confirmDeleteModal$id" tabindex="-1" role="dialog"
                                 aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
@@ -61,10 +61,10 @@
                                 </div>
                             </div>
                         </td>
-    
+
                         </td>
                     </tr>
-    
+
                 </tbody>
             </form>
         </table>
