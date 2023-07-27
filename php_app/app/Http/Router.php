@@ -78,11 +78,15 @@ class Router
         //padrão de validação das variavéis das rotas
         $patternVariable = '/{(.*?)}/';
 
+        // Executa a expressão regular e armazena os resultados em $matches
+        $matches = [];
+
+
         if (preg_match_all($patternVariable, $route, $matches)) {
             $route = preg_replace($patternVariable, '(.*?)', $route);
             $params['variables'] = $matches[1];
+           
         }
-
         //PADRÃO DE VALIDAÇÃO DE URL
         $patternRoute = '/^' . str_replace('/', '\/', $route) . '$/';
 
@@ -112,6 +116,16 @@ class Router
     }
 
     /**
+     * método responsável por definir uma rota de PUT
+     * @param string $route
+     * @param array $params
+     */
+    public function put($route, $params = [])
+    {
+        return $this->addRoute('PUT', $route, $params);
+    }
+
+    /**
      * método responsável por definir uma rota de DELETE
      * @param string $route
      * @param array $params
@@ -120,8 +134,6 @@ class Router
     {
         return $this->addRoute('DELETE', $route, $params);
     }
-
-
 
     /** 
      * método responsável por retornar a URI desconsiderando o prefixo
@@ -132,9 +144,9 @@ class Router
         //URI DA REQUEST
         $uri = $this->request->getUri();
 
-
         //FATIA A URI COM O PREFIXO
         $xURi = strlen($this->prefix) ? explode($this->prefix, $uri) : [$uri];
+
 
         //remove último prefixo
         return end($xURi);
@@ -163,13 +175,14 @@ class Router
 
                 //verifica o método
                 if (isset($methods[$httpMethod])) {
-
                     //remove a primeira posição
                     unset($matches[0]);
+                    
 
                     //variadas processadas
                     $keys = $methods[$httpMethod]['variables'];
                     $methods[$httpMethod]['variables'] = array_combine($keys, $matches);
+                   
                     $methods[$httpMethod]['variables']['request'] = $this->request;
                     //retorno dos parámetros da rota
 
@@ -196,25 +209,22 @@ class Router
         try {
 
             $route = $this->getRoute();
+            // return new Response(200, 'Success');
 
             //VERIFICA O CONTROLADOR
             if (!isset($route['controller'])) {
-                throw new Exception("A Url não pode ser processado", 500);
+                throw new Exception("A Url não pode ser processada", 500);
             }
 
             //ARGUMENTOS DA FUNÇÃO
             $args = [];
-
             //reflection
             $reflection = new ReflectionFunction($route['controller']);
             foreach ($reflection->getParameters() as $parameter) {
                 $name = $parameter->getName();
                 $agrs[$name] = $route['variables'][$name] ?? '';
             }
-            
           
-
-
             //RETORNA A EXECUÇÃO DA FUNÇÃO
             return call_user_func_array($route['controller'], $args);
         } catch (Exception $e) {

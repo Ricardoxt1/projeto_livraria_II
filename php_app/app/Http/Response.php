@@ -7,7 +7,7 @@ class Response
 
     /**
      * código do status HTTP
-     * @return integer
+     * @var integer
      */
     private $httpCode = 200;
 
@@ -15,7 +15,7 @@ class Response
      * cabeçalho do response
      * @var array
      */
-    // private $headers = [];
+    private $headers = [];
 
     /**
      * tipo de dados a ser retornado
@@ -45,7 +45,7 @@ class Response
     public function setContentType($contentType)
     {
         $this->contentType = $contentType;
-        // $this->addHeader('Content-Type', $contentType);
+        $this->addHeader('Content-Type', $contentType);
     }
 
     /**
@@ -53,24 +53,25 @@ class Response
      * @param string $key
      * @param mixed $value
      */
-    // public function addHeader($key, $value)
-    // {
-    //     $this->headers[$key] = $value;
-    // }
+    public function addHeader($key, $value)
+    {
+        $this->headers[$key] = $value;
+    }
 
     /**
      * metodo responsavel por enviar os headers para o navegador
      * 
      */
-    // public function sendHeaders(){
-    //     //STATUS
-    //     http_response_code($this->httpCode);
+    public function sendHeaders()
+    {
+        //STATUS
+        http_response_code($this->httpCode);
 
-    //     //ENVIAR HEADERS
-    //     foreach($this->headers as $key => $value){
-    //         header($key, $value);
-    //     }
-    // }
+        // ENVIAR HEADERS
+        foreach ($this->headers as $key => $value) {
+            header($key, $value);
+        }
+    }
 
     /**
      * método responsável por enviar a resposta para o usuario
@@ -79,8 +80,8 @@ class Response
     public function sendResponse()
     {
         // //ENVIA OS HEADERS
-        // $this->sendHeaders();
-        
+        $this->sendHeaders();
+
         //IMPRIME O CONTEUDO
         switch ($this->contentType) {
             case 'text/html':
