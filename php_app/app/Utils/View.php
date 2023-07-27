@@ -25,12 +25,12 @@ class View
      */
     private static function getContentView($view)
     {
-        $file = __DIR__ . '/../../resources/view/' . $view . '.php';
+        $file = __DIR__ . '/../../resources/view/' . $view . '.html';
         return file_exists($file) ? file_get_contents($file) : '';
     }
 
     /**
-     * metodo responsavel por retornar o conteúdo redenrizado de uma view 
+     * metodo responsavel por retornar o conteúdo renderizado de uma view 
      * @param string $view
      * @param array $vars (string ou $number)
      * @return string
@@ -43,7 +43,7 @@ class View
         //merge de variavéis da view
         $vars = array_merge(self::$vars, $vars);
 
-        //indentificando as chaves na view
+        //identificando as chaves na view
         $keys = array_keys($vars);
         $keys = array_map(function ($item){
             return '{{'.$item.'}}';
