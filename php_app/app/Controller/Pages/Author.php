@@ -3,6 +3,7 @@
 namespace App\Controller\Pages;
 
 use \App\Utils\View;
+use \App\Model\Entity\Organization;
 
 
 class Author extends Page
@@ -13,13 +14,13 @@ class Author extends Page
      *  */
     public static function getAuthor()
     {
+        $obOrganization = new Organization();
 
         $content = View::render('pages/list/listAuthors', [
             //view authors
-            'id' => '1',
+            'id' => $obOrganization->id,
             'name' => 'benedito',
         ]);
-
 
         //retorna a view da pagina
         return parent::getPage('Listagem de Autores', $content);
