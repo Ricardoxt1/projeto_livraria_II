@@ -4,8 +4,13 @@
 
     use \App\Http\Router;
     use \App\Utils\View;
-    
-    define('URL', 'http://app.localhost/php_app');
+    use \WilliamCosta\DotEnv\Environment;
+
+    // carrega variaveis de ambientes
+    Environment::load(__DIR__);
+
+    //dfine a constante url do projeto
+    define('URL', getenv('URL'));
 
     //define o valor padrão das variavéis
     View::init([
