@@ -14,7 +14,7 @@ class Page
      */
     private static function getNavBar()
     {
-        return View::render('pages/navbar');
+        return View::render('pages/list/navbar');
     }
 
     /**
@@ -23,7 +23,7 @@ class Page
      */
     private static function getSideBar()
     {
-        return View::render('pages/sidebar');
+        return View::render('pages/list/sidebar');
     }
 
     /**
@@ -32,7 +32,7 @@ class Page
      */
     private static function getFooter()
     {
-        return View::render('pages/footer');
+        return View::render('pages/list/footer');
     }
 
     /** metodo para resgatar os dados da pagina genérica (view)
@@ -41,7 +41,7 @@ class Page
     public static function getPage($titule, $content)
     {
 
-        return View::render('pages/page', [
+        return View::render('pages/list/page', [
             //contéudo do tilulo
             'titule' => $titule,
             //contéudo do navbar
