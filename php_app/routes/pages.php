@@ -55,7 +55,17 @@ $obRouter->get('/menu', [
 
 //ROTA DINÂMICA 
 $obRouter->get('/pagina/{idPagina}/{acao}', [
-    function ($idPagina, $acao) {
-        return new Response(200, 'Página' . $idPagina . '-' . $acao);
+      function ($idPagina, $acao) {
+          return new Response(200, 'Página/' . $idPagina . '/' . $acao);
     }
+
 ]);
+
+
+// $idPagina = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY)['idPagina'];
+// $acao = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY)['acao'];
+
+// $page = new Pages();
+// $content = $page->getPage($idPagina, $acao);
+
+
