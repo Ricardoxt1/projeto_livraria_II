@@ -53,6 +53,35 @@ $obRouter->get('/menu', [
     }
 ]);
 
+//ROTA REGISTRO AUTHOR
+$obRouter->get('/registerAuthor', [
+    function () {
+        return new Response(200, Pages\registerAuthor::getRegisterAuthor());
+    }
+]);
+
+$obRouter->post('/registerAuthor', [
+    function ($request) {
+        echo "<pre>";
+        print_r ($request);
+        exit;
+        return new Response(200, Pages\registerAuthor::getRegisterAuthor());
+    }
+]);
+
+// //ROTA REGISTRO COSTUMER
+// $obRouter->get('/registerCostumer', [
+//     function () {
+//         return new Response(200, Pages\registerCostumer::getRegisterCostumer());
+//     }
+// ]);
+
+// $obRouter->post('/registerCostumer', [
+//     function ($request) {
+//         return new Response(200, Pages\registerCostumer::getRegisterCostumer());
+//     }
+// ]);
+
 //ROTA DINÂMICA 
 $obRouter->get('/pagina/{idPagina}/{acao}', [
       function ($idPagina, $acao) {
@@ -60,12 +89,3 @@ $obRouter->get('/pagina/{idPagina}/{acao}', [
     }
 
 ]);
-
-
-// $idPagina = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY)['idPagina'];
-// $acao = parse_url($_SERVER['REQUEST_URI'], PHP_URL_QUERY)['acao'];
-
-// $page = new Pages();
-// $content = $page->getPage($idPagina, $acao);
-
-
