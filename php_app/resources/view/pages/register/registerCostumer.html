@@ -1,0 +1,67 @@
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+        <body class="bg-body-tertiary">
+
+            <div class="container">
+                <main>
+                    <div class="py-5 text-center">
+                        <h2>Cadastro de Usuarios</h2>
+                    </div>
+                   
+                    <div class="row g-5">
+
+                        <div class="col-md-7 col-lg-12">
+                            <h4 class="mb-3">Registro dados pessoais</h4>
+                            <form class="needs-validation" method="post" novalidate="">
+                                <div class="row g-3">
+                                    <div class="col-sm-7">
+                                        <label for="nome_costumer" class="form-label">Nome completo</label>
+                                        <input type="text" class="form-control" name="name" id="nome_costumer" placeholder="fulano da silva " value="" required="">
+                                        <div class="invalid-feedback">
+                                            É necessario digitar o seu nome.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-5">
+                                        <label for="numero_costumer" class="form-label">Telefone</label>
+                                        <input type="number" class="form-control" name="phone_number" id="numero_costumer" placeholder="(00) 0000-0000" value="" required="">
+                                        <div class="invalid-feedback">
+                                            É necessario digitar o seu telefone.
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-sm-7 mt-2">
+                                        <label for="email_costumer" class="form-label">Email <span class="text-body-secondary">(Optional)</span></label>
+                                        <input type="email" class="form-control" name="email" id="email_costumer" placeholder="you@example.com">
+                                        <div class="invalid-feedback">
+                                            Por favor, entre com um email valido.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-5 mt-2">
+                                        <label for="cpf_costumer" class="form-label">CPF</label>
+                                        <input type="number" class="form-control" name="cpf" id="cpf_costumer" placeholder="123.456.789-09" min="1" max="14" value="" required="">
+                                        <div class="invalid-feedback">
+                                            É necessario digitar o cpf.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 mt-2">
+                                        <label for="address_costumer" class="form-label">Endereço</label>
+                                        <input type="text" class="form-control" name="address" id="address_costumer" placeholder="Main ST 1234" required="">
+                                        <div class="invalid-feedback">
+                                            Por favor, entre com endereço valido.
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button class="w-20 my-4 btn btn-primary btn-ls" type="submit">Enviar</button>
+                            </form>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </body>
+    </div>
+</main>

@@ -1,0 +1,42 @@
+<main class="col-9 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+        <body class="bg-body-tertiary">
+
+            <div class="container">
+                <main>
+                    <div class="py-5 ml-2">
+                        <h2>Cadastro de Editoras</h2>
+                        <div>
+                            <?php
+                            if (isset($_SESSION['msg'])) {
+                                echo $_SESSION['msg'];
+                                unset($_SESSION['msg']);
+                            }
+                            ?>
+                        </div>
+                        <div class="row g-5 pt-5">
+                            <div class="col-md-7 col-lg-10">
+                                <h5 class="mb-3">Informações revelantes sobre a editora</h5>
+                            </div>
+                        </div>
+                        <form class="needs-validation" method="post" novalidate="">
+                            <div class="row g-3">
+                                <div class="col-sm-7">
+                                    <label for="name_publisher" class="form-label">Nome da editora</label>
+                                    <input type="text" class="form-control" name="name" id="name_publisher" placeholder="Editora São Miguel" value="" required="">
+                                    <div class="invalid-feedback">
+                                        É necessario digitar o nome da editora.
+                                    </div>
+                                    <button class="w-20 my-4 btn btn-primary btn-ls" type="submit">Enviar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </main>
+            </div>
+
+        </body>
+
+    </div>
+</main>
