@@ -1,0 +1,91 @@
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+        <body class="bg-body-tertiary">
+
+            <div class="container ">
+                <main>
+                    <div class="py-5 ml-2 text-center">
+                        <h2>Editar de Livros</h2>
+                    </div>
+                    <div class="row g-5 px-5 mx-3 ">
+
+                        <div class="col-md-7 col-lg-12">
+                            <h5 class="mb-3">Edite as innformações revelantes sobre o livro</h5>
+                            <form class="needs-validation" action="" method="POST" novalidate="">
+                                <div class="row g-3">
+                                    <div class="col-sm-7">
+                                        <label for="titule_book" class="form-label">Titulo</label>
+                                        <input type="text" class="form-control" name="titule" id="titule_book"
+                                            placeholder="A bela e a fera" value="{{titule}}">
+                                        <div class="invalid-feedback">
+                                            É necessario digitar o titulo do livro.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+                                        <label for="paginas_book" class="form-label">Número de
+                                            páginas</label>
+                                        <input type="number" class="form-control" name="page" id="paginas_book"
+                                            placeholder="123" value="{{page}}">
+                                        <div class="invalid-feedback">
+                                            É necessario digitar quantidade de páginas do livro.
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label for="realese_book" class="form-label">Data de
+                                            lançamento</label>
+                                        <input type="number" min="1900" max="2099" step="1" class="form-control"
+                                            name="realese_date" id="realese_book" placeholder="1999"
+                                            value="{{realese_date}}">
+                                        <div class="invalid-feedback">
+                                            É necessario digitar o ano de lançamento do livro.
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2">
+
+                                        <label for="floatingSelect">Selecionar o autor</label>
+                                        <select class="form-select" id="floatingSelect" name="author_id"
+                                            aria-label="Floating label select example">
+                                            <option value='{{id}}'>{{name}}</option>
+                                            <p style='color:red;'>Não foi realizadar a listagem com sucesso.</p>
+                                        </select>
+
+                                    </div>
+                                    <div class="col-sm-2">
+
+                                        <label for="floatingSelect">Selecionar o livraria</label>
+                                        <select class="form-select" id="floatingSelect" name="library_id"
+                                            aria-label="Floating label select example">
+                                            <option value='{{id}}'>{{name}}</option>
+                                            <p style='color:red;'>Não foi realizadar a listagem com sucesso.</p>
+                                        </select>
+
+                                    </div>
+                                    <div class="col-sm-2">
+
+                                        <label for="floatingSelect">Selecionar a editora</label>
+                                        <select class="form-select" id="floatingSelect" name="publisher_id"
+                                            aria-label="Floating label select example">
+                                            <option value='{{id}}'>{{name}}</option>
+                                            <p style='color:red;'>Não foi realizadar a listagem com sucesso.</p>
+                                        </select>
+
+                                    </div>
+
+                                </div>
+
+                                <hr class="my-4">
+
+                                <input class="w-20 btn btn-primary btn-ls" type="submit" value="Salvar"
+                                    name="edit_books">
+                            </form>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </body>
+    </div>
+</main>

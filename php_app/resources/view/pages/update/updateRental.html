@@ -1,0 +1,76 @@
+<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+    <div
+        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+
+        <body class="bg-body-tertiary">
+
+            <div class="container">
+
+                <div class="py-5 text-center">
+                    <h2>Aluguel de livros</h2>
+                </div>
+
+                <div class="row g-5">
+
+                    <div class="col-md-7 col-lg-12">
+                        <h4 class="my-3">Registro sobre o aluguel</h4>
+                        <div>
+                            <form class="needs-validation" action="" method="post" novalidate="">
+                                <div class="row g-3">
+                                    <div class="col-sm-2 my-3">
+                                        <label for="floatingSelect">Selecionar o consumidor</label>
+                                        <select class="form-select" id="floatingSelect" name="id_costumers_rental"
+                                            aria-label="Floating label select example">
+                                            <option value='{{id_costumer_rental}}'>{{name_costumer}}</option>
+                                            <p style='color:red;'>Não foi realizadar a listagem com sucesso.</p>
+                                        </select>
+
+                                    </div>
+                                    <div class="col-sm-2 my-3">
+                                        <label for="floatingSelect">Selecionar o livro</label>
+                                        <select class="form-select" id="floatingSelect" name="id_book_rental"
+                                            aria-label="Floating label select example">
+
+                                            <option value='{{id_book_rental}}'>{{titule}}</option>
+                                            <p style='color:red;'>Não foi realizadar a listagem com sucesso.</p>
+                                        </select>
+
+                                    </div>
+                                    <div class="col-sm-2 my-3">
+                                        <label for="floatingSelect">Selecionar o vendedor</label>
+                                        <select class="form-select" id="floatingSelect" name="id_employees_rental"
+                                            aria-label="Floating label select example">
+                                            <option value='{{id_employee_rental}}'>{{name_employee}}</option>
+                                            <p style='color:red;'>Não foi realizadar a listagem com sucesso.</p>
+                                        </select>
+
+                                    </div>
+                                    <div class="col-sm-3 my-3">
+                                        <label for="rental" class="form-label">Data do
+                                            aluguel</label>
+                                        <input type="date" class="form-control" name="rental" id="rental"
+                                            value="{{rental}}">
+                                        <div class="invalid-feedback">
+                                            É necessario digitar a data do aluguel.
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3 my-3">
+                                        <label for="delivery" class="form-label">Data previsão de
+                                            devolução</label>
+                                        <input type="date" class="form-control" name="delivery" id="delivery"
+                                            value="{{delivery}}">
+                                        <div class="invalid-feedback">
+                                            É necessario digitar a data da previsão de devolução.
+                                        </div>
+                                    </div>
+                                </div>
+                                <input class="w-20 my-4 btn btn-primary btn-ls" type="submit" value="Salvar"
+                                    name="edit_rentals">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </body>
+    </div>
+</main>
