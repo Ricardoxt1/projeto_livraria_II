@@ -25,6 +25,19 @@ $obRouter->post('/registerCostumer', [
     }
 ]);
 
+//UPDATE
+$obRouter->get('/updateCostumer', [
+    function () {
+        return new Response(200, Pages\Costumer::getUpdateCostumer());
+    }
+]);
+
+$obRouter->put('/updateCostumer', [
+    function ($request) {
+        return new Response(200, Pages\Costumer::getUpdateCostumer());
+    }
+]);
+
 // ------------------------------------------------------------------------------------------------
 
 //ROTA AUTHOR
@@ -48,6 +61,20 @@ $obRouter->post('/registerAuthor', [
     }
 ]);
 
+//UPDATE
+$obRouter->get('/updateAuthor', [
+    function () {
+        return new Response(200, Pages\Author::getUpdateAuthor());
+    }
+]);
+
+$obRouter->put('/updateAuthor', [
+    function ($request) {
+        return new Response(200, Pages\Author::getUpdateAuthor());
+    }
+]);
+
+
 // ------------------------------------------------------------------------------------------------
 
 //ROTA BOOK
@@ -68,6 +95,19 @@ $obRouter->get('/registerBook', [
 $obRouter->post('/registerBook', [
     function ($request) {
         return new Response(200, Pages\registerBook::getRegisterBook());
+    }
+]);
+
+//UPDATE
+$obRouter->get('/updateBook', [
+    function () {
+        return new Response(200, Pages\Book::getUpdateBook());
+    }
+]);
+
+$obRouter->put('/updateBook', [
+    function ($request) {
+        return new Response(200, Pages\Book::getUpdateBook());
     }
 ]);
 
@@ -94,6 +134,19 @@ $obRouter->post('/registerEmployee', [
     }
 ]);
 
+//UPDATE
+$obRouter->get('/updateEmployee', [
+    function () {
+        return new Response(200, Pages\Employee::getUpdateEmployee());
+    }
+]);
+
+$obRouter->put('/updateEmployee', [
+    function ($request) {
+        return new Response(200, Pages\Employee::getUpdateEmployee());
+    }
+]);
+
 // ------------------------------------------------------------------------------------------------
 
 //ROTA PUBLISHER
@@ -117,6 +170,19 @@ $obRouter->post('/registerPublisher', [
     }
 ]);
 
+//UPDATE
+$obRouter->get('/updatePublisher', [
+    function () {
+        return new Response(200, Pages\Publisher::getUpdatePublisher());
+    }
+]);
+
+$obRouter->put('/updatePublisher', [
+    function ($request) {
+        return new Response(200, Pages\Publisher::getUpdatePublisher());
+    }
+]);
+
 // ------------------------------------------------------------------------------------------------
 
 //ROTA RENTAL
@@ -137,6 +203,19 @@ $obRouter->get('/registerRental', [
 $obRouter->post('/registerRental', [
     function ($request) {
         return new Response(200, Pages\registerRental::getRegisterRental());
+    }
+]);
+
+//UPDATE
+$obRouter->get('/updateRental', [
+    function () {
+        return new Response(200, Pages\Rental::getUpdateRental());
+    }
+]);
+
+$obRouter->put('/updateRental', [
+    function ($request) {
+        return new Response(200, Pages\Rental::getUpdateRental());
     }
 ]);
 
