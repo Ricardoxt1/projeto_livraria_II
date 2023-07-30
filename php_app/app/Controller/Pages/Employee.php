@@ -28,4 +28,21 @@ class Employee extends Page
         //retorna a view da pagina
         return parent::getPage('Listagem de Funcionários',$content);
     }
+
+    /** metodo para realizar update dos dados da pagina de funcionario (view)
+     * @return string
+     *  */
+    public static function getUpdateEmployee()
+    {
+
+
+        $content = View::render('pages/update/updateEmployee', [
+            //view employee
+            'id' => '1',
+            'name' => 'benedito',
+        ]);
+
+        //retorna a view da pagina
+        return parent::getPage('Editagem de Funcionario(a)', $content);
+    }
 }

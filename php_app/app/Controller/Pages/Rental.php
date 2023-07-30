@@ -30,4 +30,21 @@ class Rental extends Page
         //retorna a view da pagina
         return parent::getPage('Listagem de Alugueis',$content);
     }
+
+    /** metodo para realizar update dos dados da pagina de alguel (view)
+     * @return string
+     *  */
+    public static function getUpdateRental()
+    {
+
+
+        $content = View::render('pages/update/updateRental', [
+            //view rental
+            'id' => '1',
+            'name' => 'benedito',
+        ]);
+
+        //retorna a view da pagina
+        return parent::getPage('Editagem de Aluguel', $content);
+    }
 }

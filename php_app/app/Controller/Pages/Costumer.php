@@ -27,4 +27,21 @@ class Costumer extends Page
         //retorna a view da pagina
         return parent::getPage('Listagem de Usuarios',$content);
     }
+
+    /** metodo para realizar update dos dados da pagina de usuario (view)
+     * @return string
+     *  */
+    public static function getUpdateCostumer()
+    {
+
+
+        $content = View::render('pages/update/updateCostumer', [
+            //view costumer
+            'id' => '1',
+            'name' => 'benedito',
+        ]);
+
+        //retorna a view da pagina
+        return parent::getPage('Editagem de Usuario', $content);
+    }
 }

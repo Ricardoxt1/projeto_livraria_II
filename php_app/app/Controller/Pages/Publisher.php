@@ -24,4 +24,21 @@ class Publisher extends Page
         //retorna a view da pagina
         return parent::getPage('Listagem de Editoras',$content);
     }
+
+    /** metodo para realizar update dos dados da pagina de editora (view)
+     * @return string
+     *  */
+    public static function getUpdatePublisher()
+    {
+
+
+        $content = View::render('pages/update/updatePublisher', [
+            //view publisher
+            'id' => '1',
+            'name' => 'benedito',
+        ]);
+
+        //retorna a view da pagina
+        return parent::getPage('Editagem de Editora', $content);
+    }
 }

@@ -27,4 +27,21 @@ class Book extends Page
         //retorna a view da pagina
         return parent::getPage('Listagem de Livros', $content);
     }
+
+    /** metodo para realizar update dos dados da pagina de livro (view)
+     * @return string
+     *  */
+    public static function getUpdateBook()
+    {
+
+
+        $content = View::render('pages/update/updateBook', [
+            //view book
+            'id' => '1',
+            'name' => 'benedito',
+        ]);
+
+        //retorna a view da pagina
+        return parent::getPage('Editagem de Livro', $content);
+    }
 }
