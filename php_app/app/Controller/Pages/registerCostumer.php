@@ -16,9 +16,7 @@ class registerCostumer extends registerPage
     {
 
         $content = View::render('pages/register/registerCostumer', [
-            //view autor
-            'id' => '1',
-            'name' => 'editora ld',
+            //view usuario
         ]);
 
 

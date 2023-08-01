@@ -16,11 +16,7 @@ class Costumer extends Page
 
         $content = View::render('pages/list/listCostumers', [
             //view costumers
-            'id' => '1',
-            'name' => 'gisleine',
-            'cpf' => '526.458.425-65',
-            'address' => 'rua street n123',
-            'email' => 'gisleine@gmail.com',
+            
         ]);
 
 
