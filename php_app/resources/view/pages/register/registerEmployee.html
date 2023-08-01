@@ -16,8 +16,8 @@
                             <form class="needs-validation was-validated" method="post" novalidate="">
                                 <div class="row g-3">
                                     <div class="col-sm-7">
-                                        <label for="nome_employees" class="form-label">Nome completo</label>
-                                        <input type="text" class="form-control" name="name" id="nome_employees"
+                                        <label for="validationCustom01" class="form-label">Nome completo</label>
+                                        <input type="text" class="form-control" name="name" id="validationCustom01"
                                             placeholder="Fulano da Silva " value="" required="">
                                         <div class="valid-feedback">
                                             Nome preenchido!
@@ -28,9 +28,9 @@
                                     </div>
 
                                     <div class="col-sm-3">
-                                        <label for="pis_employees" class="form-label">PIS</label>
+                                        <label for="validationCustom02" class="form-label">PIS</label>
                                         <input type="number" class="form-control" maxlength="15" name="pis"
-                                            id="pis_employees" placeholder="12345678910" required="">
+                                            id="validationCustom02" placeholder="12345678910" required="">
                                         <div class="valid-feedback">
                                             PIS preenchido!
                                         </div>
@@ -39,7 +39,7 @@
                                         </div>
                                         <script>
                                             // Evita que o usuário digite mais do que 15 dígitos
-                                            document.getElementById('pis_employees').addEventListener('input', function () {
+                                            document.getElementById('validationCustom02').addEventListener('input', function () {
                                                 if (this.value.length > this.maxLength) {
                                                     this.value = this.value.slice(0, this.maxLength);
                                                 }
@@ -47,8 +47,8 @@
                                         </script>
                                     </div>
                                     <div class="col-sm-4 mt-2">
-                                        <label for="cargo_employees" class="form-label">Cargo</label>
-                                        <input type="text" class="form-control" name="office" id="cargo_employees"
+                                        <label for="validationCustom03" class="form-label">Cargo</label>
+                                        <input type="text" class="form-control" name="office" id="validationCustom03"
                                             placeholder="Vendedor" required="">
                                         <div class="valid-feedback">
                                             Cargo preenchido!
@@ -59,9 +59,9 @@
                                     </div>
 
                                     <div class="col-sm-4 mt-2">
-                                        <label for="departamento_employees" class="form-label">Departamento</label>
+                                        <label for="validationCustom04" class="form-label">Departamento</label>
                                         <input type="text" class="form-control" name="departament"
-                                            id="departamento_employees" placeholder="Vendas" required="">
+                                            id="validationCustom04" placeholder="Vendas" required="">
                                         <div class="valid-feedback">
                                             Departamento preenchido!
                                         </div>
@@ -71,8 +71,8 @@
                                     </div>
 
                                     <div class="col-sm-2 mt-2">
-                                        <label for="departamento_employees" class="form-label">Livraria</label><br>
-                                        <select class="form-select is-invalid" id="floatingSelect" name="library_id"
+                                        <label for="validationCustom05" class="form-label">Livraria</label><br>
+                                        <select class="form-select is-invalid" id="validationCustom05" name="library_id"
                                             aria-label="validationServer04Feedback" required="">
                                             <option selected="" disabled="" value="">Escolha...</option>
                                             <option value='{{id}}'>{{name_library}}</option>
