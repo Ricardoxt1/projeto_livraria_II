@@ -28,9 +28,9 @@
                                     </div>
 
                                     <div class="col-sm-3">
-                                        <label for="paginas_book" class="form-label">Número de
+                                        <label for="validationCustom02" class="form-label">Número de
                                             páginas</label>
-                                        <input type="number" class="form-control" name="page" id="paginas_book"
+                                        <input type="number" class="form-control" name="page" id="validationCustom02"
                                             placeholder="123" value="" required>
                                         <div class="valid-feedback">
                                             Pode prosseguir!
@@ -40,9 +40,9 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
-                                        <label for="ano" class="form-label">Data de
+                                        <label for="validationCustom03" class="form-label">Data de
                                             lançamento</label>
-                                        <input type="number" min="1800" id="ano" name="ano" max="" step="1"
+                                        <input type="number" min="1800" id="validationCustom03" name="realese_date" max="" step="1"
                                             class="form-control" placeholder="1800" value="" required>
                                         <div class="valid-feedback">
                                             Pode prosseguir!
@@ -51,7 +51,7 @@
                                             É necessario digitar o ano de lançamento do livro.
                                         </div>
                                         <script>
-                                            const inputAno = document.getElementById('ano');
+                                            const inputAno = document.getElementById('validationCustom03');
                                             // Obtém a data atual
                                             const dataAtual = new Date();
                                             // Extrai o ano da data atual
@@ -64,31 +64,31 @@
                                     <div class="col-sm-4 mt-2">
                                         <label for="validationServer04" class="form-label">Selecionar o autor</label>
                                         <select class="form-select is-invalid" id="validationServer04"
-                                            aria-describedby="validationServer04Feedback" required="">
+                                          name="author_id"  aria-describedby="validationServer04Feedback" required="">
                                             <option selected="" disabled="" value="">Escolha...</option>
-                                            <option value='$row_authors[id]'>$row_authors[name]</option>
+                                            <option value='{{id_author}}'></option>
                                         </select>
                                         <div class="valid-feedback">
                                             Autor(a) selecionado(a)!
                                         </div>
                                     </div>
                                     <div class="col-sm-4 mt-2">
-                                        <label for="validationServer04" class="form-label">Selecionar o livraria</label>
-                                        <select class="form-select is-invalid" id="validationServer04"
-                                            aria-describedby="validationServer04Feedback" required="">
+                                        <label for="validationServer05" class="form-label">Selecionar o livraria</label>
+                                        <select class="form-select is-invalid" id="validationServer05"
+                                            name="library_id" aria-describedby="validationServer05Feedback" required="">
                                             <option selected="" disabled="" value="">Escolha...</option>
-                                            <option value='$row_libraries[id]'>$row_libraries[name]</option>
+                                            <option value='{{id_library}}'></option>
                                         </select>
                                         <div class="valid-feedback">
                                             Livraria selecionada
                                         </div>
                                     </div>
                                     <div class="col-sm-4 mt-2">
-                                        <label for="validationServer04" class="form-label">Selecionar a editora</label>
-                                        <select class="form-select is-invalid" id="validationServer04"
-                                            aria-describedby="validationServer04Feedback" required="">
-                                            <option selected="" disabled="" value="">Escolha...</option>
-                                            <option value='$row_publishers[id]'>$row_publishers[name]</option>
+                                        <label for="validationServer06" class="form-label">Selecionar a editora</label>
+                                        <select class="form-select is-invalid" id="validationServer06"
+                                            name="publisher_id" aria-describedby="validationServer06Feedback" required="">
+                                            <option selected="" disabled="" value="">Escolha...</option> 
+                                            <option value='{{id_employee}}'></option>
                                         </select>
                                         <div class="valid-feedback">
                                             Editor(a) selecionado(a)
