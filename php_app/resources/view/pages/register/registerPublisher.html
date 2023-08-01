@@ -20,16 +20,21 @@
                                 <h5 class="mb-3">Informações revelantes sobre a editora</h5>
                             </div>
                         </div>
-                        <form class="needs-validation" method="post" novalidate="">
-                            <div class="row g-3">
-                                <div class="col-sm-7">
-                                    <label for="name_publisher" class="form-label">Nome da editora</label>
-                                    <input type="text" class="form-control" name="name" id="name_publisher" placeholder="Editora São Miguel" value="" required="">
-                                    <div class="invalid-feedback">
-                                        É necessario digitar o nome da editora.
-                                    </div>
-                                    <button class="w-20 my-4 btn btn-primary btn-ls" type="submit">Enviar</button>
+                        <form class="row g-3 needs-validation was-validated my-3" method="post" novalidate="">
+                            <div class="col-md-4">
+                                <label for="validationCustom01" class="form-label">Nome da editora</label>
+                                <input type="text" class="form-control" id="validationCustom01"
+                                    placeholder="digite nome da editora" required="">
+                                <div class="valid-feedback">
+                                    Pode prosseguir!
                                 </div>
+                                <div class="invalid-feedback">
+                                    É necessario digitar o nome da editora.
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <button class="btn btn-primary mt-5" type="submit">Enviar</button>
                             </div>
                         </form>
                     </div>

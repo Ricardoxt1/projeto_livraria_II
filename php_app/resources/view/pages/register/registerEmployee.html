@@ -9,55 +9,77 @@
                     <div class="py-5 text-center">
                         <h2>Cadastro de Funcionário(a)</h2>
                     </div>
-                    <div class="row g-5">
+                    <div class="row g-5 px-5 mx-3">
 
                         <div class="col-md-7 col-lg-12">
                             <h4 class="mb-3">Registro de dados</h4>
-                            <form class="needs-validation" method="post" novalidate="">
+                            <form class="needs-validation was-validated" method="post" novalidate="">
                                 <div class="row g-3">
                                     <div class="col-sm-7">
                                         <label for="nome_employees" class="form-label">Nome completo</label>
                                         <input type="text" class="form-control" name="name" id="nome_employees"
                                             placeholder="Fulano da Silva " value="" required="">
+                                        <div class="valid-feedback">
+                                            Nome preenchido!
+                                        </div>
                                         <div class="invalid-feedback">
                                             É necessario digitar o nome do funcionário(a).
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-5">
+                                    <div class="col-sm-3">
                                         <label for="pis_employees" class="form-label">PIS</label>
-                                        <input type="number" class="form-control" min="1" name="pis" id="pis_employees"
-                                            placeholder="123.45678.91-0" value="" required="">
+                                        <input type="number" class="form-control" maxlength="15" name="pis"
+                                            id="pis_employees" placeholder="12345678910" required="">
+                                        <div class="valid-feedback">
+                                            PIS preenchido!
+                                        </div>
                                         <div class="invalid-feedback">
                                             É necessario digitar o seu telefone.
                                         </div>
+                                        <script>
+                                            // Evita que o usuário digite mais do que 15 dígitos
+                                            document.getElementById('pis_employees').addEventListener('input', function () {
+                                                if (this.value.length > this.maxLength) {
+                                                    this.value = this.value.slice(0, this.maxLength);
+                                                }
+                                            });
+                                        </script>
                                     </div>
                                     <div class="col-sm-4 mt-2">
-                                        <label for="cargo_employees" class="form-lab  el">Cargo</label>
+                                        <label for="cargo_employees" class="form-label">Cargo</label>
                                         <input type="text" class="form-control" name="office" id="cargo_employees"
-                                            placeholder="Vendedor">
+                                            placeholder="Vendedor" required="">
+                                        <div class="valid-feedback">
+                                            Cargo preenchido!
+                                        </div>
                                         <div class="invalid-feedback">
                                             Por favor, digite o cargo do funcionário(a).
                                         </div>
                                     </div>
 
                                     <div class="col-sm-4 mt-2">
-                                        <label for="departamento_employees" class="form-lab  el">Departamento</label>
+                                        <label for="departamento_employees" class="form-label">Departamento</label>
                                         <input type="text" class="form-control" name="departament"
-                                            id="departamento_employees" placeholder="Vendas">
+                                            id="departamento_employees" placeholder="Vendas" required="">
+                                        <div class="valid-feedback">
+                                            Departamento preenchido!
+                                        </div>
                                         <div class="invalid-feedback">
                                             Por favor, digite o departamento do funcionário(a).
                                         </div>
                                     </div>
 
                                     <div class="col-sm-2 mt-2">
-                                        <label for="departamento_employees" class="form-lab  el">Livraria</label><br>
-                                        <select class="form-select" id="floatingSelect" name="library_id"
-                                            aria-label="Floating label select example">
-                                            <option selected></option>
-                                            <option value='$row_libraries[id]'>$row_libraries[name]</option>
-                                            <p style='color:red;'>Não foi realizadar a listagem com sucesso.</p>
+                                        <label for="departamento_employees" class="form-label">Livraria</label><br>
+                                        <select class="form-select is-invalid" id="floatingSelect" name="library_id"
+                                            aria-label="validationServer04Feedback" required="">
+                                            <option selected="" disabled="" value="">Escolha...</option>
+                                            <option value='{{id}}'>{{name_library}}</option>
                                         </select>
+                                        <div class="valid-feedback">
+                                            Livraria selecionada!
+                                        </div>
                                     </div>
                                 </div>
                                 <button class="w-20 my-4 btn btn-primary btn-ls" type="submit">Enviar</button>
