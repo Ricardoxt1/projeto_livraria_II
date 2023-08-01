@@ -59,8 +59,18 @@ class Costumer
             'email' => $this->email,
         ]);
 
-        echo "<pre>";
-        print_r($this) . "</pre>";
-        exit;
+        //sucesso
+        return true;
+    }
+
+    /**
+     * @param string $where
+     * @param string $order
+     * @param string $limit
+     * @param integer $field
+     * @return PDOStatement
+     */
+    public static function getCostumer($where = null, $order = null, $limit = null, $fields = '*'){
+        return (new Database('costumers'))->select($where, $order, $limit, $fields);
     }
 }
