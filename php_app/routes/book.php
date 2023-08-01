@@ -20,7 +20,7 @@ $obRouter->get('/registerBook', [
 
 $obRouter->post('/registerBook', [
     function ($request) {
-        return new Response(200, Pages\registerBook::getRegisterBook());
+        return new Response(200, Pages\registerBook::insertBook($request));
     }
 ]);
 

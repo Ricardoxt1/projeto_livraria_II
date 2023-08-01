@@ -20,7 +20,7 @@ $obRouter->get('/registerAuthor', [
 
 $obRouter->post('/registerAuthor', [
     function ($request) {
-        return new Response(200, Pages\registerAuthor::getRegisterAuthor());
+        return new Response(200, Pages\registerAuthor::insertAuthor($request));
     }
 ]);
 
