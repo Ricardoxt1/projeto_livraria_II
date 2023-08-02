@@ -7,6 +7,24 @@ use \WilliamCosta\DatabaseManager\Database;
 class Book
 {
 
+    // /**
+    //  * id da imagem
+    //  * @var integer
+    //  */
+    // public $image;
+
+    // /**
+    //  * path da imagem
+    //  * @var string
+    //  */
+    // public $path;
+
+    // /**
+    //  * datetime da imagem
+    //  * @var datetime
+    //  */
+    // public $datetime;
+
     /**
      * id do livro
      * @var integer
@@ -55,6 +73,12 @@ class Book
      */
     public function cadastrar()
     {
+
+        //inseri um livro no banco de dados
+        // $this->id = (new Database('image'))->insert([
+        //     'path' => $this->path,
+        //     'datetime' => $this->datetime,
+        // ]);
 
         //inseri um livro no banco de dados
         $this->id = (new Database('books'))->insert([
