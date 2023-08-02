@@ -20,7 +20,7 @@ $obRouter->get('/registerEmployee', [
 
 $obRouter->post('/registerEmployee', [
     function ($request) {
-        return new Response(200, Pages\registerEmployee::getRegisterEmployee());
+        return new Response(200, Pages\registerEmployee::insertEmployee($request));
     }
 ]);
 

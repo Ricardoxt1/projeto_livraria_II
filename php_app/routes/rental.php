@@ -20,7 +20,7 @@ $obRouter->get('/registerRental', [
 
 $obRouter->post('/registerRental', [
     function ($request) {
-        return new Response(200, Pages\registerRental::getRegisterRental());
+        return new Response(200, Pages\registerRental::insertRental($request));
     }
 ]);
 
