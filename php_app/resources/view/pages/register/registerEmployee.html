@@ -15,10 +15,11 @@
                             <h4 class="mb-3">Registro de dados</h4>
                             <form class="needs-validation was-validated" method="post" novalidate="">
                                 <div class="row g-3">
+
                                     <div class="col-sm-7">
                                         <label for="validationCustom01" class="form-label">Nome completo</label>
                                         <input type="text" class="form-control" name="name" id="validationCustom01"
-                                            placeholder="Fulano da Silva " value="" required="">
+                                            placeholder="Nome Completo" required="">
                                         <div class="valid-feedback">
                                             Nome preenchido!
                                         </div>
@@ -75,7 +76,8 @@
                                         <select class="form-select is-invalid" id="validationCustom05" name="library_id"
                                             aria-label="validationServer04Feedback" required="">
                                             <option selected="" disabled="" value="">Escolha...</option>
-                                            <option value='{{id}}'>{{name_library}}</option>
+                                            <option>1</option>
+                                            <!-- <option value="{{library_id}}">{{name_library}}</option> -->
                                         </select>
                                         <div class="valid-feedback">
                                             Livraria selecionada!

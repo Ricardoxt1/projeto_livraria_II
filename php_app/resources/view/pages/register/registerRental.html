@@ -21,9 +21,10 @@
                                     <div class="col-sm-4">
                                         <label for="validationCustom01">Selecionar o consumidor</label>
                                         <select class="form-select is-invalid" id="validationCustom01"
-                                            name="id_costumers_rental" aria-label="validationServer01Feedback" required>
+                                            name="costumer_id" aria-label="validationServer01Feedback" required>
                                             <option selected="" disabled="" value="">Escolha...</option>
-                                            <option value='{{id_costumer}}'>{{name_costumer}}</option>
+                                            <option>1</option>
+                                            <!-- <option value='{{id_book}}'>{{name_costumer}}</option> -->
                                         </select>
                                         <div class="valid-feedback">
                                             Consumidor(a) selecionado(a)!
@@ -31,10 +32,11 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <label for="validationCustom02">Selecionar o livro</label>
-                                        <select class="form-select is-invalid" id="validationCustom02"
-                                            name="id_book_rental" aria-label="validationServer02Feedback" required>
+                                        <select class="form-select is-invalid" id="validationCustom02" name="book_id"
+                                            aria-label="validationServer02Feedback" required>
                                             <option selected="" disabled="" value="">Escolha...</option>
-                                            <option value='{{id_book}}'>{{titule}}</option>
+                                            <option>1</option>
+                                            <!-- <option value='{{id_book}}'>{{titule}}</option> -->
                                         </select>
                                         <div class="valid-feedback">
                                             Livro selecionado!
@@ -43,9 +45,10 @@
                                     <div class="col-sm-4">
                                         <label for="validationCustom03">Selecionar o vendedor</label>
                                         <select class="form-select is-invalid" id="validationCustom03"
-                                            name="id_employees_rental" aria-label="validationServer03Feedback" required>
+                                            name="employee_id" aria-label="validationServer03Feedback" required>
                                             <option selected="" disabled="" value="">Escolha...</option>
-                                            <option value='{{id_employee}}'>{{name_employee}}</option>
+                                            <option>1</option>
+                                            <!-- <option value='{{id_employee}}'>{{name_employee}}</option> -->
                                         </select>
                                         <div class="valid-feedback">
                                             Vendedor(a) selecionado(a)!
@@ -55,7 +58,7 @@
                                         <label for="validationCustom04" class="form-label">Data do
                                             aluguel</label>
                                         <input type="date" class="form-control" name="rental" id="validationCustom04"
-                                            value="" placeholder="0000-00-00" required>
+                                            placeholder="0000-00-00" required>
                                         <div class="invalid-feedback">
                                             É necessario digitar a data do aluguel.
                                         </div>
@@ -64,7 +67,7 @@
                                         <label for="validationCustom05" class="form-label">Data previsão de
                                             devolução</label>
                                         <input type="date" class="form-control" name="delivery" id="validationCustom05"
-                                            value="" placeholder="0000-00-00" required>
+                                            placeholder="0000-00-00" required>
                                         <div class="invalid-feedback">
                                             É necessario digitar a data da previsão de devolução.
                                         </div>
