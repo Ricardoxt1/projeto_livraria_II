@@ -7,25 +7,27 @@
             <div class="container">
                 <main>
                     <div class="py-5 ml-2">
-                        <h2>Cadastro de Editoras</h2>
+                        <h2>Editar Editoras</h2>
                         <div class="row g-5 pt-5">
                             <div class="col-md-7 col-lg-10">
                                 <h5 class="mb-3">Editar informações revelantes sobre a editora</h5>
                             </div>
                         </div>
-                        <form class="needs-validation" action="" method="post" novalidate="">
-                            <div class="row g-3">
-                                <div class="col-sm-7">
-                                    <label for="name_publisher" class="form-label">Nome da editora</label>
-                                    <input type="text" class="form-control" name="name" id="name_publisher"
-                                        placeholder="Editora São Miguel" value="{{name}}">
-                                    <div class="invalid-feedback">
-                                        É necessario digitar o nome da editora.
-                                    </div>
-
-                                    <input class="w-20 my-4 btn btn-primary btn-ls" type="submit" value="Salvar"
-                                        name="edit_publishers">
+                        <form class="row g-3 needs-validation was-validated my-3" method="post" novalidate="">
+                            <div class="col-md-4">
+                                <label for="validationCustom01" class="form-label">Nome da editora</label>
+                                <input type="text" class="form-control" id="validationCustom01"
+                                  name="name"  placeholder="digite nome da editora" required="">
+                                <div class="valid-feedback">
+                                    Nome preenchido!
                                 </div>
+                                <div class="invalid-feedback">
+                                    É necessario digitar o nome da editora.
+                                </div>
+                            </div>
+
+                            <div class="col-12">
+                                <button class="btn btn-primary mt-5" type="submit">Enviar</button>
                             </div>
                         </form>
                     </div>

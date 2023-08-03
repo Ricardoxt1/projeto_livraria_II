@@ -5,67 +5,70 @@
         <body class="bg-body-tertiary">
 
             <div class="container">
-
-                <div class="py-5 text-center">
-                    <h2>Aluguel de livros</h2>
-                </div>
-
-                <div class="row g-5">
+                <div class="row g-5 py-5 mx-3">
+                    <h2>Editar Aluguel</h2>
 
                     <div class="col-md-7 col-lg-12">
                         <h4 class="my-3">Registro sobre o aluguel</h4>
                         <div>
-                            <form class="needs-validation" action="" method="post" novalidate="">
+                            <form class="needs-validatio was-validated" method="post" novalidate="">
                                 <div class="row g-3">
-                                    <div class="col-sm-2 my-3">
-                                        <label for="floatingSelect">Selecionar o consumidor</label>
-                                        <select class="form-select" id="floatingSelect" name="id_costumers_rental"
-                                            aria-label="Floating label select example">
-                                            <option value='{{id_costumer_rental}}'>{{name_costumer}}</option>
-                                            <p style='color:red;'>Não foi realizadar a listagem com sucesso.</p>
+                                    <div class="col-sm-4">
+                                        <label for="validationCustom01">Selecionar o consumidor</label>
+                                        <select class="form-select is-invalid" id="validationCustom01"
+                                            name="costumer_id" aria-label="validationServer01Feedback" required>
+                                            <option selected="" disabled="" value="">Escolha...</option>
+                                            <option>1</option>
+                                            <!-- <option value='{{id_book}}'>{{name_costumer}}</option> -->
                                         </select>
-
+                                        <div class="valid-feedback">
+                                            Consumidor(a) selecionado(a)!
+                                        </div>
                                     </div>
-                                    <div class="col-sm-2 my-3">
-                                        <label for="floatingSelect">Selecionar o livro</label>
-                                        <select class="form-select" id="floatingSelect" name="id_book_rental"
-                                            aria-label="Floating label select example">
-
-                                            <option value='{{id_book_rental}}'>{{titule}}</option>
-                                            <p style='color:red;'>Não foi realizadar a listagem com sucesso.</p>
+                                    <div class="col-sm-4">
+                                        <label for="validationCustom02">Selecionar o livro</label>
+                                        <select class="form-select is-invalid" id="validationCustom02" name="book_id"
+                                            aria-label="validationServer02Feedback" required>
+                                            <option selected="" disabled="" value="">Escolha...</option>
+                                            <option>1</option>
+                                            <!-- <option value='{{id_book}}'>{{titule}}</option> -->
                                         </select>
-
+                                        <div class="valid-feedback">
+                                            Livro selecionado!
+                                        </div>
                                     </div>
-                                    <div class="col-sm-2 my-3">
-                                        <label for="floatingSelect">Selecionar o vendedor</label>
-                                        <select class="form-select" id="floatingSelect" name="id_employees_rental"
-                                            aria-label="Floating label select example">
-                                            <option value='{{id_employee_rental}}'>{{name_employee}}</option>
-                                            <p style='color:red;'>Não foi realizadar a listagem com sucesso.</p>
+                                    <div class="col-sm-4">
+                                        <label for="validationCustom03">Selecionar o vendedor</label>
+                                        <select class="form-select is-invalid" id="validationCustom03"
+                                            name="employee_id" aria-label="validationServer03Feedback" required>
+                                            <option selected="" disabled="" value="">Escolha...</option>
+                                            <option>1</option>
+                                            <!-- <option value='{{id_employee}}'>{{name_employee}}</option> -->
                                         </select>
-
+                                        <div class="valid-feedback">
+                                            Vendedor(a) selecionado(a)!
+                                        </div>
                                     </div>
-                                    <div class="col-sm-3 my-3">
-                                        <label for="rental" class="form-label">Data do
+                                    <div class="col-sm-3 mt-2">
+                                        <label for="validationCustom04" class="form-label">Data do
                                             aluguel</label>
-                                        <input type="date" class="form-control" name="rental" id="rental"
-                                            value="{{rental}}">
+                                        <input type="date" class="form-control" name="rental" id="validationCustom04"
+                                            placeholder="0000-00-00" required>
                                         <div class="invalid-feedback">
                                             É necessario digitar a data do aluguel.
                                         </div>
                                     </div>
-                                    <div class="col-sm-3 my-3">
-                                        <label for="delivery" class="form-label">Data previsão de
+                                    <div class="col-sm-3 mt-2">
+                                        <label for="validationCustom05" class="form-label">Data previsão de
                                             devolução</label>
-                                        <input type="date" class="form-control" name="delivery" id="delivery"
-                                            value="{{delivery}}">
+                                        <input type="date" class="form-control" name="delivery" id="validationCustom05"
+                                            placeholder="0000-00-00" required>
                                         <div class="invalid-feedback">
                                             É necessario digitar a data da previsão de devolução.
                                         </div>
                                     </div>
                                 </div>
-                                <input class="w-20 my-4 btn btn-primary btn-ls" type="submit" value="Salvar"
-                                    name="edit_rentals">
+                                <button class="w-20 my-4 btn btn-primary btn-ls" type="submit">Enviar</button>
                             </form>
                         </div>
                     </div>

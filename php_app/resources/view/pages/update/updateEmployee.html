@@ -6,64 +6,85 @@
 
             <div class="container">
                 <main>
-                    <div class="py-5 text-center">
+                    <div class="py-5">
                         <h2>Editar Funcionário(a)</h2>
                     </div>
                     <div>
                         <div class="row g-5">
                             <div class="col-md-7 col-lg-12">
                                 <h4 class="mb-3">Editar dados</h4>
-                                <form class="needs-validation" action="" method="post" novalidate="">
+                                <form class="needs-validation was-validated" method="post" novalidate="">
                                     <div class="row g-3">
+
                                         <div class="col-sm-7">
-                                            <label for="nome_employees" class="form-label">Nome completo</label>
-                                            <input type="text" class="form-control" name="name" id="nome_employees"
-                                                placeholder="Fulano da Silva " value="{{name}}">
+                                            <label for="validationCustom01" class="form-label">Nome completo</label>
+                                            <input type="text" class="form-control" name="name" id="validationCustom01"
+                                                placeholder="Nome Completo" required="">
+                                            <div class="valid-feedback">
+                                                Nome preenchido!
+                                            </div>
                                             <div class="invalid-feedback">
                                                 É necessario digitar o nome do funcionário(a).
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-5">
-                                            <label for="pis_employees" class="form-label">PIS</label>
-                                            <input type="number" class="form-control" min="1" name="pis"
-                                                id="pis_employees" placeholder="123.45678.91-0" value="{{pis}}">
+                                        <div class="col-sm-3">
+                                            <label for="validationCustom02" class="form-label">PIS</label>
+                                            <input type="number" class="form-control" maxlength="15" name="pis"
+                                                id="validationCustom02" placeholder="12345678910" required="">
+                                            <div class="valid-feedback">
+                                                PIS preenchido!
+                                            </div>
                                             <div class="invalid-feedback">
                                                 É necessario digitar o seu telefone.
                                             </div>
+                                            <script>
+                                                // Evita que o usuário digite mais do que 15 dígitos
+                                                document.getElementById('validationCustom02').addEventListener('input', function () {
+                                                    if (this.value.length > this.maxLength) {
+                                                        this.value = this.value.slice(0, this.maxLength);
+                                                    }
+                                                });
+                                            </script>
                                         </div>
                                         <div class="col-sm-4 mt-2">
-                                            <label for="cargo_employees" class="form-lab  el">Cargo</label>
-                                            <input type="text" class="form-control" name="office" id="cargo_employees"
-                                                placeholder="Vendedor" value="{{office}}">
+                                            <label for="validationCustom03" class="form-label">Cargo</label>
+                                            <input type="text" class="form-control" name="office"
+                                                id="validationCustom03" placeholder="Vendedor" required="">
+                                            <div class="valid-feedback">
+                                                Cargo preenchido!
+                                            </div>
                                             <div class="invalid-feedback">
                                                 Por favor, digite o cargo do funcionário(a).
                                             </div>
                                         </div>
 
                                         <div class="col-sm-4 mt-2">
-                                            <label for="departamento_employees"
-                                                class="form-lab  el">Departamento</label>
+                                            <label for="validationCustom04" class="form-label">Departamento</label>
                                             <input type="text" class="form-control" name="departament"
-                                                id="departamento_employees" placeholder="Vendas"
-                                                value="{{departament}}">
+                                                id="validationCustom04" placeholder="Vendas" required="">
+                                            <div class="valid-feedback">
+                                                Departamento preenchido!
+                                            </div>
                                             <div class="invalid-feedback">
                                                 Por favor, digite o departamento do funcionário(a).
                                             </div>
                                         </div>
 
                                         <div class="col-sm-2 mt-2">
-                                            <label for="departamento_employees" class="form-lab  el">Livraria</label>
-                                            <select class="form-select" id="floatingSelect" name="library_id"
-                                                aria-label="Floating label select example">
-                                                <option value='{{id}}'>{{nameLibrary}}</option>
-                                                <p style='color:red;'>Não foi realizadar a listagem com sucesso.</p>
+                                            <label for="validationCustom05" class="form-label">Livraria</label><br>
+                                            <select class="form-select is-invalid" id="validationCustom05"
+                                                name="library_id" aria-label="validationServer04Feedback" required="">
+                                                <option selected="" disabled="" value="">Escolha...</option>
+                                                <option>1</option>
+                                                <!-- <option value="{{library_id}}">{{name_library}}</option> -->
                                             </select>
+                                            <div class="valid-feedback">
+                                                Livraria selecionada!
+                                            </div>
                                         </div>
                                     </div>
-
-                                    <input class="w-20 my-4 btn btn-primary btn-ls" type="submit" value="Salvar"
-                                        name="edit_employees">
+                                    <button class="w-20 my-4 btn btn-primary btn-ls" type="submit">Enviar</button>
                                 </form>
                             </div>
                         </div>

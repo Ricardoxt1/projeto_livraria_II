@@ -6,81 +6,122 @@
 
             <div class="container ">
                 <main>
-                    <div class="py-5 ml-2 text-center">
-                        <h2>Editar de Livros</h2>
+                    <div class="py-5 ml-2 ml-5">
+                        <h2>Editar Livros</h2>
                     </div>
-                    <div class="row g-5 px-5 mx-3 ">
+                    <div class="row g-5 px-5 ">
 
                         <div class="col-md-7 col-lg-12">
-                            <h5 class="mb-3">Edite as innformações revelantes sobre o livro</h5>
-                            <form class="needs-validation" action="" method="POST" novalidate="">
+                            <h5 class="mb-3">Informações revelantes sobre o livro</h5>
+                            <form class="needs-validation was-validated" method="post" novalidate="">
                                 <div class="row g-3">
-                                    <div class="col-sm-7">
-                                        <label for="titule_book" class="form-label">Titulo</label>
-                                        <input type="text" class="form-control" name="titule" id="titule_book"
-                                            placeholder="A bela e a fera" value="{{titule}}">
+                                    <div class="col-sm-6">
+                                        <label for="validationCustom01" class="form-label">Titulo</label>
+                                        <input type="text" class="form-control" name="titule" id="validationCustom01"
+                                            placeholder="A bela e a fera" value="" required>
+                                        <div class="valid-feedback">
+                                            Titulo preenchido!
+                                        </div>
                                         <div class="invalid-feedback">
-                                            É necessario digitar o titulo do livro.
+                                            É necessario o titulo do livro.
                                         </div>
                                     </div>
 
-                                    <div class="col-sm-2">
-                                        <label for="paginas_book" class="form-label">Número de
+                                    <div class="col-sm-3">
+                                        <label for="validationCustom02" class="form-label">Número de
                                             páginas</label>
-                                        <input type="number" class="form-control" name="page" id="paginas_book"
-                                            placeholder="123" value="{{page}}">
+                                        <input type="number" class="form-control" name="page" id="validationCustom02"
+                                            placeholder="123" value="" required>
+                                        <div class="valid-feedback">
+                                            Número de páginas preenchido!
+                                        </div>
                                         <div class="invalid-feedback">
-                                            É necessario digitar quantidade de páginas do livro.
+                                           Digite quantidade de páginas do livro.
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
-                                        <label for="realese_book" class="form-label">Data de
+                                        <label for="validationCustom03" class="form-label">Data de
                                             lançamento</label>
-                                        <input type="number" min="1900" max="2099" step="1" class="form-control"
-                                            name="realese_date" id="realese_book" placeholder="1999"
-                                            value="{{realese_date}}">
+                                        <input type="number" min="1800" id="validationCustom03" name="realese_date"
+                                            max="" step="1" class="form-control" placeholder="1800" value="" required>
+                                        <div class="valid-feedback">
+                                            Data de lançamento preenchido!
+                                        </div>
                                         <div class="invalid-feedback">
                                             É necessario digitar o ano de lançamento do livro.
                                         </div>
+                                        <script>
+                                            const inputAno = document.getElementById('validationCustom03');
+                                            // Obtém a data atual
+                                            const dataAtual = new Date();
+                                            // Extrai o ano da data atual
+                                            const anoAtual = dataAtual.getFullYear();
+                                            // Define o atributo 'max' do input para o ano atual
+                                            inputAno.setAttribute('max', anoAtual);
+                                        </script>
                                     </div>
 
-                                    <div class="col-sm-2">
-
-                                        <label for="floatingSelect">Selecionar o autor</label>
-                                        <select class="form-select" id="floatingSelect" name="author_id"
-                                            aria-label="Floating label select example">
-                                            <option value='{{id}}'>{{name}}</option>
-                                            <p style='color:red;'>Não foi realizadar a listagem com sucesso.</p>
+                                    <div class="col-sm-4 mt-2">
+                                        <label for="validationServer04" class="form-label">Selecionar o autor</label>
+                                        <select class="form-select is-invalid" id="validationServer04" name="author_id"
+                                            aria-describedby="validationServer04Feedback" required="">
+                                            <option selected="" disabled="" value="">Escolha...</option>
+                                            <option value='{{id_author}}'></option>
                                         </select>
-
+                                        <div class="valid-feedback">
+                                            Autor(a) selecionado(a)!
+                                        </div>
                                     </div>
-                                    <div class="col-sm-2">
-
-                                        <label for="floatingSelect">Selecionar o livraria</label>
-                                        <select class="form-select" id="floatingSelect" name="library_id"
-                                            aria-label="Floating label select example">
-                                            <option value='{{id}}'>{{name}}</option>
-                                            <p style='color:red;'>Não foi realizadar a listagem com sucesso.</p>
+                                    <div class="col-sm-4 mt-2">
+                                        <label for="validationServer05" class="form-label">Selecionar o livraria</label>
+                                        <select class="form-select is-invalid" id="validationServer05" name="library_id"
+                                            aria-describedby="validationServer05Feedback" required="">
+                                            <option selected="" disabled="" value="">Escolha...</option>
+                                            <option value='{{id_library}}'></option>
                                         </select>
-
+                                        <div class="valid-feedback">
+                                            Livraria selecionada!
+                                        </div>
                                     </div>
-                                    <div class="col-sm-2">
-
-                                        <label for="floatingSelect">Selecionar a editora</label>
-                                        <select class="form-select" id="floatingSelect" name="publisher_id"
-                                            aria-label="Floating label select example">
-                                            <option value='{{id}}'>{{name}}</option>
-                                            <p style='color:red;'>Não foi realizadar a listagem com sucesso.</p>
+                                    <div class="col-sm-4 mt-2">
+                                        <label for="validationServer06" class="form-label">Selecionar a editora</label>
+                                        <select class="form-select is-invalid" id="validationServer06"
+                                            name="publisher_id" aria-describedby="validationServer06Feedback"
+                                            required="">
+                                            <option selected="" disabled="" value="">Escolha...</option>
+                                            <option value='{{id_employee}}'></option>
                                         </select>
-
+                                        <div class="valid-feedback">
+                                            Editor(a) selecionado(a)!
+                                        </div>
                                     </div>
 
+                                    <div class="mb-3">
+                                        <input type="file" class="form-control" aria-label="file example"
+                                            accept="image/*" required>
+                                        <div class="invalid-feedback">Escolha um arquivo de imagem para enviar</div>
+                                        <div class="valid-feedback">Arquivo selecionado!</div>
+                                    </div>
                                 </div>
+                                <button class="w-20 my-4 btn btn-primary btn-ls" type="submit"
+                                    onclick="submitForm()">Enviar
+                                </button>
 
-                                <hr class="my-4">
-
-                                <input class="w-20 btn btn-primary btn-ls" type="submit" value="Salvar"
-                                    name="edit_books">
+                                <!-- validação upload de arquivo -->
+                                <script>
+                                    function submitForm() {
+                                        // Verifica se o input do arquivo é válido
+                                        const fileInput = document.getElementById('validationServer05');
+                                        if (fileInput.checkValidity()) {
+                                            // Se for válido, prossegue com o envio do formulário (ou outra ação)
+                                            alert('Arquivo selecionado. Formulário enviado!');
+                                        } else {
+                                            // Se não for válido, exibe a mensagem de feedback
+                                            const invalidFeedback = document.querySelector('.invalid-feedback');
+                                            invalidFeedback.style.display = 'block';
+                                        }
+                                    }
+                                </script>
                             </form>
                         </div>
                     </div>

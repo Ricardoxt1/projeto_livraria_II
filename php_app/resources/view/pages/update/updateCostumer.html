@@ -7,61 +7,95 @@
             <div class="container">
                 <main>
                     <div class="py-5">
-                        <h2 class="text-center pb-5">Edição de Usuarios</h2>
+                        <h2>Editar Usuarios</h2>
 
                         <div class="row g-5">
 
                             <div class="col-md-7 col-lg-12">
-                                <h4 class="mb-5">Registro dados pessoais</h4>
-                                <form class="needs-validation" action="" method="post" novalidate="">
-                                    <div class="row g-3">
-                                        <div class="col-sm-7">
-                                            <label for="nome_costumer" class="form-label">Nome completo</label>
-                                            <input type="text" class="form-control" name="name" id="nome_costumer"
-                                                placeholder="fulano da silva " value="{{name}}">
+                                <h4 class="mt-5">Registro dados pessoais</h4>
+                                <form class="needs-validation was-validated" method="post" novalidate="">
+                                    <div class="row g-3 mt-3">
+                                        <div class="col-sm-6">
+                                            <label for="validationCustom01" class="form-label">Nome completo</label>
+                                            <input type="text" class="form-control" name="name" id="validationCustom01"
+                                                placeholder="fulano da silva " value="" required="">
+                                            <div class="valid-feedback">
+                                                Nome preenchido!
+                                            </div>
                                             <div class="invalid-feedback">
-                                                É necessario digitar o seu nome.
+                                                É necessario digitar o nome.
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-5">
-                                            <label for="numero_costumer" class="form-label">Telefone</label>
+                                        <div class="col-sm-4">
+                                            <label for="validationCustom02" class=" form-label">Telefone</label>
                                             <input type="number" class="form-control" name="phone_number"
-                                                id="numero_costumer" placeholder="(00) 0000-0000" value="{{telefone}}">
-                                            
-                                            <div class="invalid-feedback">
-                                                É necessario digitar o seu telefone.
+                                                id="validationCustom02" placeholder="00 00000000" maxlength="14"
+                                                required="">
+                                            <div class="valid-feedback">
+                                                Telefone preenchido!
                                             </div>
-                                        </div>
-                                        <div class="col-sm-7 mt-2">
-                                            <label for="email_costumer" class="form-label">Email</label>
-                                            <input type="email" class="form-control" name="email" id="email_costumer"
-                                                placeholder="you@example.com" value="{{email}}"> 
                                             <div class="invalid-feedback">
-                                                Por favor, entre com um email valido.
+                                                É necessario digitar o número de telefone.
+                                            </div>
+                                            <script>
+                                                // Evita que o usuário digite mais do que 14 dígitos
+                                                document.getElementById('validationCustom02').addEventListener('input', function () {
+                                                    if (this.value.length > this.maxLength) {
+                                                        this.value = this.value.slice(0, this.maxLength);
+                                                    }
+                                                });
+                                            </script>
+
+                                        </div>
+
+                                        <div class="col-sm-6 mt-2">
+                                            <label for="validationCustom03" class="form-label">Email</label>
+                                            <input type="email" class="form-control" name="email"
+                                                valueid="validationCustom03" placeholder="you@example.com" required="">
+                                            <div class="valid-feedback">
+                                                Email preenchido!
+                                            </div>
+                                            <div class="invalid-feedback">
+                                                Por favor, entre com um email válido.
                                             </div>
                                         </div>
 
-                                        <div class="col-sm-5 mt-2">
-                                            <label for="cpf_costumer" class="form-label">CPF</label>
-                                            <input type="number" class="form-control" name="cpf" id="cpf_costumer"
-                                                placeholder="123.456.789-09" min="1" max="14" value="{{cpf}}"> 
+                                        <div class="col-sm-4 mt-2">
+                                            <label for="validationCustom04" class="form-label">CPF</label>
+                                            <input type="number" class="form-control" name="cpf" id="validationCustom04"
+                                                placeholder="12345678909 (sem ponto e hífen)" maxlength="15"
+                                                required="">
+                                            <div class="valid-feedback">
+                                                CPF preenchido!
+                                            </div>
                                             <div class="invalid-feedback">
                                                 É necessario digitar o cpf.
                                             </div>
+                                            <script>
+                                                // Evita que o usuário digite mais do que 15 dígitos
+                                                document.getElementById('validationCustom04').addEventListener('input', function () {
+                                                    if (this.value.length > this.maxLength) {
+                                                        this.value = this.value.slice(0, this.maxLength);
+                                                    }
+                                                });
+                                            </script>
                                         </div>
 
-                                        <div class="col-12 mt-2">
-                                            <label for="address_costumer" class="form-label">Endereço</label>
-                                            <input type="text" class="form-control" name="address" id="address_costumer"
-                                                placeholder="Main ST 1234" value="{{endereço}}"> 
+                                        <div class="col-8 mt-2">
+                                            <label for="validationCustom05" class="form-label">Endereço</label>
+                                            <input type="text" class="form-control" name="address"
+                                                id="validationCustom05" placeholder="Main ST 1234" required="">
+                                            <div class="valid-feedback">
+                                                Endereço preenchido!
+                                            </div>
                                             <div class="invalid-feedback">
                                                 Por favor, entre com endereço valido.
                                             </div>
                                         </div>
                                     </div>
-                                    <input class="w-20 my-4 btn btn-primary btn-ls" type="submit" value="Salvar"
-                                        name="edit_costumers">
+
+                                    <button class="w-20 my-4 btn btn-primary btn-ls" type="submit">Enviar</button>
                                 </form>
 
                             </div>
