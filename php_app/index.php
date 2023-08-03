@@ -15,6 +15,7 @@
     include __DIR__.'/routes/employee.php';
     include __DIR__.'/routes/publisher.php';
     include __DIR__.'/routes/rental.php';
+    include __DIR__.'/routes/login.php';
 
     //IMPRIME O RESPONSE DA ROTA
     $obRouter->run()
