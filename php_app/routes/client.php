@@ -18,3 +18,9 @@ $obRouter->get('/register', [
         return new Response(200, Client\Register::getRegister());
     }
 ]);
+//REGISTRO
+$obRouter->post('/register', [
+    function ($request) {
+        return new Response(200, Client\Register::insertRegister($request));
+    }
+]);
