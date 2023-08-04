@@ -2,15 +2,15 @@
 
 use \App\Http\Response;
 use \App\Controller\Pages;
-// use \App\Controller\Pages\Home;
+use \App\Controller\Pages\HomePage;
 
 //ROTA HOME
 //LISTAGEM
-// $obRouter->get('/home', [
-//     function () {
-//         return new Response(200, Home\Home::getHome());
-//     }
-// ]);
+$obRouter->get('/home', [
+    function () {
+        return new Response(200, HomePage\Home::getHome());
+    }
+]);
 
 //ROTA MENU
 $obRouter->get('/menu', [
