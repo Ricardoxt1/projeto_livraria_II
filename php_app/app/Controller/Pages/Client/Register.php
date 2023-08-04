@@ -3,6 +3,7 @@
 namespace App\Controller\Pages\Client;
 
 use \App\Utils\View;
+use \App\Model\Entity\RegisterClient;
 
 
 class Register extends Client
@@ -20,5 +21,24 @@ class Register extends Client
 
         //retorna a view da pagina
         return parent::getClient('Registro', $content);
+    }
+
+    /**
+     * método responsavel por cadastrar um editora
+     * @return boolean
+     * @param Request $request
+     */
+    public static function insertRegister($request){
+        //dados do post
+        $postVars = $request->getPostVars();
+       
+        //nova instancia de registro
+        $obRegister = new RegisterClient();
+        $obRegister->username = $postVars['username'];
+        $obRegister->email = $postVars['email'];
+        $obRegister->password = $postVars['password'];
+        $obRegister->cadastrar();
+
+        return self::getRegister();
     }
 }
