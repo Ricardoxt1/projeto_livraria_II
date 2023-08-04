@@ -14,7 +14,7 @@ class registerPage
      */
     private static function getNavBar()
     {
-        return View::render('pages/register/navbar');
+        return View::render('pages/list/navbar');
     }
 
     /**
@@ -32,7 +32,7 @@ class registerPage
      */
     private static function getFooter()
     {
-        return View::render('pages/register/footer');
+        return View::render('pages/list/footer');
     }
 
     /** metodo para resgatar os dados da pagina genérica (view)
