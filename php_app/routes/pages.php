@@ -2,6 +2,15 @@
 
 use \App\Http\Response;
 use \App\Controller\Pages;
+// use \App\Controller\Pages\Home;
+
+//ROTA HOME
+//LISTAGEM
+// $obRouter->get('/home', [
+//     function () {
+//         return new Response(200, Home\Home::getHome());
+//     }
+// ]);
 
 //ROTA MENU
 $obRouter->get('/menu', [
@@ -19,3 +28,4 @@ $obRouter->get('/pagina/{idPagina}/{acao}', [
     }
 
 ]);
+
