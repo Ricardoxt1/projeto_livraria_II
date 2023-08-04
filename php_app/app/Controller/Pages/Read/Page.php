@@ -56,5 +56,24 @@ class Page
         ]);
     }
 
+    /** metodo para resgatar os dados da pagina genérica (view)
+     * @return string
+     *  */
+    public static function getPageHome($titule, $content)
+    {
+
+        return View::render('pages/list/page', [
+            //contéudo do tilulo
+            'titule' => $titule,
+            //contéudo do navbar
+            'navbar' => self::getNavBar(),
+            //conteúdo body
+            'content' => $content,
+            //conteúdo footer
+            'footer' => self::getFooter(),
+
+        ]);
+    }
+
     
 }
