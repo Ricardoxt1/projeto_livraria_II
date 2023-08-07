@@ -1,10 +1,9 @@
 <?php
-
 namespace App\Controller\Pages\Create;
 
 use \App\Utils\View;
 use \App\Model\Entity\Author;
-
+use \Exception;
 
 
 class registerAuthor extends registerPage
@@ -24,7 +23,7 @@ class registerAuthor extends registerPage
 
 
         //retorna a view da pagina
-        return parent::getPage('Registro de Autores',$content);
+        return parent::getPage('Registro de Autores', $content);
     }
 
     /**
@@ -32,15 +31,26 @@ class registerAuthor extends registerPage
      * @return boolean
      * @param Request $request
      */
-    public static function insertAuthor($request){
-        //dados do post
-        $postVars = $request->getPostVars();
-       
-        //nova instancia de autor
-        $obAuthor = new Author();
-        $obAuthor->name = $postVars['name'];
-        $obAuthor->cadastrar();
+    public static function insertAuthor($request)
+    {
+        try {
+            //dados do post
+            $postVars = $request->getPostVars();
 
-        return self::getRegisterAuthor();
+            // Verificar se o campo 'name' está presente no postVars
+            if (!isset($postVars['name']) || empty($postVars['name'])) {
+                throw new Exception('Por favor, preencha o campo nome.');
+            }
+
+            //nova instancia de autor
+            $obAuthor = new Author();
+            $obAuthor->name = $postVars['name'];
+            $obAuthor->cadastrar();
+
+            return self::getRegisterAuthor();
+        } catch (Exception $e) {
+            // Capturar e tratar exceções
+            return 'Erro ao inserir autor: ' . $e->getMessage();
+        }
     }
 }

@@ -4,6 +4,7 @@ namespace App\Controller\Pages\Client;
 
 use \App\Utils\View;
 use \App\Model\Entity\RegisterClient;
+use \Exception;
 
 
 class Register extends Client
@@ -28,17 +29,30 @@ class Register extends Client
      * @return boolean
      * @param Request $request
      */
-    public static function insertRegister($request){
-        //dados do post
-        $postVars = $request->getPostVars();
-       
-        //nova instancia de registro
-        $obRegister = new RegisterClient();
-        $obRegister->username = $postVars['username'];
-        $obRegister->email = $postVars['email'];
-        $obRegister->password = $postVars['password'];
-        $obRegister->cadastrar();
+    public static function insertRegister($request)
+    {
+        try {
+            // Dados do post
+            $postVars = $request->getPostVars();
 
-        return self::getRegister();
+            if(empty($postVars['username']) || empty($postVars['password']) || empty($postVars['email'])){
+                throw new Exception('Necessário preencher todos os campos!');
+
+            }
+
+            // Nova instância de registro
+            $obRegister = new RegisterClient();
+            $obRegister->username = $postVars['username'];
+            $obRegister->email = $postVars['email'];
+            $obRegister->password = $postVars['password'];
+
+            // Tentativa de cadastrar o registro
+            $obRegister->cadastrar();
+
+            return self::getRegister();
+        } catch (Exception $e) {
+            // Captura a exceção e lida com o erro
+            return "Erro ao inserir o registro: " . $e->getMessage();
+        }
     }
 }

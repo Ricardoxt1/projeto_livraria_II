@@ -4,6 +4,7 @@ namespace App\Controller\Pages\Create;
 
 use \App\Utils\View;
 use \App\Model\Entity\Employee;
+use \Exception;
 
 
 class registerEmployee extends registerPage
@@ -32,18 +33,30 @@ class registerEmployee extends registerPage
      * @param Request $request
      */
     public static function insertEmployee($request){
-        //dados do post
-        $postVars = $request->getPostVars();
-       
-        //nova instancia de usuario
-        $obEmployee = new Employee();
-        $obEmployee->name = $postVars['name'];
-        $obEmployee->pis = $postVars['pis'];
-        $obEmployee->office = $postVars['office'];
-        $obEmployee->departament = $postVars['departament'];
-        $obEmployee->library_id = $postVars['library_id'];
-        $obEmployee->cadastrar();
+        try {
+            //dados do post
+            $postVars = $request->getPostVars();
+            
+             // Verificar se os campos obrigatórios estão presentes
+             if (empty($postVars['name']) || empty($postVars['pis']) || empty($postVars['office']) || empty($postVars['departament']) || empty($postVars['library_id'])) {
+                throw new Exception("Todos os campos obrigatórios devem ser preenchidos.");
+            }
 
-        return self::getRegisterEmployee();
+            //nova instancia de funcionario
+            $obEmployee = new Employee();
+            $obEmployee->name = $postVars['name'];
+            $obEmployee->pis = $postVars['pis'];
+            $obEmployee->office = $postVars['office'];
+            $obEmployee->departament = $postVars['departament'];
+            $obEmployee->library_id = $postVars['library_id'];
+            $obEmployee->cadastrar();
+    
+            return self::getRegisterEmployee();
+        } catch (\Exception $e) {
+            
+            return ("Erro ao inserir funcionário: " . $e->getMessage());
+           
+        }
     }
+    
 }

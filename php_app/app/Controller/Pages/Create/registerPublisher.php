@@ -4,6 +4,7 @@ namespace App\Controller\Pages\Create;
 
 use \App\Utils\View;
 use \App\Model\Entity\Publisher;
+use \Exception;
 
 class registerPublisher extends registerPage
 {
@@ -22,7 +23,7 @@ class registerPublisher extends registerPage
 
 
         //retorna a view da pagina
-        return parent::getPage('Registro de Editora',$content);
+        return parent::getPage('Registro de Editora', $content);
     }
 
     /**
@@ -30,15 +31,26 @@ class registerPublisher extends registerPage
      * @return boolean
      * @param Request $request
      */
-    public static function insertPublisher($request){
-        //dados do post
-        $postVars = $request->getPostVars();
-       
-        //nova instancia de editora
-        $obPublisher = new Publisher();
-        $obPublisher->name = $postVars['name'];
-        $obPublisher->cadastrar();
+    public static function insertPublisher($request)
+    {
+        try {
+            //dados do post
+            $postVars = $request->getPostVars();
 
-        return self::getRegisterPublisher();
+            // Verificar se o campo 'name' está presente no POST
+            if (!isset($postVars['name']) || empty($postVars['name'])) {
+                throw new Exception("Por favor, preencha o campo nome.");
+            }
+
+            //nova instancia de editora
+            $obPublisher = new Publisher();
+            $obPublisher->name = $postVars['name'];
+            $obPublisher->cadastrar();
+
+            return self::getRegisterPublisher();
+        } catch (Exception $e) {
+            // Tratar o erro
+            return "Erro ao cadastrar uma editora: " . $e->getMessage();
+        }
     }
 }

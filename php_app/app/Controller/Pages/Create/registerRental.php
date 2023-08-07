@@ -4,7 +4,7 @@ namespace App\Controller\Pages\Create;
 
 use \App\Utils\View;
 use \App\Model\Entity\Rental;
-
+use \Exception;
 
 class registerRental extends registerPage
 {
@@ -31,19 +31,31 @@ class registerRental extends registerPage
      * @return boolean
      * @param Request $request
      */
-    public static function insertRental($request){
-        //dados do post
-        $postVars = $request->getPostVars();
-       
-        //nova instancia de aluguel
-        $obRental = new Rental();
-        $obRental->rental = $postVars['rental'];
-        $obRental->delivery = $postVars['delivery'];
-        $obRental->costumer_id = $postVars['costumer_id'];
-        $obRental->book_id = $postVars['book_id'];
-        $obRental->employee_id = $postVars['employee_id'];
-        $obRental->cadastrar();
+    public static function insertRental($request) {
+        try {
+            // Dados do post
+            $postVars = $request->getPostVars();
+            
+            if(empty($postVars['rental']) || !is_array($postVars['delivery']) || empty($postVars['costumer_id']) || empty($postVars['book_id']) | empty($postVars['employee_id']) ) {
+                throw new Exception("Por favor, preencha todos os campos.");
+            };
 
-        return self::getRegisterRental();
+            // Nova instância de aluguel
+            $obRental = new Rental();
+            $obRental->rental = $postVars['rental'];
+            $obRental->delivery = $postVars['delivery'];
+            $obRental->costumer_id = $postVars['costumer_id'];
+            $obRental->book_id = $postVars['book_id'];
+            $obRental->employee_id = $postVars['employee_id'];
+            
+            // Tente cadastrar o aluguel
+            $obRental->cadastrar();
+    
+            return self::getRegisterRental();
+        } catch (Exception $e) {
+            
+            return "Erro ao inserir o aluguel: " . $e->getMessage();
+        }
     }
+    
 }
