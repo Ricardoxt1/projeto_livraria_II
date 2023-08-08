@@ -42,8 +42,8 @@
                                     <div class="col-sm-3">
                                         <label for="validationCustom03" class="form-label">Data de
                                             lançamento</label>
-                                        <input type="number" min="1800" id="validationCustom03" name="realese_date" max="" step="1"
-                                            class="form-control" placeholder="1800" value="" required>
+                                        <input type="number" min="1800" id="validationCustom03" name="realese_date"
+                                            max="" step="1" class="form-control" placeholder="1800" value="" required>
                                         <div class="valid-feedback">
                                             Pode prosseguir!
                                         </div>
@@ -63,10 +63,10 @@
 
                                     <div class="col-sm-4 mt-2">
                                         <label for="validationServer04" class="form-label">Selecionar o autor</label>
-                                        <select class="form-select is-invalid" id="validationServer04"
-                                          name="author_id"  aria-describedby="validationServer04Feedback" required="">
+                                        <select class="form-select is-invalid" id="validationServer04" name="author_id"
+                                            aria-describedby="validationServer04Feedback" required="">
                                             <option selected="" disabled="" value="">Escolha...</option>
-                                            <option value='{{id_author}}'></option>
+                                            <option>2</option>
                                         </select>
                                         <div class="valid-feedback">
                                             Autor(a) selecionado(a)!
@@ -74,10 +74,10 @@
                                     </div>
                                     <div class="col-sm-4 mt-2">
                                         <label for="validationServer05" class="form-label">Selecionar o livraria</label>
-                                        <select class="form-select is-invalid" id="validationServer05"
-                                            name="library_id" aria-describedby="validationServer05Feedback" required="">
+                                        <select class="form-select is-invalid" id="validationServer05" name="library_id"
+                                            aria-describedby="validationServer05Feedback" required="">
                                             <option selected="" disabled="" value="">Escolha...</option>
-                                            <option value='{{id_library}}'></option>
+                                            <option>1</option>
                                         </select>
                                         <div class="valid-feedback">
                                             Livraria selecionada
@@ -86,9 +86,10 @@
                                     <div class="col-sm-4 mt-2">
                                         <label for="validationServer06" class="form-label">Selecionar a editora</label>
                                         <select class="form-select is-invalid" id="validationServer06"
-                                            name="publisher_id" aria-describedby="validationServer06Feedback" required="">
-                                            <option selected="" disabled="" value="">Escolha...</option> 
-                                            <option value='{{id_employee}}'></option>
+                                            name="publisher_id" aria-describedby="validationServer06Feedback"
+                                            required="">
+                                            <option selected="" disabled="" value="">Escolha...</option>
+                                            <option>4</option>
                                         </select>
                                         <div class="valid-feedback">
                                             Editor(a) selecionado(a)
@@ -96,7 +97,7 @@
                                     </div>
 
                                     <div class="mb-3">
-                                        <input type="file" class="form-control" aria-label="file example"
+                                        <input type="file" class="form-control" aria-label="file example" name="img"
                                             accept="image/*" required>
                                         <div class="invalid-feedback">Escolha um arquivo de imagem para enviar</div>
                                         <div class="valid-feedback">Arquivo selecionado!</div>
