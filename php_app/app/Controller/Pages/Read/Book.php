@@ -3,10 +3,35 @@
 namespace App\Controller\Pages\Read;
 
 use \App\Utils\View;
+use \App\Model\Entity\Book as EntityBook;
 
 
 class Book extends Page
 {
+
+    private function getBookItems()
+    {
+        // dados do livro
+        $itens = '';
+
+        // resultados da pagina
+        $results = EntityBook::getBook(null, 'id DESC');
+
+        // renderiza o item
+        while ($obBook = $results->fetchObject(EntityBook::class)){
+            $itens .= View::render('pages/list/book/item', [
+                'titule' => $obBook->titule,
+                'page' => $obBook->page,
+                'realese_date' => $obBook->realese_date,
+                'authors_name' => $obBook->author_id,
+                'publishers_name' => $obBook->publisher_id,
+                
+            ]);
+        }
+
+        //retorna os dados
+        return $itens;
+    }
 
     /** metodo para resgatar os dados da pagina de livros (view)
      * @return string
@@ -15,13 +40,9 @@ class Book extends Page
     {
 
         $content = View::render('pages/list/listBooks', [
-            //view books
-            'id' => '1',
-            'titule' => 'bela e a fera',
-            'page' => '1982',
-            'realese_date' => '1970',
-            'authors_name' => 'beneditor',
-            'publishers_name' => 'editora ld',
+            //view book
+            'item' => self::getBookItems(),
+            
         ]);
 
         //retorna a view da pagina
@@ -36,9 +57,7 @@ class Book extends Page
 
 
         $content = View::render('pages/update/updateBook', [
-            //view book
-            'id' => '1',
-            'name' => 'benedito',
+            
         ]);
 
         //retorna a view da pagina

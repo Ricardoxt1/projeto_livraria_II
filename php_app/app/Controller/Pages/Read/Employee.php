@@ -3,10 +3,36 @@
 namespace App\Controller\Pages\Read;
 
 use \App\Utils\View;
+use \App\Model\Entity\Employee as EntityEmployee;
 
 
 class Employee extends Page
 {
+    private function getEmployeeItems()
+    {
+        // dados do usuario
+        $itens = '';
+
+        // resultados da pagina
+        $results = EntityEmployee::getEmployee(null, 'id ASC');
+
+        // renderiza o item
+        while ($obEmployee = $results->fetchObject(EntityEmployee::class)){
+            $itens .= View::render('pages/list/employee/item',[
+                'id' => $obEmployee->id,
+                'name' => $obEmployee->name,
+                'pis' => $obEmployee->pis,
+                'office' => $obEmployee->office,
+                'departament' => $obEmployee->departament,
+                'library_id' => $obEmployee->library_id,
+
+            ]);
+        }
+
+        // retorna os dados
+        return $itens;
+    }
+
 
     /** metodo para resgatar os dados da pagina de funcionario (view)
      * @return string
@@ -16,12 +42,7 @@ class Employee extends Page
 
         $content = View::render('pages/list/listEmployees', [
             //view employee
-            'id' => '1',
-            'name' => 'joãozinho',
-            'pis' => '542.6898.7488',
-            'office' => 'vendedor',
-            'departament' => 'vendas',
-
+            'item' => self::getEmployeeItems(),
         ]);
 
 
@@ -38,8 +59,7 @@ class Employee extends Page
 
         $content = View::render('pages/update/updateEmployee', [
             //view employee
-            'id' => '1',
-            'name' => 'benedito',
+            
         ]);
 
         //retorna a view da pagina

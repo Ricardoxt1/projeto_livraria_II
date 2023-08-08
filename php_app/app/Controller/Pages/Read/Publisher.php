@@ -3,10 +3,30 @@
 namespace App\Controller\Pages\Read;
 
 use \App\Utils\View;
+use \App\Model\Entity\Publisher as EntityPublisher;
 
 
 class Publisher extends Page
 {
+    private function getPublisherItems(){
+
+        // dados da editora
+        $itens = '';
+    
+        // resultados da pagina
+        $results = EntityPublisher::getPublisher(null, 'id ASC');
+    
+        // renderiza o item
+        while ($obPublisher = $results->fetchObject(EntityPublisher::class)){
+            $itens .= View::render('pages/list/publisher/item', [
+                'id' => $obPublisher->id,
+                'name' => $obPublisher->name,
+            ]);
+        }
+    
+        return $itens;
+    }
+
 
     /** metodo para resgatar os dados da pagina de editora (view)
      * @return string
@@ -16,8 +36,7 @@ class Publisher extends Page
 
         $content = View::render('pages/list/listPublishers', [
             //view publishers
-            'id' => '1',
-            'name' => 'editora ld',
+            'item' => self::getPublisherItems(),
         ]);
 
 

@@ -3,10 +3,46 @@
 namespace App\Controller\Pages\Read;
 
 use \App\Utils\View;
-
+use \App\Model\Entity\Rental as EntityRental;
 
 class Rental extends Page
 {
+    /** 
+     * método responsavel por retornar itens alocados no banco de dados redenrizando a pagina
+     * @return string
+     */
+    private function getRentalItems()
+    {
+        // dados de aluguel
+        $itens = '';
+
+        // resultados da pagina
+        $results = EntityRental::getRental(null, 'id DESC');
+
+        // $itens = [
+        //     ['costumers', 'c', 'c.name = rentals.costumer_id', 'INNER'],
+        //     ['books', 'b', 'b.titule = rentals.book_id', 'INNER'],
+        //     ['employees', 'e', 'e.name = rentals.employee_id', 'INNER'],
+        // ];
+        
+        // $results = EntityRental::getRental(null, null, null, '*', $itens);
+        
+       
+        // renderiza o item
+        while ($obRental = $results->fetchObject(EntityRental::class)){
+            $itens .= View::render('pages/list/rental/item', [
+                'id' => $obRental->id,
+                'rental' => $obRental->rental,
+                'delivery' => $obRental->delivery,
+                'costumer' => $obRental->costumer_id,
+                'titule' => $obRental->book_id,
+                'employee' => $obRental->employee_id,
+            ]);
+        }
+    
+        // retorna os dados
+        return $itens;
+    }
 
     /** metodo para resgatar os dados da pagina de alugueis (view)
      * @return string
@@ -16,14 +52,8 @@ class Rental extends Page
 
         $content = View::render('pages/list/listRentals', [
             //view rental
-            'id' => '1',
-            'rental' => '26/07/2023',
-            'delivery' => '02/08/2023',
-            'costumer_name' => 'gislaine',
-            'book_titule' => 'bela e a fera',
-            'employee_name' => 'joãozinho',
+            'item' => self::getRentalItems()
             
-
         ]);
 
 
@@ -40,8 +70,7 @@ class Rental extends Page
 
         $content = View::render('pages/update/updateRental', [
             //view rental
-            'id' => '1',
-            'name' => 'benedito',
+           
         ]);
 
         //retorna a view da pagina

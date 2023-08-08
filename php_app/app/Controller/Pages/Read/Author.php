@@ -3,11 +3,36 @@
 namespace App\Controller\Pages\Read;
 
 use \App\Utils\View;
-
+use \App\Model\Entity\Author as EntityAuthor;
 
 
 class Author extends Page
 {
+
+    /**
+     * método responsavel por retornar itens alocados no banco de dados, renderizando na pagina.
+     * @return string
+     */
+    private function getAuthorItems()
+    {
+        // dados do autor
+        $itens = '';
+
+        // resultados da pagina
+        $results = EntityAuthor::getAuthor(null, 'id DESC');
+
+        // renderiza o item
+        while ($obAuthor = $results->fetchObject(EntityAuthor::class)) {
+            $itens .= View::render('pages/list/author/item', [
+                'name' => $obAuthor->name,
+                
+            ]);
+        }
+
+
+        // retorna os dados
+        return $itens;
+    }
 
     /** metodo para resgatar os dados da pagina de autores (view)
      * @return string
@@ -18,8 +43,7 @@ class Author extends Page
 
         $content = View::render('pages/list/listAuthors', [
             //view authors
-            'id' => '1',
-            'name' => 'benedito',
+            'itens' => self::getAuthorItems()
         ]);
 
         //retorna a view da pagina
