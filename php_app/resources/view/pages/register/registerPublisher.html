@@ -13,7 +13,7 @@
                                 <h5 class="mb-3">Informações revelantes sobre a editora</h5>
                             </div>
                         </div>
-                        <form class="row g-3 needs-validation was-validated my-3" method="post" novalidate="">
+                        <form class="row g-3 needs-validation my-3" method="post" id="publisherForm" novalidate="">
                             <div class="col-md-4">
                                 <label for="validationCustom01" class="form-label">Nome da editora</label>
                                 <input type="text" class="form-control" id="validationCustom01"
@@ -38,3 +38,17 @@
 
     </div>
 </main>
+<script>
+    const publisherForm = document.getElementById('publisherForm');
+
+    publisherForm.addEventListener('submit', function (event) {
+        if (!publisherForm.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else{
+            console.log('Formulário enviado!');
+        }
+
+        publisherForm.classList.add('was-validated');
+    });
+</script>

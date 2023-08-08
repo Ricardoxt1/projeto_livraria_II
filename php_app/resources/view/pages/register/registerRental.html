@@ -16,11 +16,11 @@
 
                         <div class="col-md-7 col-lg-12">
                             <h4 class="mb-3">Registro sobre o aluguel</h4>
-                            <form class="needs-validatio was-validated" method="post" novalidate="">
+                            <form class="needs-validatio" method="post" id="rentalForm" novalidate="">
                                 <div class="row g-3">
                                     <div class="col-sm-4">
                                         <label for="validationCustom01">Selecionar o consumidor</label>
-                                        <select class="form-select is-invalid" id="validationCustom01"
+                                        <select class="form-select" id="validationCustom01"
                                             name="costumer_id" aria-label="validationServer01Feedback" required>
                                             <option selected="" disabled="" value="">Escolha...</option>
                                             <option>1</option>
@@ -29,10 +29,13 @@
                                         <div class="valid-feedback">
                                             Consumidor(a) selecionado(a)!
                                         </div>
+                                        <div class="invalid-feedback">
+                                            Necessário selecionar um consumidor.
+                                        </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <label for="validationCustom02">Selecionar o livro</label>
-                                        <select class="form-select is-invalid" id="validationCustom02" name="book_id"
+                                        <select class="form-select" id="validationCustom02" name="book_id"
                                             aria-label="validationServer02Feedback" required>
                                             <option selected="" disabled="" value="">Escolha...</option>
                                             <option>1</option>
@@ -41,10 +44,13 @@
                                         <div class="valid-feedback">
                                             Livro selecionado!
                                         </div>
+                                        <div class="invalid-feedback">
+                                            Necessário selecionar um livro.
+                                        </div>
                                     </div>
                                     <div class="col-sm-4">
                                         <label for="validationCustom03">Selecionar o vendedor</label>
-                                        <select class="form-select is-invalid" id="validationCustom03"
+                                        <select class="form-select" id="validationCustom03"
                                             name="employee_id" aria-label="validationServer03Feedback" required>
                                             <option selected="" disabled="" value="">Escolha...</option>
                                             <option>1</option>
@@ -53,9 +59,12 @@
                                         <div class="valid-feedback">
                                             Vendedor(a) selecionado(a)!
                                         </div>
+                                        <div class="invalid-feedback">
+                                            Necessário selecionar um vendedor.
+                                        </div>
                                     </div>
                                     <div class="col-sm-3 mt-2">
-                                        <label for="validationCustom04" class="form-label is-invalid">Data do
+                                        <label for="validationCustom04" class="form-label">Data do
                                             aluguel</label>
                                         <input type="date" class="form-control" name="rental" id="validationCustom04"
                                             placeholder="0000-00-00" required>
@@ -64,7 +73,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-3 mt-2">
-                                        <label for="validationCustom05" class="form-label is-invalid">Data previsão de
+                                        <label for="validationCustom05" class="form-label">Data previsão de
                                             devolução</label>
                                         <input type="date" class="form-control" name="delivery" id="validationCustom05"
                                             placeholder="0000-00-00" required>
@@ -82,3 +91,17 @@
         </body>
     </div>
 </main>
+<script>
+    const rentalForm = document.getElementById('rentalForm');
+
+    rentalForm.addEventListener('submit', function (event) {
+        if (!rentalForm.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else{
+            console.log('Formulário enviado!');
+        }
+
+        rentalForm.classList.add('was-validated');
+    });
+</script>

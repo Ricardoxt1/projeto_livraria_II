@@ -13,17 +13,14 @@
 
                         <div class="col-md-7 col-lg-12">
                             <h5 class="mb-3">Informações revelantes sobre o livro</h5>
-                            <form class="needs-validation was-validated" method="post" novalidate="">
+                            <form class="needs-validation" id="bookForm" method="post" novalidate="">
                                 <div class="row g-3">
                                     <div class="col-sm-6">
                                         <label for="validationCustom01" class="form-label">Titulo</label>
                                         <input type="text" class="form-control" name="titule" id="validationCustom01"
                                             placeholder="A bela e a fera" value="" required>
                                         <div class="valid-feedback">
-                                            Pode prosseguir!
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            É necessario o titulo do livro
+                                            Titulo preenchido!
                                         </div>
                                     </div>
 
@@ -33,10 +30,7 @@
                                         <input type="number" class="form-control" name="page" id="validationCustom02"
                                             placeholder="123" value="" required>
                                         <div class="valid-feedback">
-                                            Pode prosseguir!
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            É necessario digitar quantidade de páginas do livro.
+                                            Número de páginas preenchido!
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -45,10 +39,7 @@
                                         <input type="number" min="1800" id="validationCustom03" name="realese_date"
                                             max="" step="1" class="form-control" placeholder="1800" value="" required>
                                         <div class="valid-feedback">
-                                            Pode prosseguir!
-                                        </div>
-                                        <div class="invalid-feedback">
-                                            É necessario digitar o ano de lançamento do livro.
+                                            Data de lançamento preenchido!
                                         </div>
                                         <script>
                                             const inputAno = document.getElementById('validationCustom03');
@@ -63,7 +54,7 @@
 
                                     <div class="col-sm-4 mt-2">
                                         <label for="validationServer04" class="form-label">Selecionar o autor</label>
-                                        <select class="form-select is-invalid" id="validationServer04" name="author_id"
+                                        <select class="form-select" id="validationServer04" name="author_id"
                                             aria-describedby="validationServer04Feedback" required="">
                                             <option selected="" disabled="" value="">Escolha...</option>
                                             <option>2</option>
@@ -74,7 +65,7 @@
                                     </div>
                                     <div class="col-sm-4 mt-2">
                                         <label for="validationServer05" class="form-label">Selecionar o livraria</label>
-                                        <select class="form-select is-invalid" id="validationServer05" name="library_id"
+                                        <select class="form-select" id="validationServer05" name="library_id"
                                             aria-describedby="validationServer05Feedback" required="">
                                             <option selected="" disabled="" value="">Escolha...</option>
                                             <option>1</option>
@@ -85,7 +76,7 @@
                                     </div>
                                     <div class="col-sm-4 mt-2">
                                         <label for="validationServer06" class="form-label">Selecionar a editora</label>
-                                        <select class="form-select is-invalid" id="validationServer06"
+                                        <select class="form-select" id="validationServer06"
                                             name="publisher_id" aria-describedby="validationServer06Feedback"
                                             required="">
                                             <option selected="" disabled="" value="">Escolha...</option>
@@ -99,14 +90,13 @@
                                     <div class="mb-3">
                                         <input type="file" class="form-control" aria-label="file example" name="img"
                                             accept="image/*" required>
-                                        <div class="invalid-feedback">Escolha um arquivo de imagem para enviar</div>
                                         <div class="valid-feedback">Arquivo selecionado!</div>
                                     </div>
                                 </div>
                                 <button class="w-20 my-4 btn btn-primary btn-ls" type="submit"
                                     onclick="submitForm()">Enviar</button>
 
-                                <!-- validação upload de arquivo -->
+                                <!-- validação upload de arquivo
                                 <script>
                                     function submitForm() {
                                         // Verifica se o input do arquivo é válido
@@ -120,7 +110,7 @@
                                             invalidFeedback.style.display = 'block';
                                         }
                                     }
-                                </script>
+                                </script> -->
                             </form>
                         </div>
                     </div>
@@ -129,3 +119,17 @@
         </body>
     </div>
 </main>
+<script>
+    const bookForm = document.getElementById('bookForm');
+
+    bookForm.addEventListener('submit', function (event) {
+        if (!bookForm.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else{
+            console.log('Formulário enviado!');
+        }
+
+        bookForm.classList.add('was-validated');
+    });
+</script>
