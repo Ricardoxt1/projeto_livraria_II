@@ -6,15 +6,15 @@ use \App\Controller\Pages\Create;
 //ROTA BOOK
 //LISTAGEM
 $obRouter->get('/book', [
-    function () {
-        return new Response(200, Read\Book::getBook());
+    function ($request) {
+        return new Response(200, Read\Book::getBook($request));
     }
 ]);
 
 //REGISTRO 
 $obRouter->get('/registerBook', [
-    function () {
-        return new Response(200, Create\registerBook::getRegisterBook());
+    function ($request) {
+        return new Response(200, Create\registerBook::getRegisterBook($request));
     }
 ]);
 
