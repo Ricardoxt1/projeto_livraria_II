@@ -3,24 +3,36 @@
 namespace App\Controller\Pages\Create;
 
 use \App\Utils\View;
-use \App\Model\Entity\Rental;
+use \App\Model\Entity\Rental as EntityRental;
 use \Exception;
+
 
 class registerRental extends registerPage
 {
-
+    
     /** metodo para envio de dados da pagina registro aluguel (view)
      * @return string
      *  */
     public static function getRegisterRental()
     {
 
-        $content = View::render('pages/register/registerRental', [
-            //view aluguel
-            'id' => '1',
-            'name' => 'editora ld',
-        ]);
-
+        // resultados da pagina
+        $results = EntityRental::getRental(null, null, null);
+   
+        // renderiza o item
+        while ($obRental = $results->fetchObject(EntityRental::class)){
+            $content = View::render('pages/register/registerRental', [
+                'id' => $obRental->rentals_id,
+                'rental' => $obRental->rental,
+                'delivery' => $obRental->delivery,
+                'costumer_name' => $obRental->costumers_name,
+                'costumer_id' => $obRental->costumer_id,
+                'titule' => $obRental->books_titule,
+                'book_id' => $obRental->book_id,
+                'employee' => $obRental->employees_name,
+                'employee_id' => $obRental->employee_id,
+            ]);
+        }
 
         //retorna a view da pagina
         return parent::getPage('Registro de Aluguéis',$content);
@@ -37,7 +49,7 @@ class registerRental extends registerPage
             $postVars = $request->getPostVars();
             
             // Nova instância de aluguel
-            $obRental = new Rental();
+            $obRental = new EntityRental();
             $obRental->rental = $postVars['rental'];
             $obRental->delivery = $postVars['delivery'];
             $obRental->costumer_id = $postVars['costumer_id'];
