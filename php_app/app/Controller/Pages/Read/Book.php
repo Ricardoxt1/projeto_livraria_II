@@ -22,16 +22,17 @@ class Book extends Page
         
         //Quantidade total de registro
         $quantidadeTotal = EntityBook::getBook(null,null,null,'COUNT(*) as qtd')->fetchObject()->qtd;
-
-        //Página Atual
-        $queryParams = $request->getQueryParams();
-        $paginaAtual = $queryParams['page'] ?? 1;
         
+        //Página Atual
+        $queryParams = $request->getQueryParams();	 
+
+        $paginaAtual = $queryParams['page'] ?? 1;
+
         $obPagination = new Pagination($quantidadeTotal, $paginaAtual, 4);
         
         // resultados da pagina
         $results = EntityBook::getBookJoin(null,'id DESC', $obPagination->getLimit());
-
+        
         // renderiza o item
         while ($obBook = $results->fetchObject(EntityBook::class)) {
             $itens .= View::render('pages/list/book/item', [
@@ -40,7 +41,7 @@ class Book extends Page
                 'realese_date' => $obBook->realese_date,
                 'authors_name' => $obBook->authors_name,
                 'publishers_name' => $obBook->publishers_name,
-
+                
             ]);
         }
 

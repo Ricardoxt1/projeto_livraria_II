@@ -45,16 +45,16 @@ class Page
     {
         //páginas
         $pages = $obPagination->getPages();
-
+        
         //verifica a quantidade de páginas 
         if (count($pages) <= 1) return '';
-
+        
         //links
         $links = '';
-
+        
         //URL ATUAL (SEM GETS)
         $url = $request->getRouter()->getCurrentUrl();
-
+        
         //GET
         $queryParams = $request->getQueryParams();
 
@@ -62,12 +62,13 @@ class Page
         foreach ($pages as $page) {
             //ALTERA A PÁGINA
             $queryParams['page'] = $page['page'];
+            
             //LINK
-            $link = $url . '?' . http_build_query($queryParams);
-
+            $link = $url.'?'.http_build_query($queryParams);
+            
             //View
             $links .= View::render('pages/pagination/link', [
-
+                
                 'page' => $page['page'],
                 'link' => $link,
                 'active' => $page['current'] ? 'active' : '',

@@ -5,6 +5,7 @@ namespace App\Controller\Pages\Read;
 use \App\Utils\View;
 use \App\Model\Entity\Rental as EntityRental;
 
+
 class Rental extends Page
 {
     /** 

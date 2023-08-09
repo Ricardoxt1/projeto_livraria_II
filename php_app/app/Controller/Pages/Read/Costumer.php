@@ -15,7 +15,7 @@ class Costumer extends Page
         $itens = '';
 
         // resultados da pagina
-        $results = EntityCostumer::getCostumer(null, 'id DESC');
+        $results = EntityCostumer::getCostumer(null, 'id ASC');
 
         // renderiza o item
         while ($obCostumer = $results->fetchObject(EntityCostumer::class)) {

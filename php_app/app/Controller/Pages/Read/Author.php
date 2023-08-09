@@ -19,7 +19,7 @@ class Author extends Page
         $itens = '';
 
         // resultados da pagina
-        $results = EntityAuthor::getAuthor(null, 'id DESC');
+        $results = EntityAuthor::getAuthor(null, 'id ASC');
 
         // renderiza o item
         while ($obAuthor = $results->fetchObject(EntityAuthor::class)) {
