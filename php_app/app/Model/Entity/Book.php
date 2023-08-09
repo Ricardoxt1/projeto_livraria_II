@@ -104,4 +104,19 @@ class Book
     public static function getBook($where = null, $order = null, $limit = null, $fields = '*'){
         return (new Database('books'))->select($where, $order, $limit, $fields);
     }
+    
+    /**
+     * @param string $where
+     * @param string $order
+     * @param string $limit
+     * @return PDOStatement
+     */
+    public static function getBookJoin($where = null, $order = null, $limit = null)
+    {
+
+        return (new Database('books'))->selectBook($where, $order, $limit);
+    }
+
+
+    
 }

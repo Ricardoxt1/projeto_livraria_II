@@ -4,6 +4,7 @@ namespace App\Model\Entity;
 
 use \WilliamCosta\DatabaseManager\Database;
 
+
 class Rental
 {
 
@@ -71,7 +72,8 @@ class Rental
      * @param integer $field
      * @return PDOStatement
      */
-    public static function getRental($where = null, $order = null, $limit = null, $fields = '*'){
-        return (new Database('rentals'))->select($where, $order, $limit, $fields);
+    public static function getRental($where = null, $order = null, $limit = null){
+        return (new Database('rentals'))->selectRental($where, $order, $limit);
     }
+
 }
