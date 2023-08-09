@@ -57,7 +57,7 @@
                                         <select class="form-select" id="validationServer04" name="author_id"
                                             aria-describedby="validationServer04Feedback" required="">
                                             <option selected="" disabled="" value="">Escolha...</option>
-                                            <option>2</option>
+                                            {{optionAuthor}}
                                         </select>
                                         <div class="valid-feedback">
                                             Autor(a) selecionado(a)!
@@ -68,7 +68,7 @@
                                         <select class="form-select" id="validationServer05" name="library_id"
                                             aria-describedby="validationServer05Feedback" required="">
                                             <option selected="" disabled="" value="">Escolha...</option>
-                                            <option>1</option>
+                                            <option value='1'>Livraria Pedbot</option>
                                         </select>
                                         <div class="valid-feedback">
                                             Livraria selecionada
@@ -76,11 +76,10 @@
                                     </div>
                                     <div class="col-sm-4 mt-2">
                                         <label for="validationServer06" class="form-label">Selecionar a editora</label>
-                                        <select class="form-select" id="validationServer06"
-                                            name="publisher_id" aria-describedby="validationServer06Feedback"
-                                            required="">
+                                        <select class="form-select" id="validationServer06" name="publisher_id"
+                                            aria-describedby="validationServer06Feedback" required="">
                                             <option selected="" disabled="" value="">Escolha...</option>
-                                            <option>4</option>
+                                            {{optionPublisher}}
                                         </select>
                                         <div class="valid-feedback">
                                             Editor(a) selecionado(a)
@@ -94,23 +93,8 @@
                                     </div>
                                 </div>
                                 <button class="w-20 my-4 btn btn-primary btn-ls" type="submit"
-                                    onclick="submitForm()">Enviar</button>
-
-                                <!-- validação upload de arquivo
-                                <script>
-                                    function submitForm() {
-                                        // Verifica se o input do arquivo é válido
-                                        const fileInput = document.getElementById('validationServer05');
-                                        if (fileInput.checkValidity()) {
-                                            // Se for válido, prossegue com o envio do formulário (ou outra ação)
-                                            alert('Arquivo selecionado. Formulário enviado!');
-                                        } else {
-                                            // Se não for válido, exibe a mensagem de feedback
-                                            const invalidFeedback = document.querySelector('.invalid-feedback');
-                                            invalidFeedback.style.display = 'block';
-                                        }
-                                    }
-                                </script> -->
+                                    onclick="submitForm()">Enviar
+                                </button>
                             </form>
                         </div>
                     </div>
@@ -126,7 +110,7 @@
         if (!bookForm.checkValidity()) {
             event.preventDefault();
             event.stopPropagation();
-        } else{
+        } else {
             console.log('Formulário enviado!');
         }
 

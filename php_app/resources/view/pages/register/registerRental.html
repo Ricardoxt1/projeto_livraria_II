@@ -23,7 +23,7 @@
                                         <select class="form-select" id="validationCustom01"
                                             name="costumer_id" aria-label="validationServer01Feedback" required>
                                             <option selected="" disabled="" value="">Escolha...</option>
-                                            <option value='{{costumer_id}}'>{{costumer_name}}</option>
+                                            {{optionCostumer}}
                                         </select>
                                         <div class="valid-feedback">
                                             Consumidor(a) selecionado(a)!
@@ -37,7 +37,7 @@
                                         <select class="form-select" id="validationCustom02" name="book_id"
                                             aria-label="validationServer02Feedback" required>
                                             <option selected="" disabled="" value="">Escolha...</option>
-                                            <option value='{{book_id}}'>{{titule}}</option>
+                                            {{optionBook}}
                                         </select>
                                         <div class="valid-feedback">
                                             Livro selecionado!
@@ -51,7 +51,7 @@
                                         <select class="form-select" id="validationCustom03"
                                             name="employee_id" aria-label="validationServer03Feedback" required>
                                             <option selected="" disabled="" value="">Escolha...</option>
-                                            <option value='{{employee_id}}'>{{employee}}</option>
+                                            {{optionEmployee}}
                                         </select>
                                         <div class="valid-feedback">
                                             Vendedor(a) selecionado(a)!
