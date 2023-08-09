@@ -20,10 +20,10 @@
 
                         </div>
 
-                        <form class="row needs-validation was-validated d-flex justify-content-center" method="post">
+                        <form class="row needs-validation d-flex justify-content-center" id="registerForm" method="post">
 
                             <div class="form-outline  col-12">
-                                <label class="form-label is-invalid mt-3" for="form2Example11">Nome do
+                                <label class="form-label  mt-3" for="form2Example11">Nome do
                                     usuario</label>
                                 <input type="text" id="form2Example11" class="form-control"
                                  name="username"   placeholder="digite nome do usuario" required />
@@ -35,7 +35,7 @@
                                 </div>
                             </div>
                             <div class="form-outline col-12">
-                                <label class="form-label is-invalid mt-3" for="validationCustom01">Email</label>
+                                <label class="form-label  mt-3" for="validationCustom01">Email</label>
                                 <input type="email" id="validationCustom01" class="form-control"
                                   name="email"  placeholder="digite seu email" required />
                                 <div class="valid-feedback">
@@ -46,9 +46,9 @@
                                 </div>
                             </div>
                             <div class="form-outline my-3 col-6">
-                                <label for="validationCustom02" class="form-label is-invalid">Senha</label>
+                                <label for="validationCustom02" class="form-label ">Senha</label>
                                 <div class="input-group">
-                                    <input type="password" class="form-control is-invalid" id="validationCustom02"
+                                    <input type="password" class="form-control " id="validationCustom02"
                                      name="password"   aria-describedby="toggleButton" placeholder="Digite sua senha" required />
                                     <button class="btn btn-outline-secondary text-center" type="button"
                                         id="toggleButton "><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -69,7 +69,7 @@
                                 </div>
                             </div>
                             <div class="form-outline mt-3 col-6">
-                                <label for="validationCustom03" class="form-label is-invalid">Confirme sua senha</label>
+                                <label for="validationCustom03" class="form-label ">Confirme sua senha</label>
                                 <div class="input-group">
                                     <input type="password" class="form-control" id="validationCustom03"
                                         aria-describedby="toggleButton" placeholder="Digite sua senha" required />
@@ -104,3 +104,17 @@
         </div>
     </div>
 </div>
+<script>
+    const registerForm = document.getElementById('registerForm');
+
+    registerForm.addEventListener('submit', function (event) {
+        if (!registerForm.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else{
+            console.log('Formulário enviado!');
+        }
+
+        registerForm.classList.add('was-validated');
+    });
+</script>
