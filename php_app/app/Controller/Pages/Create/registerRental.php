@@ -4,35 +4,98 @@ namespace App\Controller\Pages\Create;
 
 use \App\Utils\View;
 use \App\Model\Entity\Rental as EntityRental;
+use \App\Model\Entity\Book as EntityBook;
+use \App\Model\Entity\Costumer as EntityCostumer;
+use \App\Model\Entity\Employee as EntityEmployee;
 use \Exception;
 
 
 class registerRental extends registerPage
 {
-    
-    /** metodo para envio de dados da pagina registro aluguel (view)
-     * @return string
-     *  */
-    public static function getRegisterRental()
+    /** 
+     * método responsavel por retornar itens alocados no banco de dados redenrizando a pagina
+     * @return string $optionBook
+     */
+    private function getBookOption()
     {
+        // dados de aluguel em relação aos livros
+        $optionBook = '';
 
         // resultados da pagina
-        $results = EntityRental::getRental(null, null, null);
-   
+        $resultsBook = EntityBook::getBook(null, null, null);
+        
         // renderiza o item
-        while ($obRental = $results->fetchObject(EntityRental::class)){
-            $content = View::render('pages/register/registerRental', [
-                'id' => $obRental->rentals_id,
-                'rental' => $obRental->rental,
-                'delivery' => $obRental->delivery,
-                'costumer_name' => $obRental->costumers_name,
-                'costumer_id' => $obRental->costumer_id,
-                'titule' => $obRental->books_titule,
-                'book_id' => $obRental->book_id,
-                'employee' => $obRental->employees_name,
-                'employee_id' => $obRental->employee_id,
+        while ($obBook = $resultsBook->fetchObject(EntityBook::class)){
+            $optionBook .= View::render('pages/register/rental/optionBook', [
+                'book_id' => $obBook->id,
+                'titule' => $obBook->titule,
             ]);
         }
+    
+        // retorna os dados
+        return $optionBook;
+    }
+
+    /** 
+     * método responsavel por retornar itens alocados no banco de dados redenrizando a pagina
+     * @return string $optionCostumer
+     */
+    private function getCostumerOption()
+    {
+        // dados de aluguel em relação aos usuarios
+        $optionCostumer = '';
+
+        // resultados da pagina
+        $resultsCostumer = EntityCostumer::getCostumer(null, null, null);
+        // renderiza o item
+        while ($obCostumer = $resultsCostumer->fetchObject(EntityCostumer::class)){
+            $optionCostumer .= View::render('pages/register/rental/optionCostumer', [
+                'costumer_id' => $obCostumer->id,
+                'costumer' => $obCostumer->name,
+            ]);
+        }
+    
+        // retorna os dados
+        return $optionCostumer;
+    }
+
+    /** 
+     * método responsavel por retornar itens alocados no banco de dados redenrizando a pagina
+     * @return string $optionEmployee
+     */
+    private function getEmployeeOption()
+    {
+        // dados de aluguel em relação aos funcionarios
+        $optionEmployee = '';
+
+        // resultados da pagina
+        $resultsEmployee = EntityEmployee::getEmployee(null, null, null);
+        // renderiza o item
+        while ($obEmployee = $resultsEmployee->fetchObject(EntityEmployee::class)){
+            $optionEmployee .= View::render('pages/register/rental/optionEmployee', [
+                'employee_id' => $obEmployee->id,
+                'employee' => $obEmployee->name,
+            ]);
+        }
+    
+        // retorna os dados
+        return $optionEmployee;
+    }
+
+
+    /** metodo para envio de dados da pagina registro aluguel (view)
+     * @return string $content
+     *  */
+    public static function getRegisterRental($request)
+    {
+
+        $content = View::render('pages/register/registerRental', [
+            //view livro
+            'optionBook' => self::getBookOption($request),
+            'optionCostumer' => self::getCostumerOption($request),
+            'optionEmployee' => self::getEmployeeOption($request),
+
+        ]);
 
         //retorna a view da pagina
         return parent::getPage('Registro de Aluguéis',$content);
@@ -59,7 +122,7 @@ class registerRental extends registerPage
             // Tente cadastrar o aluguel
             $obRental->cadastrar();
     
-            return self::getRegisterRental();
+            return self::getRegisterRental($request);
         } catch (Exception $e) {
             
             return "Erro ao inserir o aluguel: " . $e->getMessage();
