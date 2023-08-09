@@ -6,15 +6,15 @@ use \App\Controller\Pages\Create;
 //ROTA RENTAL
 //LISTAGEM
 $obRouter->get('/rental', [
-    function () {
-        return new Response(200, Read\Rental::getRental());
+    function ($request) {
+        return new Response(200, Read\Rental::getRental($request));
     }
 ]);
 
 //REGISTRO 
 $obRouter->get('/registerRental', [
-    function () {
-        return new Response(200, Create\registerRental::getRegisterRental());
+    function ($request) {
+        return new Response(200, Create\registerRental::getRegisterRental($request));
     }
 ]);
 
