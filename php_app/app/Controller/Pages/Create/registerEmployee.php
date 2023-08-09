@@ -37,11 +37,6 @@ class registerEmployee extends registerPage
             //dados do post
             $postVars = $request->getPostVars();
             
-             // Verificar se os campos obrigatórios estão presentes
-             if (empty($postVars['name']) || empty($postVars['pis']) || empty($postVars['office']) || empty($postVars['departament']) || empty($postVars['library_id'])) {
-                throw new Exception("Todos os campos obrigatórios devem ser preenchidos.");
-            }
-
             //nova instancia de funcionario
             $obEmployee = new Employee();
             $obEmployee->name = $postVars['name'];

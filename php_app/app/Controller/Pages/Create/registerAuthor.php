@@ -37,11 +37,6 @@ class registerAuthor extends registerPage
             //dados do post
             $postVars = $request->getPostVars();
 
-            // Verificar se o campo 'name' está presente no postVars
-            if (!isset($postVars['name']) || empty($postVars['name'])) {
-                throw new Exception('Por favor, preencha o campo nome.');
-            }
-
             //nova instancia de autor
             $obAuthor = new Author();
             $obAuthor->name = $postVars['name'];

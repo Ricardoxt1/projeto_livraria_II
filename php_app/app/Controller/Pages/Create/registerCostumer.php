@@ -36,11 +36,6 @@ class registerCostumer extends registerPage
             //dados do post
             $postVars = $request->getPostVars();
 
-            // Verificar se os campos obrigatórios estão presentes
-            if (empty($postVars['name']) || empty($postVars['cpf']) || empty($postVars['phone_number']) || empty($postVars['address']) || empty($postVars['email'])) {
-                throw new Exception("Todos os campos obrigatórios devem ser preenchidos.");
-            }
-            
             //nova instancia de usuario
             $obCostumer = new Costumer();
             $obCostumer->name = $postVars['name'];

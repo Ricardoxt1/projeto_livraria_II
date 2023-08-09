@@ -17,8 +17,8 @@ class registerBook extends registerPage
 
         $content = View::render('pages/register/registerBook', [
             //view livro
-            'id' => '1',
-            'name' => 'editora ld',
+            
+           
         ]);
 
 
@@ -36,12 +36,7 @@ class registerBook extends registerPage
         try {
             //dados do post
             $postVars = $request->getPostVars();
-
-            // Verificar se os campos obrigatórios estão presentes
-            if (empty($postVars['titule']) || empty($postVars['page']) || empty($postVars['realese_date']) || empty($postVars['author_id']) || empty($postVars['library_id']) || empty($postVars['publisher_id'])) {
-                throw new Exception("Todos os campos obrigatórios devem ser preenchidos.");
-            }
-
+            
             //nova instancia de livro
             $obBook = new Book();
             $obBook->titule = $postVars['titule'];
@@ -50,9 +45,11 @@ class registerBook extends registerPage
             $obBook->author_id = $postVars['author_id'];
             $obBook->library_id = $postVars['library_id'];
             $obBook->publisher_id = $postVars['publisher_id'];
+            // $obBook->img = $postVars['img'];
             $obBook->cadastrar();
 
-            return self::getRegisterBook();
+            // retorna a página de listagem de livros
+            return self::getRegisterBook($request);
         } catch (Exception $e) {
             return "Erro ao inserir o livro: " . $e->getMessage();
         }

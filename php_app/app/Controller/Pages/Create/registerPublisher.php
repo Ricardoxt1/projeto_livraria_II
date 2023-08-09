@@ -37,11 +37,6 @@ class registerPublisher extends registerPage
             //dados do post
             $postVars = $request->getPostVars();
 
-            // Verificar se o campo 'name' está presente no POST
-            if (!isset($postVars['name']) || empty($postVars['name'])) {
-                throw new Exception("Por favor, preencha o campo nome.");
-            }
-
             //nova instancia de editora
             $obPublisher = new Publisher();
             $obPublisher->name = $postVars['name'];

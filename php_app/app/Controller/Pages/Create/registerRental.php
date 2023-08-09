@@ -36,10 +36,6 @@ class registerRental extends registerPage
             // Dados do post
             $postVars = $request->getPostVars();
             
-            if(empty($postVars['rental']) || !is_array($postVars['delivery']) || empty($postVars['costumer_id']) || empty($postVars['book_id']) | empty($postVars['employee_id']) ) {
-                throw new Exception("Por favor, preencha todos os campos.");
-            };
-
             // Nova instância de aluguel
             $obRental = new Rental();
             $obRental->rental = $postVars['rental'];
