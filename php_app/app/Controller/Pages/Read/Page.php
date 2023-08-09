@@ -35,6 +35,51 @@ class Page
         return View::render('pages/list/footer');
     }
 
+    /**
+     * método responsável por redenrizar o layout de paginação
+     * @param request $request
+     * @param pagination $obPagination
+     * @return string
+     */
+    public static function getPagination($request, $obPagination)
+    {
+        //páginas
+        $pages = $obPagination->getPages();
+
+        //verifica a quantidade de páginas 
+        if (count($pages) <= 1) return '';
+
+        //links
+        $links = '';
+
+        //URL ATUAL (SEM GETS)
+        $url = $request->getRouter()->getCurrentUrl();
+
+        //GET
+        $queryParams = $request->getQueryParams();
+
+        //RENDERIZA OS LINKS
+        foreach ($pages as $page) {
+            //ALTERA A PÁGINA
+            $queryParams['page'] = $page['page'];
+            //LINK
+            $link = $url . '?' . http_build_query($queryParams);
+
+            //View
+            $links .= View::render('pages/pagination/link', [
+
+                'page' => $page['page'],
+                'link' => $link,
+                'active' => $page['current'] ? 'active' : '',
+            ]);
+
+            //redenriza box da pagina
+            return View::render('pages/pagination/box', [
+                'links' => $links
+            ]);
+        }
+    }
+
     /** metodo para resgatar os dados da pagina genérica (view)
      * @return string
      *  */
@@ -74,6 +119,4 @@ class Page
 
         ]);
     }
-
-    
 }
