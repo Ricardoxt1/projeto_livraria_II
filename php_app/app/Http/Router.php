@@ -5,6 +5,7 @@ namespace App\Http;
 use \Closure;
 use \Exception;
 use \ReflectionFunction;
+use \App\Http\Middleware\Queue as MiddlewareQueue;
 
 class Router
 {
@@ -40,7 +41,7 @@ class Router
      */
     public function __construct($url)
     {
-        $this->request = new Request();
+        $this->request = new Request($this);
         $this->url = $url;
         $this->setPrefix();
     }
@@ -72,7 +73,10 @@ class Router
             }
         }
 
-        print_r($params,  true);
+        // middleware das rotas
+        $params['middlewares'] = $params['middlewares'] ?? [];
+
+       
 
         //variáveis da rota
         $params['variables'] = [];
@@ -174,7 +178,6 @@ class Router
             //verifica se a uri bate o padrão
             if (preg_match($patternRoute, $uri, $matches)) {
 
-
                 print_r($methods, true);
 
                 print_r($httpMethod, true);
@@ -183,10 +186,6 @@ class Router
                 if (isset($methods[$httpMethod])) {
                     //remove a primeira posição
                     unset($matches[0]);
-
-
-
-
 
                     //variadas processadas
                     $keys = $methods[$httpMethod]['variables'];
@@ -214,7 +213,7 @@ class Router
         try {
 
             $route = $this->getRoute();
-           
+
             //VERIFICA O CONTROLADOR
             if (empty($route['controller'])) {
                 throw new Exception("A Url não pode ser processada", 500);
@@ -229,12 +228,21 @@ class Router
                 $name = $parameter->getName();
                 $agrs[$name] = $route['variables'][$name] ?? '';
             }
-            
 
-            //RETORNA A EXECUÇÃO DA FUNÇÃO
-            return call_user_func_array($route['controller'], $agrs);
+            //RETORNA A EXECUÇÃO DA FILA DE MIDDLEWARES
+            return (new MiddlewareQueue($route['middlewares'],$route['controller'], $agrs))->next($this->request);
+            
         } catch (Exception $e) {
             return new Response($e->getCode(), $e->getMessage());
         }
+    }
+
+    /** 
+     * método responsavel por retornar a url atual
+     * @return string
+     */
+    public function getCurrentUrl()
+    {
+        return $this->url . $this->getUri();
     }
 }
