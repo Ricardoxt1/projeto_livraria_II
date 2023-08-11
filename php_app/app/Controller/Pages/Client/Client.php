@@ -19,6 +19,8 @@ class Client
 
     /** metodo para resgatar os dados da pagina genérica (view)
      * @return string
+     * @param string $titule
+     * @param string $content
      *  */
     public static function getClient($titule, $content)
     {

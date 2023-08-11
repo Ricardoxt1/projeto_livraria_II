@@ -34,25 +34,30 @@ class Register extends Client
         try {
             // Dados do post
             $postVars = $request->getPostVars();
-
             if(empty($postVars['username']) || empty($postVars['password']) || empty($postVars['email'])){
                 throw new Exception('Necessário preencher todos os campos!');
-
+                
             }
-
+            
             // Nova instância de registro
             $obRegister = new RegisterClient();
             $obRegister->username = $postVars['username'];
             $obRegister->email = $postVars['email'];
             $obRegister->password = $postVars['password'];
 
+            // $obRegister = RegisterClient::getRegisterByEmail($email);
+            // if(!$obRegister instanceof RegisterClient){
+            //     return self::getRegister($request);
+            // }
+            
             // Tentativa de cadastrar o registro
             $obRegister->cadastrar();
-
+            
             return self::getRegister();
         } catch (Exception $e) {
             // Captura a exceção e lida com o erro
             return "Erro ao inserir o registro: " . $e->getMessage();
         }
+        echo "<pre>"; print_r($obRegister); echo "<pre>"; exit;
     }
 }
