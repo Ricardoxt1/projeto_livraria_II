@@ -10,12 +10,12 @@
                             <img src="/resources/img/logoLibrary.png" style="width: 185px;" alt="logo">
                             <h2 class="mt-1 mb-5 pb-1 ">Biblioteca Pedbot</h2>
                         </div>
-
-                        <form class="needs-validatio was-validated">
+                        {{status}}
+                        <form class="needs-validatio was-validated" method="post" >
 
                             <div class="form-outline my-4">
                                 <label class="form-label is-invalid mt-3" for="form2Example11">Email</label>
-                                <input type="email" id="form2Example11" class="form-control"
+                                <input type="email" id="form2Example11" name="email" class="form-control"
                                     placeholder="digite nome do usuario" required />
                                 <div class="valid-feedback">
                                     Email preenchido!
@@ -27,7 +27,7 @@
 
                             <div class="form-outline mb-4">
                                 <label class="form-label is-invalid" for="form2Example22">Senha</label>
-                                <input type="password" id="form2Example22" class="form-control"
+                                <input type="password" id="form2Example22" name="password" class="form-control"
                                     placeholder="digite sua senha" required />
                                 <div class="valid-feedback">
                                     Senha preenchida!
@@ -38,8 +38,7 @@
                             </div>
 
                             <div class="text-center pt-1 mb-5 pb-1">
-                                <a href="{{URL}}/home"><button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">Entrar</button></a>
-                                <a class="text-muted" href="#!">Esqueceu a senha?</a>
+                               <button class="btn btn-primary btn-md mb-3" type="submit">Entrar</button>
                             </div>
 
                             <div class="d-inline align-items-center justify-content-center">
