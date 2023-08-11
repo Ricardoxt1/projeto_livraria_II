@@ -7,6 +7,9 @@ use \App\Controller\Pages\HomePage;
 //ROTA HOME
 //LISTAGEM
 $obRouter->get('/home', [
+    'middlewares' => [
+        'required-admin-login'
+    ],
     function () {
         return new Response(200, HomePage\Home::getHome());
     }
@@ -14,6 +17,9 @@ $obRouter->get('/home', [
 
 //ROTA MENU
 $obRouter->get('/menu', [
+    'middlewares' => [
+        'required-admin-login'
+    ],
     function () {
         return new Response(200, Pages\Menu::getMenu());
     }
@@ -28,4 +34,3 @@ $obRouter->get('/pagina/{idPagina}/{acao}', [
     }
 
 ]);
-
