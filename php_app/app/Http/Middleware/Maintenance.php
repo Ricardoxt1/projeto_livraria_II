@@ -16,7 +16,9 @@ class Maintenance
 
         //verifica o estado de manutenção da pagina
         if (getenv('MAINTENANCE') == 'true') {
-            throw new \Exception("Página em manutenção. Tente novamente mais tarde.", 200);
+            throw new \Exception('<div class="container alight-content-center">
+                                        <img src="/resources/img/notification/maintanence1.jpg" alt="em manutenção" height=100%>
+                                  </div>", 200');
         }
 
         //executa o próximo nível do middleware

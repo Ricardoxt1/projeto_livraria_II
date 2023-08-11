@@ -245,4 +245,17 @@ class Router
     {
         return $this->url . $this->getUri();
     }
+
+    /**
+     * método responsavel por redirecionar a url
+     * @param string $route
+     */
+    public function redirect($route){
+        //url
+        $url = $this->url.$route;
+        
+        //executa o redirect
+        header('location: ' . $url);
+        exit;
+    }
 }
