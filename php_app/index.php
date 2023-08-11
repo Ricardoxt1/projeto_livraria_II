@@ -16,6 +16,7 @@
     include __DIR__.'/routes/publisher.php';
     include __DIR__.'/routes/rental.php';
     include __DIR__.'/routes/client.php';
+    include __DIR__.'/routes/album.php';
 
 
     //IMPRIME O RESPONSE DA ROTA
