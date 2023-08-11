@@ -31,24 +31,34 @@ class RegisterClient
      */
     public $password;
 
-    
+    /**
+     * método responsável por retornar um usuário com base em seu email
+     * @param string $email
+     * @return RegisterClient
+     */
+    public static function getRegisterByEmail($email){
+        return (new Database('register'))->select('email = "'.$email.'"')->fetchObject(self::class);
+    }
+
+        
     /**
      * método responsável por cadastrar com a instancia atual
      * @return boolean
      */
     public function cadastrar()
     {
-
+        $hashedPassword = password_hash($this->password, PASSWORD_BCRYPT);
         //inseri um registrar no banco de dados
         $this->id = (new Database('register'))->insert([
             'username' => $this->username,
             'email' => $this->email,
-            'password' => $this->password,
+            'password' => $hashedPassword,
         ]);
 
         //sucesso
         return true;
     }
+
 
     /**
      * @param string $where

@@ -98,7 +98,7 @@ class Book
      * @param string $where
      * @param string $order
      * @param string $limit
-     * @param integer $field
+     * @param string $field
      * @return PDOStatement
      */
     public static function getBook($where = null, $order = null, $limit = null, $fields = '*'){
