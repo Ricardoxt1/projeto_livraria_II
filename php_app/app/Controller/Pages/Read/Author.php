@@ -53,7 +53,7 @@ class Author extends Page
     }
 
 
-    /** metodo para realizar update dos dados da pagina de autores (view)
+    /** metodo para realizar busca de dados para realizar update autores (view)
      * @return string
      * @param integer $id
      * @param Request $request
@@ -79,5 +79,32 @@ class Author extends Page
 
         //retorna a view da pagina
         return parent::getPage('Editagem de autor', $content);
+    }
+
+    /** metodo para realizar update dos dados da pagina de autores (view)
+     * @return string
+     * @param integer $id
+     * @param Request $request
+     * 
+     *  */
+    public static function setUpdateAuthor($request, $id)
+    {
+        //obtem os dados de autores no banco de dados
+        $obAuthor = EntityAuthor::getAuthorById($id);
+
+        //valida a instancia
+        if (!$obAuthor instanceof EntityAuthor) {
+            $request->getRouter()->redirect('/author');
+        }
+
+        //post vars
+        $postVars = $request->getPostVars();
+
+        //atualiza a instancia
+        $obAuthor->name = $postVars['name'] ?? $obAuthor->name;
+        $obAuthor->atualizar();
+
+        //redireciona para editagem
+        $request->getRouter()->redirect('/'. 'updateAuthor/'.$obAuthor->id.'/edit?status=updated');
     }
 }

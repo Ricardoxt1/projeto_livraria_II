@@ -40,7 +40,7 @@ class registerAuthor extends registerPage
             $obAuthor->name = $postVars['name'];
             $obAuthor->cadastrar();
 
-            // return self::getRegisterAuthor();
+            //redireciona para editagem
             $request->getRouter()->redirect('/'. 'updateAuthor/'.$obAuthor->id.'/edit?status=created');
         } catch (Exception $e) {
             // Capturar e tratar exceções

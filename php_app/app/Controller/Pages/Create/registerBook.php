@@ -67,6 +67,7 @@ class registerBook extends registerPage
         $content = View::render('pages/register/registerBook', [
             //view livro
             'optionAuthor' => self::getBookOpAuthor($request),
+            'optionPublisher' => self::getBookOpPublisher($request),
 
         ]);
 
@@ -97,8 +98,8 @@ class registerBook extends registerPage
             // $obBook->img = $postVars['img'];
             $obBook->cadastrar();
 
-            // retorna a página de listagem de livros
-            return self::getRegisterBook($request);
+            //redireciona para pagina de editagem
+            $request->getRouter()->redirect('/'. 'updateBook/'.$obBook->id.'/edit?status=created');
         } catch (Exception $e) {
             return "Erro ao inserir o livro: " . $e->getMessage();
         }

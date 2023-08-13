@@ -67,4 +67,34 @@ class Publisher extends Page
         //retorna a view da pagina
         return parent::getPage('Editagem de Editora', $content);
     }
+
+
+             /** metodo para realizar update dos dados da pagina de editora (view)
+     * @return string
+     * @param integer $id
+     * @param Request $request
+     * 
+     *  */
+    public static function setUpdatePublisher($request, $id)
+    {
+        //obtem os dados de livros no banco de dados
+        $obPublisher = EntityPublisher::getPublisherById($id);
+
+        //valida a instancia
+        if (!$obPublisher instanceof EntityPublisher) {
+            $request->getRouter()->redirect('/publisher');
+        }
+
+        //post vars
+        $postVars = $request->getPostVars();
+
+        //atualiza a instancia
+        $obPublisher->name = $postVars['name'] ?? $obPublisher->name;
+       
+        $obPublisher->atualizar();
+
+
+        //redireciona para editagem
+        $request->getRouter()->redirect('/'. 'updatePublisher/'.$obPublisher->id.'/edit?status=updated');
+    }
 }

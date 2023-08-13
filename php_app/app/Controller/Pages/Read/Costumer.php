@@ -74,4 +74,37 @@ class Costumer extends Page
         //retorna a view da pagina
         return parent::getPage('Editagem de Usuario', $content);
     }
+
+     /** metodo para realizar update dos dados da pagina de consumidor (view)
+     * @return string
+     * @param integer $id
+     * @param Request $request
+     * 
+     *  */
+    public static function setUpdateCostumer($request, $id)
+    {
+        //obtem os dados de livros no banco de dados
+        $obCostumer = EntityCostumer::getCostumerById($id);
+
+        //valida a instancia
+        if (!$obCostumer instanceof EntityCostumer) {
+            $request->getRouter()->redirect('/costumer');
+        }
+
+        //post vars
+        $postVars = $request->getPostVars();
+
+        //atualiza a instancia
+        $obCostumer->name = $postVars['name'] ?? $obCostumer->name;
+        $obCostumer->cpf = $postVars['cpf'] ?? $obCostumer->cpf;
+        $obCostumer->phone_number = $postVars['phone_number'] ?? $obCostumer->phone_number;
+        $obCostumer->address = $postVars['address'] ?? $obCostumer->address;
+        $obCostumer->email = $postVars['email'] ?? $obCostumer->email;
+        
+        $obCostumer->atualizar();
+
+
+        //redireciona para editagem
+        $request->getRouter()->redirect('/'. 'updateCostumer/'.$obCostumer->id.'/edit?status=updated');
+    }
 }

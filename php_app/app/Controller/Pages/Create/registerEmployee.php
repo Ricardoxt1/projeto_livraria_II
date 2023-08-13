@@ -46,7 +46,8 @@ class registerEmployee extends registerPage
             $obEmployee->library_id = $postVars['library_id'];
             $obEmployee->cadastrar();
     
-            return self::getRegisterEmployee();
+           //redireciona para pagina de editagem
+           $request->getRouter()->redirect('/'. 'updateEmployee/'.$obEmployee->id.'/edit?status=created');
         } catch (\Exception $e) {
             
             return ("Erro ao inserir funcionário: " . $e->getMessage());

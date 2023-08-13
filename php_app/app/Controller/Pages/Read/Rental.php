@@ -157,4 +157,37 @@ class Rental extends Page
         //retorna a view da pagina
         return parent::getPage('Editagem de Aluguel', $content);
     }
+
+     /** metodo para realizar update dos dados da pagina de aluguel (view)
+     * @return string
+     * @param integer $id
+     * @param Request $request
+     * 
+     *  */
+    public static function setUpdateRental($request, $id)
+    {
+        //obtem os dados de livros no banco de dados
+        $obRental = EntityRental::getRentalById($id);
+
+        //valida a instancia
+        if (!$obRental instanceof EntityRental) {
+            $request->getRouter()->redirect('/rental');
+        }
+
+        //post vars
+        $postVars = $request->getPostVars();
+
+        //atualiza a instancia
+        $obRental->rental = $postVars['rental'] ?? $obRental->rental;
+        $obRental->delivery = $postVars['delivery'] ?? $obRental->delivery;
+        $obRental->costumer_id = $postVars['costumer_id'] ?? $obRental->costumer_id;
+        $obRental->book_id = $postVars['book_id'] ?? $obRental->book_id;
+        $obRental->employee_id = $postVars['employee_id'] ?? $obRental->employee_id;
+        
+        $obRental->atualizar();
+
+
+        //redireciona para editagem
+        $request->getRouter()->redirect('/'. 'updateRental/'.$obRental->id.'/edit?status=updated');
+    }
 }

@@ -48,7 +48,8 @@ class registerCostumer extends registerPage
             // Cadastrar o cliente
             $obCostumer->cadastrar();
 
-            return self::getRegisterCostumer();
+            //redireciona para pagina de editagem
+            $request->getRouter()->redirect('/'. 'updateCostumer/'.$obCostumer->id.'/edit?status=created');
         } catch (Exception $e) {
             // Tratar o erro
             return "Erro ao inserir cliente: " . $e->getMessage();

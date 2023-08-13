@@ -42,7 +42,8 @@ class registerPublisher extends registerPage
             $obPublisher->name = $postVars['name'];
             $obPublisher->cadastrar();
 
-            return self::getRegisterPublisher();
+            //redireciona para pagina de editagem
+            $request->getRouter()->redirect('/'. 'updatePublisher/'.$obPublisher->id.'/edit?status=created');
         } catch (Exception $e) {
             // Tratar o erro
             return "Erro ao cadastrar uma editora: " . $e->getMessage();

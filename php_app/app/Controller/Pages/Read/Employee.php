@@ -61,7 +61,7 @@ class Employee extends Page
 
         //valida a instancia
         if (!$obEmployee instanceof EntityEmployee) {
-            $request->getRouter()->redirect('/costumer');
+            $request->getRouter()->redirect('/employee');
         }
 
         $content = View::render('pages/update/updateEmployee', [
@@ -76,5 +76,38 @@ class Employee extends Page
 
         //retorna a view da pagina
         return parent::getPage('Editagem de Funcionario(a)', $content);
+    }
+
+         /** metodo para realizar update dos dados da pagina de funcionario (view)
+     * @return string
+     * @param integer $id
+     * @param Request $request
+     * 
+     *  */
+    public static function setUpdateEmployee($request, $id)
+    {
+        //obtem os dados de livros no banco de dados
+        $obEmployee = EntityEmployee::getEmployeeById($id);
+
+        //valida a instancia
+        if (!$obEmployee instanceof EntityEmployee) {
+            $request->getRouter()->redirect('/employee');
+        }
+
+        //post vars
+        $postVars = $request->getPostVars();
+
+        //atualiza a instancia
+        $obEmployee->name = $postVars['name'] ?? $obEmployee->name;
+        $obEmployee->pis = $postVars['pis'] ?? $obEmployee->pis;
+        $obEmployee->office = $postVars['office'] ?? $obEmployee->office;
+        $obEmployee->departament = $postVars['departament'] ?? $obEmployee->departament;
+        $obEmployee->library_id = $postVars['library_id'] ?? $obEmployee->library_id;
+        
+        $obEmployee->atualizar();
+
+
+        //redireciona para editagem
+        $request->getRouter()->redirect('/'. 'updateEmployee/'.$obEmployee->id.'/edit?status=updated');
     }
 }

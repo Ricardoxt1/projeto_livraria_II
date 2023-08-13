@@ -122,7 +122,8 @@ class registerRental extends registerPage
             // Tente cadastrar o aluguel
             $obRental->cadastrar();
     
-            return self::getRegisterRental($request);
+            //redireciona para pagina de editagem
+            $request->getRouter()->redirect('/'. 'updateRental/'.$obRental->id.'/edit?status=created');
         } catch (Exception $e) {
             
             return "Erro ao inserir o aluguel: " . $e->getMessage();

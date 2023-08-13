@@ -147,4 +147,38 @@ class Book extends Page
         //retorna a view da pagina
         return parent::getPage('Editagem de Livro', $content);
     }
+
+    /** metodo para realizar update dos dados da pagina de livros (view)
+     * @return string
+     * @param integer $id
+     * @param Request $request
+     * 
+     *  */
+    public static function setUpdateBook($request, $id)
+    {
+        //obtem os dados de livros no banco de dados
+        $obBook = EntityBook::getBookById($id);
+
+        //valida a instancia
+        if (!$obBook instanceof EntityBook) {
+            $request->getRouter()->redirect('/author');
+        }
+
+        //post vars
+        $postVars = $request->getPostVars();
+
+        //atualiza a instancia
+        $obBook->titule = $postVars['titule'] ?? $obBook->titule;
+        $obBook->page = $postVars['page'] ?? $obBook->page;
+        $obBook->realese_date = $postVars['realese_date'] ?? $obBook->realese_date;
+        $obBook->author_id = $postVars['author_id'] ?? $obBook->author_id;
+        $obBook->library_id = $postVars['library_id'] ?? $obBook->library_id;
+        $obBook->publisher_id = $postVars['publisher_id'] ?? $obBook->publisher_id;
+
+        $obBook->atualizar();
+
+
+        //redireciona para editagem
+        $request->getRouter()->redirect('/'. 'updateBook/'.$obBook->id.'/edit?status=updated');
+    }
 }
