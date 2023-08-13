@@ -18,7 +18,7 @@
                                         <div class="col-sm-6">
                                             <label for="validationCustom01" class="form-label">Nome completo</label>
                                             <input type="text" class="form-control" name="name" id="validationCustom01"
-                                                placeholder="fulano da silva " value="" required="">
+                                                placeholder="fulano da silva " value="{{name}}" required="">
                                             <div class="valid-feedback">
                                                 Nome preenchido!
                                             </div>
@@ -31,7 +31,7 @@
                                             <label for="validationCustom02" class=" form-label">Telefone</label>
                                             <input type="number" class="form-control" name="phone_number"
                                                 id="validationCustom02" placeholder="00 00000000" maxlength="14"
-                                                required="">
+                                              value="{{phone_number}}"  required="">
                                             <div class="valid-feedback">
                                                 Telefone preenchido!
                                             </div>
@@ -52,7 +52,7 @@
                                         <div class="col-sm-6 mt-2">
                                             <label for="validationCustom03" class="form-label">Email</label>
                                             <input type="email" class="form-control" name="email"
-                                                valueid="validationCustom03" placeholder="you@example.com" required="">
+                                                valueid="validationCustom03" placeholder="you@example.com" value="{{email}}" required="">
                                             <div class="valid-feedback">
                                                 Email preenchido!
                                             </div>
@@ -65,7 +65,7 @@
                                             <label for="validationCustom04" class="form-label">CPF</label>
                                             <input type="number" class="form-control" name="cpf" id="validationCustom04"
                                                 placeholder="12345678909 (sem ponto e hífen)" maxlength="15"
-                                                required="">
+                                               value="{{cpf}}" required="">
                                             <div class="valid-feedback">
                                                 CPF preenchido!
                                             </div>
@@ -85,7 +85,7 @@
                                         <div class="col-8 mt-2">
                                             <label for="validationCustom05" class="form-label">Endereço</label>
                                             <input type="text" class="form-control" name="address"
-                                                id="validationCustom05" placeholder="Main ST 1234" required="">
+                                                id="validationCustom05" placeholder="Main ST 1234" value="{{address}}" required="">
                                             <div class="valid-feedback">
                                                 Endereço preenchido!
                                             </div>

@@ -18,7 +18,7 @@
                                     <div class="col-sm-6">
                                         <label for="validationCustom01" class="form-label">Titulo</label>
                                         <input type="text" class="form-control" name="titule" id="validationCustom01"
-                                            placeholder="A bela e a fera" value="" required>
+                                            placeholder="A bela e a fera" value="{{titule}}" required>
                                         <div class="valid-feedback">
                                             Titulo preenchido!
                                         </div>
@@ -31,7 +31,8 @@
                                         <label for="validationCustom02" class="form-label">Número de
                                             páginas</label>
                                         <input type="number" class="form-control" name="page" id="validationCustom02"
-                                            placeholder="123" value="" required>
+                                            placeholder="123" value="{{page}}" required>
+                                       
                                         <div class="valid-feedback">
                                             Número de páginas preenchido!
                                         </div>
@@ -43,7 +44,7 @@
                                         <label for="validationCustom03" class="form-label">Data de
                                             lançamento</label>
                                         <input type="number" min="1800" id="validationCustom03" name="realese_date"
-                                            max="" step="1" class="form-control" placeholder="1800" value="" required>
+                                            max="" step="1" class="form-control" placeholder="1800" value="{{realese_date}}" required>
                                         <div class="valid-feedback">
                                             Data de lançamento preenchido!
                                         </div>
@@ -66,7 +67,7 @@
                                         <select class="form-select is-invalid" id="validationServer04" name="author_id"
                                             aria-describedby="validationServer04Feedback" required="">
                                             <option selected="" disabled="" value="">Escolha...</option>
-                                            <option value='{{id_author}}'></option>
+                                            {{optionAuthor}}
                                         </select>
                                         <div class="valid-feedback">
                                             Autor(a) selecionado(a)!
@@ -76,8 +77,7 @@
                                         <label for="validationServer05" class="form-label">Selecionar o livraria</label>
                                         <select class="form-select is-invalid" id="validationServer05" name="library_id"
                                             aria-describedby="validationServer05Feedback" required="">
-                                            <option selected="" disabled="" value="">Escolha...</option>
-                                            <option value='{{id_library}}'></option>
+                                            <option selected="" disabled="" value="{{}}">Pedbot</option>
                                         </select>
                                         <div class="valid-feedback">
                                             Livraria selecionada!
@@ -89,7 +89,7 @@
                                             name="publisher_id" aria-describedby="validationServer06Feedback"
                                             required="">
                                             <option selected="" disabled="" value="">Escolha...</option>
-                                            <option value='{{id_employee}}'></option>
+                                            {{optionPublisher}}
                                         </select>
                                         <div class="valid-feedback">
                                             Editor(a) selecionado(a)!

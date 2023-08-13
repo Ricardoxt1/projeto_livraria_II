@@ -19,7 +19,7 @@
                                         <div class="col-sm-7">
                                             <label for="validationCustom01" class="form-label">Nome completo</label>
                                             <input type="text" class="form-control" name="name" id="validationCustom01"
-                                                placeholder="Nome Completo" required="">
+                                                placeholder="Nome Completo" value="{{name}}" required="">
                                             <div class="valid-feedback">
                                                 Nome preenchido!
                                             </div>
@@ -31,7 +31,7 @@
                                         <div class="col-sm-3">
                                             <label for="validationCustom02" class="form-label">PIS</label>
                                             <input type="number" class="form-control" maxlength="15" name="pis"
-                                                id="validationCustom02" placeholder="12345678910" required="">
+                                                id="validationCustom02" placeholder="12345678910" value="{{pis}}" required="">
                                             <div class="valid-feedback">
                                                 PIS preenchido!
                                             </div>
@@ -50,7 +50,7 @@
                                         <div class="col-sm-4 mt-2">
                                             <label for="validationCustom03" class="form-label">Cargo</label>
                                             <input type="text" class="form-control" name="office"
-                                                id="validationCustom03" placeholder="Vendedor" required="">
+                                                id="validationCustom03" placeholder="Vendedor" value="{{office}}" required="">
                                             <div class="valid-feedback">
                                                 Cargo preenchido!
                                             </div>
@@ -62,7 +62,7 @@
                                         <div class="col-sm-4 mt-2">
                                             <label for="validationCustom04" class="form-label">Departamento</label>
                                             <input type="text" class="form-control" name="departament"
-                                                id="validationCustom04" placeholder="Vendas" required="">
+                                                id="validationCustom04" placeholder="Vendas" value="{{departament}}" required="">
                                             <div class="valid-feedback">
                                                 Departamento preenchido!
                                             </div>
@@ -76,8 +76,7 @@
                                             <select class="form-select is-invalid" id="validationCustom05"
                                                 name="library_id" aria-label="validationServer04Feedback" required="">
                                                 <option selected="" disabled="" value="">Escolha...</option>
-                                                <option>1</option>
-                                                <!-- <option value="{{library_id}}">{{name_library}}</option> -->
+                                                <option value="{{library_id}}">Pedbot</option>
                                             </select>
                                             <div class="valid-feedback">
                                                 Livraria selecionada!
