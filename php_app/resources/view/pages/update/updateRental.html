@@ -12,11 +12,11 @@
                         <h4 class="my-3">Registro sobre o aluguel</h4>
                         <div class="my-4">{{status}}</div>
                         <div>
-                            <form class="needs-validatio was-validated" method="post" novalidate="">
+                            <form class="needs-validatio" method="post" id="rentalForm" novalidate="">
                                 <div class="row g-3">
                                     <div class="col-sm-4">
                                         <label for="validationCustom01">Selecionar o consumidor</label>
-                                        <select class="form-select is-invalid" id="validationCustom01"
+                                        <select class="form-select" id="validationCustom01"
                                             name="costumer_id" aria-label="validationServer01Feedback" required>
                                             <option selected="" disabled="" value="">Escolha...</option>
                                             {{optionCostumer}}
@@ -27,7 +27,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <label for="validationCustom02">Selecionar o livro</label>
-                                        <select class="form-select is-invalid" id="validationCustom02" name="book_id"
+                                        <select class="form-select" id="validationCustom02" name="book_id"
                                             aria-label="validationServer02Feedback" required>
                                             <option selected="" disabled="" value="">Escolha...</option>
                                             {{optionBook}}
@@ -38,7 +38,7 @@
                                     </div>
                                     <div class="col-sm-4">
                                         <label for="validationCustom03">Selecionar o vendedor</label>
-                                        <select class="form-select is-invalid" id="validationCustom03"
+                                        <select class="form-select" id="validationCustom03"
                                             name="employee_id" aria-label="validationServer03Feedback" required>
                                             <option selected="" disabled="" value="">Escolha...</option>
                                             {{optionEmployee}}
@@ -75,3 +75,17 @@
         </body>
     </div>
 </main>
+<script>
+    const authorForm = document.getElementById('rentalForm');
+
+    authorForm.addEventListener('submit', function (event) {
+        if (!authorForm.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            console.log('Formulário enviado!');
+        }
+
+        authorForm.classList.add('was-validated');
+    });
+</script>

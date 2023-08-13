@@ -14,7 +14,7 @@
                         <div class="col-md-7 col-lg-12">
                             <h5 class="mb-3">Informações revelantes sobre o livro</h5>
                             <div class="my-5">{{status}}</div>
-                            <form class="needs-validation was-validated" method="post" novalidate="">
+                            <form class="needs-validation" method="post" id="bookForm" novalidate="">
                                 <div class="row g-3">
                                     <div class="col-sm-6">
                                         <label for="validationCustom01" class="form-label">Titulo</label>
@@ -65,7 +65,7 @@
 
                                     <div class="col-sm-4 mt-2">
                                         <label for="validationServer04" class="form-label">Selecionar o autor</label>
-                                        <select class="form-select is-invalid" id="validationServer04" name="author_id"
+                                        <select class="form-select" id="validationServer04" name="author_id"
                                             aria-describedby="validationServer04Feedback" required="">
                                             <option selected="" disabled="" value="">Escolha...</option>
                                             {{optionAuthor}}
@@ -76,7 +76,7 @@
                                     </div>
                                     <div class="col-sm-4 mt-2">
                                         <label for="validationServer05" class="form-label">Selecionar o livraria</label>
-                                        <select class="form-select is-invalid" id="validationServer05" name="library_id"
+                                        <select class="form-select" id="validationServer05" name="library_id"
                                             aria-describedby="validationServer05Feedback" required="">
                                             <option selected="" disabled="" value="{{}}">Pedbot</option>
                                         </select>
@@ -86,7 +86,7 @@
                                     </div>
                                     <div class="col-sm-4 mt-2">
                                         <label for="validationServer06" class="form-label">Selecionar a editora</label>
-                                        <select class="form-select is-invalid" id="validationServer06"
+                                        <select class="form-select" id="validationServer06"
                                             name="publisher_id" aria-describedby="validationServer06Feedback"
                                             required="">
                                             <option selected="" disabled="" value="">Escolha...</option>
@@ -131,3 +131,17 @@
         </body>
     </div>
 </main>
+<script>
+    const authorForm = document.getElementById('bookForm');
+
+    authorForm.addEventListener('submit', function (event) {
+        if (!authorForm.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            console.log('Formulário enviado!');
+        }
+
+        authorForm.classList.add('was-validated');
+    });
+</script>

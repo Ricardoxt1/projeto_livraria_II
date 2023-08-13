@@ -9,7 +9,7 @@
                     <div class="py-5 ml-2">
                         <h2>{{title}}</h2>
                         <div class="mt-5">{{status}}</div>
-                        <form class="row g-3 needs-validation was-validated my-4" method="post" novalidate="">
+                        <form class="row g-3 needs-validation my-4" method="post" id="authorForm" novalidate="">
                             <div class="col-md-4">
                                 <label for="validationCustom01" class="form-label">Nome do autor</label>
                                 <input type="text" class="form-control" id="validationCustom01" name="name"
@@ -33,3 +33,17 @@
         </body>
     </div>
 </main>
+<script>
+    const authorForm = document.getElementById('authorForm');
+
+    authorForm.addEventListener('submit', function (event) {
+        if (!authorForm.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            console.log('Formulário enviado!');
+        }
+
+        authorForm.classList.add('was-validated');
+    });
+</script>

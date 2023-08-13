@@ -14,7 +14,7 @@
                                 <h5 class="mb-3">Editar informações revelantes sobre a editora</h5>
                             </div>
                         </div>
-                        <form class="row g-3 needs-validation was-validated my-3" method="post" novalidate="">
+                        <form class="row g-3 needs-validation my-3" method="post" id="publisherForm" novalidate="">
                             <div class="col-md-4">
                                 <label for="validationCustom01" class="form-label">Nome da editora</label>
                                 <input type="text" class="form-control" id="validationCustom01"
@@ -39,3 +39,17 @@
 
     </div>
 </main>
+<script>
+    const authorForm = document.getElementById('publisherForm');
+
+    authorForm.addEventListener('submit', function (event) {
+        if (!authorForm.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            console.log('Formulário enviado!');
+        }
+
+        authorForm.classList.add('was-validated');
+    });
+</script>

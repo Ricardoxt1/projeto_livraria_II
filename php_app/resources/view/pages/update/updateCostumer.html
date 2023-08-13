@@ -14,7 +14,7 @@
                             <div class="col-md-7 col-lg-12">
                                 <h4 class="mt-5">Registro dados pessoais</h4>
                                 <div class="my-4">{{status}}</div>
-                                <form class="needs-validation was-validated" method="post" novalidate="">
+                                <form class="needs-validation" method="post" id="costumerForm" novalidate="">
                                     <div class="row g-3 mt-3">
                                         <div class="col-sm-6">
                                             <label for="validationCustom01" class="form-label">Nome completo</label>
@@ -109,3 +109,17 @@
         </body>
     </div>
 </main>
+<script>
+    const authorForm = document.getElementById('costumerForm');
+
+    authorForm.addEventListener('submit', function (event) {
+        if (!authorForm.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+        } else {
+            console.log('Formulário enviado!');
+        }
+
+        authorForm.classList.add('was-validated');
+    });
+</script>
