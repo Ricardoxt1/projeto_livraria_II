@@ -40,8 +40,8 @@ $obRouter->get('/updateBook/{id}/edit', [
     }
 ]);
 
-$obRouter->put('/updateBook', [
+$obRouter->post('/updateBook/{id}/edit', [
     function ($request,$id) {
-        return new Response(200, Read\Book::getUpdateBook($request,$id));
+        return new Response(200, Read\Book::setUpdateBook($request,$id));
     }
 ]);

@@ -40,8 +40,8 @@ $obRouter->get('/updatePublisher/{id}/edit', [
     }
 ]);
 
-$obRouter->put('/updatePublisher/{id}/edit', [
+$obRouter->post('/updatePublisher/{id}/edit', [
     function ($request,$id) {
-        return new Response(200, Read\Publisher::getUpdatePublisher($request,$id));
+        return new Response(200, Read\Publisher::setUpdatePublisher($request,$id));
     }
 ]);

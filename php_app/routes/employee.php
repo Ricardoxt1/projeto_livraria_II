@@ -41,8 +41,8 @@ $obRouter->get('/updateEmployee/{id}/edit', [
     }
 ]);
 
-$obRouter->put('/updateEmployee/{id}/edit', [
+$obRouter->post('/updateEmployee/{id}/edit', [
     function ($request, $id) {
-        return new Response(200, Read\Employee::getUpdateEmployee($request, $id));
+        return new Response(200, Read\Employee::setUpdateEmployee($request, $id));
     }
 ]);

@@ -43,8 +43,8 @@ $obRouter->get('/updateAuthor/{id}/edit', [
     }
 ]);
 
-$obRouter->put('/updateAuthor', [
+$obRouter->post('/updateAuthor/{id}/edit', [
     function ($request,$id) {
-        return new Response(200, Read\Author::getUpdateAuthor($request,$id));
+        return new Response(200, Read\Author::setUpdateAuthor($request,$id));
     }
 ]);

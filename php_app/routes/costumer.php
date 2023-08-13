@@ -42,8 +42,8 @@ $obRouter->get('/updateCostumer/{id}/edit', [
     }
 ]);
 
-$obRouter->put('/updateCostumer/{id}/edit', [
+$obRouter->post('/updateCostumer/{id}/edit', [
     function ($request,$id) {
-        return new Response(200, Read\Costumer::getUpdateCostumer($request,$id));
+        return new Response(200, Read\Costumer::setUpdateCostumer($request,$id));
     }
 ]);

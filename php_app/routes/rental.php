@@ -40,8 +40,8 @@ $obRouter->get('/updateRental/{id}/edit', [
     }
 ]);
 
-$obRouter->put('/updateRental/{id}/edit', [
+$obRouter->post('/updateRental/{id}/edit', [
     function ($request,$id) {
-        return new Response(200, Read\Rental::getUpdateRental($request,$id));
+        return new Response(200, Read\Rental::setUpdateRental($request,$id));
     }
 ]);
