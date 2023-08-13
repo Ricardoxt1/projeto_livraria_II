@@ -17,8 +17,6 @@ class registerAuthor extends registerPage
 
         $content = View::render('pages/register/registerAuthor', [
             //view autor
-            'id' => '1',
-            'name' => 'editora ld',
         ]);
 
 
@@ -31,7 +29,7 @@ class registerAuthor extends registerPage
      * @return boolean
      * @param Request $request
      */
-    public static function insertAuthor($request)
+    public static function setRegisterAuthor($request)
     {
         try {
             //dados do post
@@ -42,7 +40,8 @@ class registerAuthor extends registerPage
             $obAuthor->name = $postVars['name'];
             $obAuthor->cadastrar();
 
-            return self::getRegisterAuthor();
+            // return self::getRegisterAuthor();
+            $request->getRouter()->redirect('/'. 'updateAuthor/'.$obAuthor->id.'/edit?status=created');
         } catch (Exception $e) {
             // Capturar e tratar exceções
             return 'Erro ao inserir autor: ' . $e->getMessage();

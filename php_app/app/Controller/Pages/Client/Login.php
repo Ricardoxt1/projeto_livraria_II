@@ -18,15 +18,12 @@ class Login extends Client
     public static function getLogin($request, $errorMessage = null)
     {   
         //status
-        $status = !is_null($errorMessage) ? View::render('pages/client/login/status', [
-            //view 
-            'mensagem' => $errorMessage
-        ]) : '';
+        $status = !is_null($errorMessage) ? Alert::getError($errorMessage) : '';
 
 
         $content = View::render('pages/client/login', [
             //view 
-            'status' => $status
+            'alert' => $status
         ]);
 
         //retorna a view da pagina

@@ -30,13 +30,12 @@ class Costumer extends Page
         }
         //retorna os dados
         return $itens;
-
     }
 
     /** metodo para resgatar os dados da pagina de consumidores (view)
      * @return string
      *  */
-    public static function getCostumer()
+    public static function getCostumer($request)
     {
 
         $content = View::render('pages/list/listCostumers', [
@@ -52,14 +51,24 @@ class Costumer extends Page
     /** metodo para realizar update dos dados da pagina de usuario (view)
      * @return string
      *  */
-    public static function getUpdateCostumer()
+    public static function getUpdateCostumer($request, $id)
     {
+        //obtem os dados de usuarios no banco de dados
+        $obCostumer = EntityCostumer::getCostumerById($id);
 
+        //valida a instancia
+        if (!$obCostumer instanceof EntityCostumer) {
+            $request->getRouter()->redirect('/costumer');
+        }
 
         $content = View::render('pages/update/updateCostumer', [
             //view costumer
-            'id' => '1',
-            'name' => 'benedito',
+            'id' => $obCostumer->id,
+            'name' => $obCostumer->name,
+            'cpf' => $obCostumer->cpf,
+            'phone_number' => $obCostumer->phone_number,
+            'address' => $obCostumer->address,
+            'email' => $obCostumer->email,
         ]);
 
         //retorna a view da pagina

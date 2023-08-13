@@ -106,7 +106,7 @@ class registerRental extends registerPage
      * @return boolean
      * @param Request $request
      */
-    public static function insertRental($request) {
+    public static function setRegisterRental($request) {
         try {
             // Dados do post
             $postVars = $request->getPostVars();

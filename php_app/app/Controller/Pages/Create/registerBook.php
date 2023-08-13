@@ -67,7 +67,6 @@ class registerBook extends registerPage
         $content = View::render('pages/register/registerBook', [
             //view livro
             'optionAuthor' => self::getBookOpAuthor($request),
-            'optionPublisher' => self::getBookOpPublisher($request),
 
         ]);
 
@@ -81,7 +80,7 @@ class registerBook extends registerPage
      * @return boolean
      * @param Request $request
      */
-    public static function insertBook($request)
+    public static function setRegiterBook($request)
     {
         try {
             //dados do post

@@ -17,8 +17,8 @@ class Employee extends Page
         $results = EntityEmployee::getEmployee(null, 'id ASC');
 
         // renderiza o item
-        while ($obEmployee = $results->fetchObject(EntityEmployee::class)){
-            $itens .= View::render('pages/list/employee/item',[
+        while ($obEmployee = $results->fetchObject(EntityEmployee::class)) {
+            $itens .= View::render('pages/list/employee/item', [
                 'id' => $obEmployee->id,
                 'name' => $obEmployee->name,
                 'pis' => $obEmployee->pis,
@@ -47,19 +47,31 @@ class Employee extends Page
 
 
         //retorna a view da pagina
-        return parent::getPage('Listagem de Funcionários',$content);
+        return parent::getPage('Listagem de Funcionários', $content);
     }
 
     /** metodo para realizar update dos dados da pagina de funcionario (view)
      * @return string
      *  */
-    public static function getUpdateEmployee()
+    public static function getUpdateEmployee($request, $id)
     {
 
+        //obtem os dados de funcionarios no banco de dados
+        $obEmployee = EntityEmployee::getEmployeeById($id);
+
+        //valida a instancia
+        if (!$obEmployee instanceof EntityEmployee) {
+            $request->getRouter()->redirect('/costumer');
+        }
 
         $content = View::render('pages/update/updateEmployee', [
             //view employee
-            
+            'id' => $obEmployee->id,
+            'name' => $obEmployee->name,
+            'pis' => $obEmployee->pis,
+            'office' => $obEmployee->office,
+            'departament' => $obEmployee->departament,
+            'library_id' => $obEmployee->library_id,
         ]);
 
         //retorna a view da pagina

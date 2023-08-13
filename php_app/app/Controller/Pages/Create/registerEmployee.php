@@ -32,7 +32,7 @@ class registerEmployee extends registerPage
      * @return boolean
      * @param Request $request
      */
-    public static function insertEmployee($request){
+    public static function setRegisterEmployee($request){
         try {
             //dados do post
             $postVars = $request->getPostVars();

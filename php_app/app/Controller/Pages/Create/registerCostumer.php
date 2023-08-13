@@ -30,7 +30,7 @@ class registerCostumer extends registerPage
      * @return boolean
      * @param Request $request
      */
-    public static function insertCostumer($request)
+    public static function setRegisterCostumer($request)
     {
         try {
             //dados do post

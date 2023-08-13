@@ -31,7 +31,7 @@ class registerPublisher extends registerPage
      * @return boolean
      * @param Request $request
      */
-    public static function insertPublisher($request)
+    public static function setRegisterPublisher($request)
     {
         try {
             //dados do post
