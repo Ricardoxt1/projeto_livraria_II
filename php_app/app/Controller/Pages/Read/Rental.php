@@ -48,7 +48,8 @@ class Rental extends Page
 
         $content = View::render('pages/list/listRentals', [
             //view rental
-            'item' => self::getRentalItems($request)
+            'item' => self::getRentalItems($request),
+            'status' => self::getStatus($request)
 
         ]);
 
@@ -77,6 +78,9 @@ class Rental extends Page
                 break;
             case 'updated':
                 return Alert::getSuccess('Aluguel atualizado com sucesso!');
+                break;
+            case 'deleted':
+                return Alert::getSuccess('Aluguel deletado com sucesso!');
                 break;
         }
     }
@@ -155,7 +159,7 @@ class Rental extends Page
     /** metodo para realizar update dos dados da pagina de alguel (view)
      * @return string
      *  */
-    public static function getUpdateRental($request,$id)
+    public static function getUpdateRental($request, $id)
     {
 
         $content = '';
@@ -183,7 +187,7 @@ class Rental extends Page
         return parent::getPage('Editagem de Aluguel', $content);
     }
 
-     /** metodo para realizar update dos dados da pagina de aluguel (view)
+    /** metodo para realizar update dos dados da pagina de aluguel (view)
      * @return string
      * @param integer $id
      * @param Request $request
@@ -208,11 +212,52 @@ class Rental extends Page
         $obRental->costumer_id = $postVars['costumer_id'] ?? $obRental->costumer_id;
         $obRental->book_id = $postVars['book_id'] ?? $obRental->book_id;
         $obRental->employee_id = $postVars['employee_id'] ?? $obRental->employee_id;
-        
+
         $obRental->atualizar();
 
 
         //redireciona para editagem
-        $request->getRouter()->redirect('/'. 'updateRental/'.$obRental->id.'/edit?status=updated');
+        $request->getRouter()->redirect('/' . 'updateRental/' . $obRental->id . '/edit?status=updated');
+    }
+
+    /** metodo para realizar exclusão dos dados da pagina de autores
+     * @return string
+     * @param integer $id
+     * @param Request $request
+     * 
+     *  */
+    public static function getDeleteRental($request, $id)
+    {
+        //obtem os dados de aluguel no banco de dados
+        $obRental = EntityRental::getRentalById($id);
+
+
+        //valida a instancia
+        if (!$obRental instanceof EntityRental) {
+            $request->getRouter()->redirect('/rental');
+        }
+    }
+
+    /** metodo para realizar exclusão dos dados da pagina de aluguel 
+     * @return string
+     * @param integer $id
+     * @param Request $request
+     * 
+     *  */
+    public static function setDeleteRental($request, $id)
+    {
+        //obtem os dados do alguel no banco de dados
+        $obRental = EntityRental::getRentalById($id);
+
+        //valida a instancia
+        if (!$obRental instanceof EntityRental) {
+            $request->getRouter()->redirect('/rental');
+        }
+
+        //excluir um alguel
+        $obRental->excluir();
+
+        //redireciona para editagem
+        $request->getRouter()->redirect('/rental?status=deleted');
     }
 }

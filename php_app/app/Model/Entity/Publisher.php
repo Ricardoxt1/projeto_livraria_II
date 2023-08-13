@@ -19,7 +19,7 @@ class Publisher
      */
     public $name;
 
-    
+
     /**
      * método responsável por cadastrar editora com a instancia atual
      * @return boolean
@@ -53,12 +53,23 @@ class Publisher
     }
 
     /**
+     * método responsável por deletar uma editora no banco de dados
+     * @return boolean
+     */
+    public function excluir()
+    {
+        //deletar uma editora no banco de dados
+        return (new Database('publishers'))->delete('id = ' . $this->id);
+    }
+
+    /**
      * metodo responsável por retornar uma editora com base no seu id
      * @param integer $id
      * @return Publisher
      */
-    public static function getPublisherById($id){
-        return self::getPublisher('id ='. $id)->fetchObject(self::class);
+    public static function getPublisherById($id)
+    {
+        return self::getPublisher('id =' . $id)->fetchObject(self::class);
     }
 
     /**
@@ -68,7 +79,8 @@ class Publisher
      * @param integer $field
      * @return PDOStatement
      */
-    public static function getPublisher($where = null, $order = null, $limit = null, $fields = '*'){
+    public static function getPublisher($where = null, $order = null, $limit = null, $fields = '*')
+    {
         return (new Database('publishers'))->select($where, $order, $limit, $fields);
     }
 }

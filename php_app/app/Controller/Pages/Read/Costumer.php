@@ -42,6 +42,7 @@ class Costumer extends Page
         $content = View::render('pages/list/listCostumers', [
             //view costumers
             'item' => self::getCostumerItems(),
+            'status' => self::getStatus($request)
         ]);
 
 
@@ -70,6 +71,9 @@ class Costumer extends Page
             case 'updated':
                 return Alert::getSuccess('Usuario atualizado com sucesso!');
                 break;
+            case 'deleted':
+                return Alert::getSuccess('Usuario deletado com sucesso!');
+                break;
         }
     }
 
@@ -78,7 +82,7 @@ class Costumer extends Page
      *  */
     public static function getUpdateCostumer($request, $id)
     {
-        
+
         //obtem os dados de usuarios no banco de dados
         $obCostumer = EntityCostumer::getCostumerById($id);
 
@@ -103,7 +107,7 @@ class Costumer extends Page
         return parent::getPage('Editagem de Usuario', $content);
     }
 
-     /** metodo para realizar update dos dados da pagina de consumidor (view)
+    /** metodo para realizar update dos dados da pagina de consumidor (view)
      * @return string
      * @param integer $id
      * @param Request $request
@@ -128,11 +132,51 @@ class Costumer extends Page
         $obCostumer->phone_number = $postVars['phone_number'] ?? $obCostumer->phone_number;
         $obCostumer->address = $postVars['address'] ?? $obCostumer->address;
         $obCostumer->email = $postVars['email'] ?? $obCostumer->email;
-        
+
         $obCostumer->atualizar();
 
 
         //redireciona para editagem
-        $request->getRouter()->redirect('/'. 'updateCostumer/'.$obCostumer->id.'/edit?status=updated');
+        $request->getRouter()->redirect('/' . 'updateCostumer/' . $obCostumer->id . '/edit?status=updated');
+    }
+
+    /** metodo para realizar exclusão dos dados da pagina de autores
+     * @return string
+     * @param integer $id
+     * @param Request $request
+     * 
+     *  */
+    public static function getDeleteCostumer($request, $id)
+    {
+        //obtem os dados de consumidores no banco de dados
+        $obCostumer = EntityCostumer::getCostumerById($id);
+
+
+        //valida a instancia
+        if (!$obCostumer instanceof EntityCostumer) {
+            $request->getRouter()->redirect('/costumer');
+        }
+    }
+
+    /** metodo para realizar exclusão dos dados da pagina de consumidores
+     * @return string
+     * @param integer $id
+     * @param Request $request
+     * 
+     *  */
+    public static function setDeleteCostumer($request, $id)
+    {
+        //obtem os dados de consumidores no banco de dados
+        $obCostumer = EntityCostumer::getCostumerById($id);
+
+        //valida a instancia
+        if (!$obCostumer instanceof EntityCostumer) {
+            $request->getRouter()->redirect('/costumer');
+        }
+
+        //excluir um consumidor
+        $obCostumer->excluir();
+        //redireciona para editagem
+        $request->getRouter()->redirect('/costumer?status=deleted');
     }
 }

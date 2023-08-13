@@ -45,3 +45,21 @@ $obRouter->post('/updateBook/{id}/edit', [
         return new Response(200, Read\Book::setUpdateBook($request,$id));
     }
 ]);
+
+//DELETE
+$obRouter->get('/book/{id}/delete', [
+    'middlewares' => [
+        'required-admin-login', 'mainteance'
+    ],
+    function ($request, $id) {
+        return new Response(200, Read\Book::getDeleteBook($request,$id));
+    }
+]);
+$obRouter->post('/book/{id}/delete', [
+    'middlewares' => [
+        'required-admin-login'
+    ],
+    function ($request, $id) {
+        return new Response(200, Read\Book::setDeleteBook($request,$id));
+    }
+]);

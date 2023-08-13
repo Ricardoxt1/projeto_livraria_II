@@ -47,3 +47,21 @@ $obRouter->post('/updateCostumer/{id}/edit', [
         return new Response(200, Read\Costumer::setUpdateCostumer($request,$id));
     }
 ]);
+
+//DELETE
+$obRouter->get('/costumer/{id}/delete', [
+    'middlewares' => [
+        'required-admin-login', 'mainteance'
+    ],
+    function ($request, $id) {
+        return new Response(200, Read\Costumer::getDeleteCostumer($request,$id));
+    }
+]);
+$obRouter->post('/costumer/{id}/delete', [
+    'middlewares' => [
+        'required-admin-login'
+    ],
+    function ($request, $id) {
+        return new Response(200, Read\Costumer::setDeleteCostumer($request,$id));
+    }
+]);

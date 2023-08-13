@@ -9,8 +9,8 @@ $obRouter->get('/publisher', [
     'middlewares' => [
         'required-admin-login'
     ],
-    function () {
-        return new Response(200, Read\Publisher::getPublisher());
+    function ($request) {
+        return new Response(200, Read\Publisher::getPublisher($request));
     }
 ]);
 
@@ -43,5 +43,23 @@ $obRouter->get('/updatePublisher/{id}/edit', [
 $obRouter->post('/updatePublisher/{id}/edit', [
     function ($request,$id) {
         return new Response(200, Read\Publisher::setUpdatePublisher($request,$id));
+    }
+]);
+
+//DELETE
+$obRouter->get('/publisher/{id}/delete', [
+    'middlewares' => [
+        'required-admin-login', 'mainteance'
+    ],
+    function ($request, $id) {
+        return new Response(200, Read\Publisher::getDeletePublisher($request,$id));
+    }
+]);
+$obRouter->post('/publisher/{id}/delete', [
+    'middlewares' => [
+        'required-admin-login'
+    ],
+    function ($request, $id) {
+        return new Response(200, Read\Publisher::setDeletePublisher($request,$id));
     }
 ]);

@@ -86,6 +86,16 @@ class Rental
     }
 
     /**
+     * método responsável por deletar um aluguel no banco de dados
+     * @return boolean
+     */
+    public function excluir()
+    {
+        //deletar um aluguel no banco de dados
+        return (new Database('rentals'))->delete('id = ' . $this->id);
+    }
+
+    /**
      * metodo responsável por retornar um aluguel com base no seu id
      * @param integer $id
      * @return Rental

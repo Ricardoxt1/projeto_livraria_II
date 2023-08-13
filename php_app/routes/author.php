@@ -48,3 +48,21 @@ $obRouter->post('/updateAuthor/{id}/edit', [
         return new Response(200, Read\Author::setUpdateAuthor($request,$id));
     }
 ]);
+
+//DELETE
+$obRouter->get('/author/{id}/delete', [
+    'middlewares' => [
+        'required-admin-login', 'mainteance'
+    ],
+    function ($request, $id) {
+        return new Response(200, Read\Author::getDeleteAuthor($request,$id));
+    }
+]);
+$obRouter->post('/author/{id}/delete', [
+    'middlewares' => [
+        'required-admin-login'
+    ],
+    function ($request, $id) {
+        return new Response(200, Read\Author::setDeleteAuthor($request,$id));
+    }
+]);

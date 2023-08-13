@@ -84,12 +84,23 @@ class Employee
     }
 
     /**
+     * método responsável por deletar um funcionário no banco de dados
+     * @return boolean
+     */
+    public function excluir()
+    {
+        //deletar um funcionario no banco de dados
+        return (new Database('employees'))->delete('id = ' . $this->id);
+    }
+
+    /**
      * metodo responsável por retornar um funcionario com base no seu id
      * @param integer $id
      * @return Employee
      */
-    public static function getEmployeeById($id){
-        return self::getEmployee('id ='. $id)->fetchObject(self::class);
+    public static function getEmployeeById($id)
+    {
+        return self::getEmployee('id =' . $id)->fetchObject(self::class);
     }
 
     /**
@@ -99,7 +110,8 @@ class Employee
      * @param integer $field
      * @return PDOStatement
      */
-    public static function getEmployee($where = null, $order = null, $limit = null, $fields = '*'){
+    public static function getEmployee($where = null, $order = null, $limit = null, $fields = '*')
+    {
         return (new Database('employees'))->select($where, $order, $limit, $fields);
     }
 }

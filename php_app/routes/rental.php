@@ -45,3 +45,21 @@ $obRouter->post('/updateRental/{id}/edit', [
         return new Response(200, Read\Rental::setUpdateRental($request,$id));
     }
 ]);
+
+//DELETE
+$obRouter->get('/rental/{id}/delete', [
+    'middlewares' => [
+        'required-admin-login', 'mainteance'
+    ],
+    function ($request, $id) {
+        return new Response(200, Read\Rental::getDeleteRental($request,$id));
+    }
+]);
+$obRouter->post('/rental/{id}/delete', [
+    'middlewares' => [
+        'required-admin-login', 'mainteance'
+    ],
+    function ($request, $id) {
+        return new Response(200, Read\Rental::setDeleteRental($request,$id));
+    }
+]);

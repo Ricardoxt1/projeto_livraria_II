@@ -8,22 +8,23 @@ use \App\Controller\Pages\Client\Alert;
 
 class Publisher extends Page
 {
-    private function getPublisherItems(){
+    private function getPublisherItems()
+    {
 
         // dados da editora
         $itens = '';
-    
+
         // resultados da pagina
         $results = EntityPublisher::getPublisher(null, 'id ASC');
-    
+
         // renderiza o item
-        while ($obPublisher = $results->fetchObject(EntityPublisher::class)){
+        while ($obPublisher = $results->fetchObject(EntityPublisher::class)) {
             $itens .= View::render('pages/list/publisher/item', [
                 'id' => $obPublisher->id,
                 'name' => $obPublisher->name,
             ]);
         }
-    
+
         return $itens;
     }
 
@@ -31,17 +32,18 @@ class Publisher extends Page
     /** metodo para resgatar os dados da pagina de editora (view)
      * @return string
      *  */
-    public static function getPublisher()
+    public static function getPublisher($request)
     {
 
         $content = View::render('pages/list/listPublishers', [
             //view publishers
             'item' => self::getPublisherItems(),
+            'status' => self::getStatus($request)
         ]);
 
 
         //retorna a view da pagina
-        return parent::getPage('Listagem de Editoras',$content);
+        return parent::getPage('Listagem de Editoras', $content);
     }
 
     /**
@@ -65,13 +67,16 @@ class Publisher extends Page
             case 'updated':
                 return Alert::getSuccess('Editora atualizado com sucesso!');
                 break;
+            case 'deleted':
+                return Alert::getSuccess('Editora deletada com sucesso!');
+                break;
         }
     }
 
     /** metodo para realizar update dos dados da pagina de editora (view)
      * @return string
      *  */
-    public static function getUpdatePublisher($request,$id)
+    public static function getUpdatePublisher($request, $id)
     {
 
         //obtem os dados de editora no banco de dados
@@ -79,7 +84,7 @@ class Publisher extends Page
 
         //valida a instancia
         if (!$obPublisher instanceof EntityPublisher) {
-            $request->getRouter()->redirect('/author');
+            $request->getRouter()->redirect('/publisher');
         }
 
         $content = View::render('pages/update/updatePublisher', [
@@ -94,7 +99,7 @@ class Publisher extends Page
     }
 
 
-             /** metodo para realizar update dos dados da pagina de editora (view)
+    /** metodo para realizar update dos dados da pagina de editora (view)
      * @return string
      * @param integer $id
      * @param Request $request
@@ -115,11 +120,51 @@ class Publisher extends Page
 
         //atualiza a instancia
         $obPublisher->name = $postVars['name'] ?? $obPublisher->name;
-       
+
         $obPublisher->atualizar();
 
 
         //redireciona para editagem
-        $request->getRouter()->redirect('/'. 'updatePublisher/'.$obPublisher->id.'/edit?status=updated');
+        $request->getRouter()->redirect('/' . 'updatePublisher/' . $obPublisher->id . '/edit?status=updated');
+    }
+
+    /** metodo para realizar exclusão dos dados da pagina de editora
+     * @return string
+     * @param integer $id
+     * @param Request $request
+     * 
+     *  */
+    public static function getDeletePublisher($request, $id)
+    {
+        //obtem os dados de editora no banco de dados
+        $obPublisher = EntityPublisher::getPublisherById($id);
+
+
+        //valida a instancia
+        if (!$obPublisher instanceof EntityPublisher) {
+            $request->getRouter()->redirect('/publisher');
+        }
+    }
+
+    /** metodo para realizar exclusão dos dados da pagina de editoras (view)
+     * @return string
+     * @param integer $id
+     * @param Request $request
+     * 
+     *  */
+    public static function setDeletePublisher($request, $id)
+    {
+        //obtem os dados de editoras no banco de dados
+        $obPublisher = EntityPublisher::getPublisherById($id);
+
+        //valida a instancia
+        if (!$obPublisher instanceof EntityPublisher) {
+            $request->getRouter()->redirect('/publisher');
+        }
+
+        //excluir uma editora
+        $obPublisher->excluir();
+        //redireciona para editagem
+        $request->getRouter()->redirect('/publisher?status=deleted');
     }
 }

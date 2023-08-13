@@ -19,7 +19,7 @@ class Author
      */
     public $name;
 
-    
+
     /**
      * método responsável por cadastrar autor com a instancia atual
      * @return boolean
@@ -36,7 +36,7 @@ class Author
         return true;
     }
 
-      /**
+    /**
      * método responsável por atualizar autor com a instancia atual
      * @return boolean
      */
@@ -44,7 +44,7 @@ class Author
     {
 
         //atualiza um autor no banco de dados
-        return (new Database('authors'))->update('id = '.$this->id,[
+        return (new Database('authors'))->update('id = ' . $this->id, [
             'name' => $this->name,
         ]);
 
@@ -53,12 +53,24 @@ class Author
     }
 
     /**
+     * método responsável por deletar um autor no banco de dados
+     * @return boolean
+     */
+    public function excluir()
+    {
+        //deletar um autor no banco de dados
+        return (new Database('authors'))->delete('id = ' . $this->id);
+
+    }
+
+    /**
      * metodo responsável por retornar um autor com base no seu id
      * @param integer $id
      * @return Author
      */
-    public static function getAuthorById($id){
-        return self::getAuthor('id ='. $id)->fetchObject(self::class);
+    public static function getAuthorById($id)
+    {
+        return self::getAuthor('id =' . $id)->fetchObject(self::class);
     }
 
     /**
@@ -68,7 +80,8 @@ class Author
      * @param integer $field
      * @return PDOStatement
      */
-    public static function getAuthor($where = null, $order = null, $limit = null, $fields = '*'){
+    public static function getAuthor($where = null, $order = null, $limit = null, $fields = '*')
+    {
         return (new Database('authors'))->select($where, $order, $limit, $fields);
     }
 }

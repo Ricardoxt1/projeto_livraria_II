@@ -90,6 +90,17 @@ class Book
         return true;
     }
 
+        /**
+     * método responsável por deletar um livro no banco de dados
+     * @return boolean
+     */
+    public function excluir()
+    {
+        //deletar um livro no banco de dados
+        return (new Database('books'))->delete('id = ' . $this->id);
+
+    }
+
 
     /**
      * metodo responsável por retornar um livro com base no seu id

@@ -37,12 +37,13 @@ class Employee extends Page
     /** metodo para resgatar os dados da pagina de funcionario (view)
      * @return string
      *  */
-    public static function getEmployee()
+    public static function getEmployee($request)
     {
 
         $content = View::render('pages/list/listEmployees', [
             //view employee
             'item' => self::getEmployeeItems(),
+            'status' => self::getStatus($request)
         ]);
 
 
@@ -70,6 +71,9 @@ class Employee extends Page
                 break;
             case 'updated':
                 return Alert::getSuccess('Funcionário(a) atualizado com sucesso!');
+                break;
+            case 'deleted':
+                return Alert::getSuccess('Funcionário(a) deletado com sucesso!');
                 break;
         }
     }
@@ -103,7 +107,7 @@ class Employee extends Page
         return parent::getPage('Editagem de Funcionario(a)', $content);
     }
 
-         /** metodo para realizar update dos dados da pagina de funcionario (view)
+    /** metodo para realizar update dos dados da pagina de funcionario (view)
      * @return string
      * @param integer $id
      * @param Request $request
@@ -128,11 +132,51 @@ class Employee extends Page
         $obEmployee->office = $postVars['office'] ?? $obEmployee->office;
         $obEmployee->departament = $postVars['departament'] ?? $obEmployee->departament;
         $obEmployee->library_id = $postVars['library_id'] ?? $obEmployee->library_id;
-        
+
         $obEmployee->atualizar();
 
 
         //redireciona para editagem
-        $request->getRouter()->redirect('/'. 'updateEmployee/'.$obEmployee->id.'/edit?status=updated');
+        $request->getRouter()->redirect('/' . 'updateEmployee/' . $obEmployee->id . '/edit?status=updated');
+    }
+
+    /** metodo para realizar exclusão dos dados da pagina de funcionários
+     * @return string
+     * @param integer $id
+     * @param Request $request
+     * 
+     *  */
+    public static function getDeleteEmployee($request, $id)
+    {
+        //obtem os dados de funcionario no banco de dados
+        $obEmployee = EntityEmployee::getEmployeeById($id);
+
+
+        //valida a instancia
+        if (!$obEmployee instanceof EntityEmployee) {
+            $request->getRouter()->redirect('/employee');
+        }
+    }
+
+    /** metodo para realizar exclusão dos dados da pagina de funcionário
+     * @return string
+     * @param integer $id
+     * @param Request $request
+     * 
+     *  */
+    public static function setDeleteEmployee($request, $id)
+    {
+        //obtem os dados de funcionário no banco de dados
+        $obEmployee = EntityEmployee::getEmployeeById($id);
+
+        //valida a instancia
+        if (!$obEmployee instanceof EntityEmployee) {
+            $request->getRouter()->redirect('/employee');
+        }
+
+        //excluir um funcionário
+        $obEmployee->excluir();
+        //redireciona para editagem
+        $request->getRouter()->redirect('/employee?status=deleted');
     }
 }

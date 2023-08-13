@@ -45,6 +45,7 @@ class Author extends Page
         $content = View::render('pages/list/listAuthors', [
             //view authors
             'itens' => self::getAuthorItems($request),
+            'status' => self::getStatus($request)
 
         ]);
 
@@ -72,6 +73,9 @@ class Author extends Page
                 break;
             case 'updated':
                 return Alert::getSuccess('Autor atualizado com sucesso!');
+                break;
+            case 'deleted':
+                return Alert::getSuccess('Autor deletado com sucesso!');
                 break;
         }
     }
@@ -130,5 +134,45 @@ class Author extends Page
 
         //redireciona para editagem
         $request->getRouter()->redirect('/' . 'updateAuthor/' . $obAuthor->id . '/edit?status=updated');
+    }
+
+    /** metodo para realizar exclusão dos dados da pagina de autores
+     * @return string
+     * @param integer $id
+     * @param Request $request
+     * 
+     *  */
+    public static function getDeleteAuthor($request, $id)
+    {
+        //obtem os dados de autores no banco de dados
+        $obAuthor = EntityAuthor::getAuthorById($id);
+
+
+        //valida a instancia
+        if (!$obAuthor instanceof EntityAuthor) {
+            $request->getRouter()->redirect('/author');
+        }
+    }
+
+    /** metodo para realizar exclusão dos dados da pagina de autores (view)
+     * @return string
+     * @param integer $id
+     * @param Request $request
+     * 
+     *  */
+    public static function setDeleteAuthor($request, $id)
+    {
+        //obtem os dados de autores no banco de dados
+        $obAuthor = EntityAuthor::getAuthorById($id);
+
+        //valida a instancia
+        if (!$obAuthor instanceof EntityAuthor) {
+            $request->getRouter()->redirect('/author');
+        }
+
+        //excluir autor
+        $obAuthor->excluir();
+        //redireciona para editagem
+        $request->getRouter()->redirect('/author?status=deleted');
     }
 }

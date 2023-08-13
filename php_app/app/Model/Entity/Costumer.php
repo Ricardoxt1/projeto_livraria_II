@@ -84,12 +84,23 @@ class Costumer
     }
 
     /**
+     * método responsável por deletar um consumidor no banco de dados
+     * @return boolean
+     */
+    public function excluir()
+    {
+        //deletar um consumidor no banco de dados
+        return (new Database('costumers'))->delete('id = ' . $this->id);
+    }
+
+    /**
      * metodo responsável por retornar um autor com base no seu id
      * @param integer $id
      * @return Author
      */
-    public static function getCostumerById($id){
-        return self::getCostumer('id ='. $id)->fetchObject(self::class);
+    public static function getCostumerById($id)
+    {
+        return self::getCostumer('id =' . $id)->fetchObject(self::class);
     }
 
     /**
@@ -99,7 +110,8 @@ class Costumer
      * @param integer $field
      * @return PDOStatement
      */
-    public static function getCostumer($where = null, $order = null, $limit = null, $fields = '*'){
+    public static function getCostumer($where = null, $order = null, $limit = null, $fields = '*')
+    {
         return (new Database('costumers'))->select($where, $order, $limit, $fields);
     }
 }
