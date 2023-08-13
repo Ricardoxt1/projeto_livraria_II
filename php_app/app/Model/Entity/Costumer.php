@@ -64,6 +64,26 @@ class Costumer
     }
 
     /**
+     * método responsável por atualizar um usuario com a instancia atual
+     * @return boolean
+     */
+    public function atualizar()
+    {
+
+        //atualiza um consumidor no banco de dados
+        return (new Database('costumers'))->update('id = ' . $this->id, [
+            'name' => $this->name,
+            'cpf' => $this->cpf,
+            'phone_number' => $this->phone_number,
+            'address' => $this->address,
+            'email' => $this->email,
+        ]);
+
+        //sucesso
+        return true;
+    }
+
+    /**
      * metodo responsável por retornar um autor com base no seu id
      * @param integer $id
      * @return Author

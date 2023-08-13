@@ -36,6 +36,22 @@ class Author
         return true;
     }
 
+      /**
+     * método responsável por atualizar autor com a instancia atual
+     * @return boolean
+     */
+    public function atualizar()
+    {
+
+        //atualiza um autor no banco de dados
+        return (new Database('authors'))->update('id = '.$this->id,[
+            'name' => $this->name,
+        ]);
+
+        //sucesso
+        return true;
+    }
+
     /**
      * metodo responsável por retornar um autor com base no seu id
      * @param integer $id

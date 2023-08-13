@@ -68,13 +68,37 @@ class Book
         return true;
     }
 
+
+    /**
+     * método responsável por atualizar um livro com a instancia atual
+     * @return boolean
+     */
+    public function atualizar()
+    {
+
+        //atualiza um livro no banco de dados
+        return (new Database('books'))->update('id = ' . $this->id, [
+            'titule' => $this->titule,
+            'page' => $this->page,
+            'realese_date' => $this->realese_date,
+            'author_id' => $this->author_id,
+            'library_id' => $this->library_id,
+            'publisher_id' => $this->publisher_id
+        ]);
+
+        //sucesso
+        return true;
+    }
+
+
     /**
      * metodo responsável por retornar um livro com base no seu id
      * @param integer $id
      * @return Book
      */
-    public static function getBookById($id){
-        return self::getBook('id ='. $id)->fetchObject(self::class);
+    public static function getBookById($id)
+    {
+        return self::getBook('id =' . $id)->fetchObject(self::class);
     }
 
     /**
@@ -84,10 +108,11 @@ class Book
      * @param string $field
      * @return PDOStatement
      */
-    public static function getBook($where = null, $order = null, $limit = null, $fields = '*'){
+    public static function getBook($where = null, $order = null, $limit = null, $fields = '*')
+    {
         return (new Database('books'))->select($where, $order, $limit, $fields);
     }
-    
+
     /**
      * @param string $where
      * @param string $order
@@ -98,7 +123,4 @@ class Book
     {
         return (new Database('books'))->selectBook($where, $order, $limit);
     }
-
-
-    
 }

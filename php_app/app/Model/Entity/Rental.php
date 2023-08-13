@@ -66,12 +66,33 @@ class Rental
     }
 
     /**
+     * método responsável por atualizar um aluguel com a instancia atual
+     * @return boolean
+     */
+    public function atualizar()
+    {
+
+        //atualiza um consumidor no banco de dados
+        return (new Database('rentals'))->update('id = ' . $this->id, [
+            'rental' => $this->rental,
+            'delivery' => $this->delivery,
+            'costumer_id' => $this->costumer_id,
+            'book_id' => $this->book_id,
+            'employee_id' => $this->employee_id,
+        ]);
+
+        //sucesso
+        return true;
+    }
+
+    /**
      * metodo responsável por retornar um aluguel com base no seu id
      * @param integer $id
      * @return Rental
      */
-    public static function getRentalById($id){
-        return self::getRental('id ='. $id)->fetchObject(self::class);
+    public static function getRentalById($id)
+    {
+        return self::getRental('id =' . $id)->fetchObject(self::class);
     }
 
     /**
@@ -81,7 +102,8 @@ class Rental
      * @param string $field
      * @return PDOStatement
      */
-    public static function getRental($where = null, $order = null, $limit = null, $fields = '*'){
+    public static function getRental($where = null, $order = null, $limit = null, $fields = '*')
+    {
         return (new Database('rentals'))->select($where, $order, $limit, $fields);
     }
 
@@ -92,8 +114,8 @@ class Rental
      * @param integer $field
      * @return PDOStatement
      */
-    public static function getRentalJoin($where = null, $order = null, $limit = null){
+    public static function getRentalJoin($where = null, $order = null, $limit = null)
+    {
         return (new Database('rentals'))->selectRental($where, $order, $limit);
     }
-
 }

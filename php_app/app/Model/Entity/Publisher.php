@@ -37,6 +37,22 @@ class Publisher
     }
 
     /**
+     * método responsável por atualizar uma editora com a instancia atual
+     * @return boolean
+     */
+    public function atualizar()
+    {
+
+        //atualiza um consumidor no banco de dados
+        return (new Database('publishers'))->update('id = ' . $this->id, [
+            'name' => $this->name,
+        ]);
+
+        //sucesso
+        return true;
+    }
+
+    /**
      * metodo responsável por retornar uma editora com base no seu id
      * @param integer $id
      * @return Publisher

@@ -64,6 +64,26 @@ class Employee
     }
 
     /**
+     * método responsável por atualizar um funcionario com a instancia atual
+     * @return boolean
+     */
+    public function atualizar()
+    {
+
+        //atualiza um consumidor no banco de dados
+        return (new Database('employees'))->update('id = ' . $this->id, [
+            'name' => $this->name,
+            'pis' => $this->pis,
+            'office' => $this->office,
+            'departament' => $this->departament,
+            'library_id' => $this->library_id,
+        ]);
+
+        //sucesso
+        return true;
+    }
+
+    /**
      * metodo responsável por retornar um funcionario com base no seu id
      * @param integer $id
      * @return Employee
