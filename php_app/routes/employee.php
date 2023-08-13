@@ -7,6 +7,9 @@ use \App\Controller\Pages\Create;
 //ROTA EMPLOYEE
 //LISTAGEM
 $obRouter->get('/employee', [
+    'middlewares' => [
+        'required-admin-login'
+    ],
     function () {
         return new Response(200, Read\Employee::getEmployee());
     }
@@ -14,6 +17,9 @@ $obRouter->get('/employee', [
 
 //REGISTRO 
 $obRouter->get('/registerEmployee', [
+    'middlewares' => [
+        'required-admin-login'
+    ],
     function () {
         return new Response(200, Create\registerEmployee::getRegisterEmployee());
     }
@@ -21,19 +27,22 @@ $obRouter->get('/registerEmployee', [
 
 $obRouter->post('/registerEmployee', [
     function ($request) {
-        return new Response(200, Create\registerEmployee::insertEmployee($request));
+        return new Response(200, Create\registerEmployee::setRegisterEmployee($request));
     }
 ]);
 
 //UPDATE
-$obRouter->get('/updateEmployee', [
-    function () {
-        return new Response(200, Read\Employee::getUpdateEmployee());
+$obRouter->get('/updateEmployee/{id}/edit', [
+    'middlewares' => [
+        'required-admin-login'
+    ],
+    function ($request, $id) {
+        return new Response(200, Read\Employee::getUpdateEmployee($request, $id));
     }
 ]);
 
-$obRouter->put('/updateEmployee', [
-    function ($request) {
-        return new Response(200, Read\Employee::getUpdateEmployee());
+$obRouter->put('/updateEmployee/{id}/edit', [
+    function ($request, $id) {
+        return new Response(200, Read\Employee::getUpdateEmployee($request, $id));
     }
 ]);

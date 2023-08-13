@@ -6,6 +6,9 @@ use \App\Controller\Pages\Create;
 //ROTA RENTAL
 //LISTAGEM
 $obRouter->get('/rental', [
+    'middlewares' => [
+        'required-admin-login'
+    ],
     function ($request) {
         return new Response(200, Read\Rental::getRental($request));
     }
@@ -13,6 +16,9 @@ $obRouter->get('/rental', [
 
 //REGISTRO 
 $obRouter->get('/registerRental', [
+    'middlewares' => [
+        'required-admin-login'
+    ],
     function ($request) {
         return new Response(200, Create\registerRental::getRegisterRental($request));
     }
@@ -20,19 +26,22 @@ $obRouter->get('/registerRental', [
 
 $obRouter->post('/registerRental', [
     function ($request) {
-        return new Response(200, Create\registerRental::insertRental($request));
+        return new Response(200, Create\registerRental::setRegisterRental($request));
     }
 ]);
 
 //UPDATE
-$obRouter->get('/updateRental', [
-    function () {
-        return new Response(200, Read\Rental::getUpdateRental());
+$obRouter->get('/updateRental/{id}/edit', [
+    'middlewares' => [
+        'required-admin-login'
+    ],
+    function ($request,$id) {
+        return new Response(200, Read\Rental::getUpdateRental($request,$id));
     }
 ]);
 
-$obRouter->put('/updateRental', [
-    function ($request) {
-        return new Response(200, Read\Rental::getUpdateRental());
+$obRouter->put('/updateRental/{id}/edit', [
+    function ($request,$id) {
+        return new Response(200, Read\Rental::getUpdateRental($request,$id));
     }
 ]);

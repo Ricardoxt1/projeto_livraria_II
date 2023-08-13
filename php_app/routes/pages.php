@@ -10,8 +10,8 @@ $obRouter->get('/home', [
     'middlewares' => [
         'required-admin-login'
     ],
-    function () {
-        return new Response(200, HomePage\Home::getHome());
+    function ($request) {
+        return new Response(200, HomePage\Home::getHome($request));
     }
 ]);
 

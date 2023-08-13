@@ -7,13 +7,19 @@ use \App\Controller\Pages\Create;
 //ROTA COSTUMER
 //LISTAGEM
 $obRouter->get('/costumer', [
-    function () {
-        return new Response(200, Read\Costumer::getCostumer());
+    'middlewares' => [
+        'required-admin-login'
+    ],
+    function ($request) {
+        return new Response(200, Read\Costumer::getCostumer($request));
     }
 ]);
 
 //REGISTRO
 $obRouter->get('/registerCostumer', [
+    'middlewares' => [
+        'required-admin-login'
+    ],
     function () {
         return new Response(200, Create\registerCostumer::getRegisterCostumer());
     }
@@ -22,19 +28,22 @@ $obRouter->get('/registerCostumer', [
 $obRouter->post('/registerCostumer', [
     function ($request) {
 
-        return new Response(200, Create\registerCostumer::insertCostumer($request));
+        return new Response(200, Create\registerCostumer::setRegisterCostumer($request));
     }
 ]);
 
 //UPDATE
-$obRouter->get('/updateCostumer', [
-    function () {
-        return new Response(200, Read\Costumer::getUpdateCostumer());
+$obRouter->get('/updateCostumer/{id}/edit', [
+    'middlewares' => [
+        'required-admin-login'
+    ],
+    function ($request,$id) {
+        return new Response(200, Read\Costumer::getUpdateCostumer($request,$id));
     }
 ]);
 
-$obRouter->put('/updateCostumer', [
-    function ($request) {
-        return new Response(200, Read\Costumer::getUpdateCostumer());
+$obRouter->put('/updateCostumer/{id}/edit', [
+    function ($request,$id) {
+        return new Response(200, Read\Costumer::getUpdateCostumer($request,$id));
     }
 ]);
