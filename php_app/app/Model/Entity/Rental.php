@@ -66,13 +66,33 @@ class Rental
     }
 
     /**
+     * metodo responsável por retornar um aluguel com base no seu id
+     * @param integer $id
+     * @return Rental
+     */
+    public static function getRentalById($id){
+        return self::getRental('id ='. $id)->fetchObject(self::class);
+    }
+
+    /**
+     * @param string $where
+     * @param string $order
+     * @param string $limit
+     * @param string $field
+     * @return PDOStatement
+     */
+    public static function getRental($where = null, $order = null, $limit = null, $fields = '*'){
+        return (new Database('rentals'))->select($where, $order, $limit, $fields);
+    }
+
+    /**
      * @param string $where
      * @param string $order
      * @param string $limit
      * @param integer $field
      * @return PDOStatement
      */
-    public static function getRental($where = null, $order = null, $limit = null){
+    public static function getRentalJoin($where = null, $order = null, $limit = null){
         return (new Database('rentals'))->selectRental($where, $order, $limit);
     }
 

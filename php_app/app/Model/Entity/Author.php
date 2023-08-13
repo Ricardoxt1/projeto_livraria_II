@@ -37,6 +37,15 @@ class Author
     }
 
     /**
+     * metodo responsável por retornar um autor com base no seu id
+     * @param integer $id
+     * @return Author
+     */
+    public static function getAuthorById($id){
+        return self::getAuthor('id ='. $id)->fetchObject(self::class);
+    }
+
+    /**
      * @param string $where
      * @param string $order
      * @param string $limit

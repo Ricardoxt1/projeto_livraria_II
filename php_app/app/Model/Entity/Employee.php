@@ -64,6 +64,15 @@ class Employee
     }
 
     /**
+     * metodo responsável por retornar um funcionario com base no seu id
+     * @param integer $id
+     * @return Employee
+     */
+    public static function getEmployeeById($id){
+        return self::getEmployee('id ='. $id)->fetchObject(self::class);
+    }
+
+    /**
      * @param string $where
      * @param string $order
      * @param string $limit

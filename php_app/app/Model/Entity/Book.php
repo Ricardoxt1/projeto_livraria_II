@@ -6,25 +6,6 @@ use \WilliamCosta\DatabaseManager\Database;
 
 class Book
 {
-
-    // /**
-    //  * id da imagem
-    //  * @var integer
-    //  */
-    // public $image;
-
-    // /**
-    //  * path da imagem
-    //  * @var string
-    //  */
-    // public $path;
-
-    // /**
-    //  * datetime da imagem
-    //  * @var datetime
-    //  */
-    // public $datetime;
-
     /**
      * id do livro
      * @var integer
@@ -73,13 +54,6 @@ class Book
      */
     public function cadastrar()
     {
-
-        //inseri um livro no banco de dados
-        // $this->id = (new Database('image'))->insert([
-        //     'path' => $this->path,
-        //     'datetime' => $this->datetime,
-        // ]);
-
         //inseri um livro no banco de dados
         $this->id = (new Database('books'))->insert([
             'titule' => $this->titule,
@@ -92,6 +66,15 @@ class Book
 
         //sucesso
         return true;
+    }
+
+    /**
+     * metodo responsável por retornar um livro com base no seu id
+     * @param integer $id
+     * @return Book
+     */
+    public static function getBookById($id){
+        return self::getBook('id ='. $id)->fetchObject(self::class);
     }
 
     /**
@@ -113,7 +96,6 @@ class Book
      */
     public static function getBookJoin($where = null, $order = null, $limit = null)
     {
-
         return (new Database('books'))->selectBook($where, $order, $limit);
     }
 

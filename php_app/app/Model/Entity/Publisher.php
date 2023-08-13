@@ -37,6 +37,15 @@ class Publisher
     }
 
     /**
+     * metodo responsável por retornar uma editora com base no seu id
+     * @param integer $id
+     * @return Publisher
+     */
+    public static function getPublisherById($id){
+        return self::getPublisher('id ='. $id)->fetchObject(self::class);
+    }
+
+    /**
      * @param string $where
      * @param string $order
      * @param string $limit

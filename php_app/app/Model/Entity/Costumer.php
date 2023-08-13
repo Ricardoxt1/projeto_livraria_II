@@ -64,6 +64,15 @@ class Costumer
     }
 
     /**
+     * metodo responsável por retornar um autor com base no seu id
+     * @param integer $id
+     * @return Author
+     */
+    public static function getCostumerById($id){
+        return self::getCostumer('id ='. $id)->fetchObject(self::class);
+    }
+
+    /**
      * @param string $where
      * @param string $order
      * @param string $limit
