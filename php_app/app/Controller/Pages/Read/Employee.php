@@ -4,7 +4,7 @@ namespace App\Controller\Pages\Read;
 
 use \App\Utils\View;
 use \App\Model\Entity\Employee as EntityEmployee;
-
+use \App\Controller\Pages\Client\Alert;
 
 class Employee extends Page
 {
@@ -50,6 +50,30 @@ class Employee extends Page
         return parent::getPage('Listagem de Funcionários', $content);
     }
 
+    /**
+     * método responsável por retornar a mensagem de status
+     * @param request $request
+     * @return string
+     */
+    private static function getStatus($request)
+    {
+        //query params
+        $queryParamns = $request->getQueryParams();
+
+        //status
+        if (!isset($queryParamns['status'])) return '';
+
+        //Mensagem de Status
+        switch ($queryParamns['status']) {
+            case 'created':
+                return Alert::getSuccess('Funcionário(a) criado com sucesso!');
+                break;
+            case 'updated':
+                return Alert::getSuccess('Funcionário(a) atualizado com sucesso!');
+                break;
+        }
+    }
+
     /** metodo para realizar update dos dados da pagina de funcionario (view)
      * @return string
      *  */
@@ -72,6 +96,7 @@ class Employee extends Page
             'office' => $obEmployee->office,
             'departament' => $obEmployee->departament,
             'library_id' => $obEmployee->library_id,
+            'status' => self::getStatus($request)
         ]);
 
         //retorna a view da pagina

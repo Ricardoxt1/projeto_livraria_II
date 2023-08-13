@@ -7,6 +7,8 @@ use \App\Model\Entity\Book as EntityBook;
 use \App\Model\Entity\Author;
 use \App\Model\Entity\Publisher;
 use \WilliamCosta\DatabaseManager\Pagination;
+use \App\Controller\Pages\Client\Alert;
+
 
 
 class Book extends Page
@@ -68,6 +70,30 @@ class Book extends Page
 
         //retorna a view da pagina
         return parent::getPage('Listagem de Livros', $content);
+    }
+
+    /**
+     * método responsável por retornar a mensagem de status
+     * @param request $request
+     * @return string
+     */
+    private static function getStatus($request)
+    {
+        //query params
+        $queryParamns = $request->getQueryParams();
+
+        //status
+        if (!isset($queryParamns['status'])) return '';
+
+        //Mensagem de Status
+        switch ($queryParamns['status']) {
+            case 'created':
+                return Alert::getSuccess('Livro criado com sucesso!');
+                break;
+            case 'updated':
+                return Alert::getSuccess('Livro atualizado com sucesso!');
+                break;
+        }
     }
 
     /**
@@ -140,6 +166,7 @@ class Book extends Page
             'realese_date' => $obBook->realese_date,
             'optionAuthor' => self::getBookOpAuthor($request),
             'optionPublisher' => self::getBookOpPublisher($request),
+            'status' => self::getStatus($request)
 
         ]);
 

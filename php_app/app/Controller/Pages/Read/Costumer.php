@@ -4,6 +4,7 @@ namespace App\Controller\Pages\Read;
 
 use \App\Utils\View;
 use \App\Model\Entity\Costumer as EntityCostumer;
+use \App\Controller\Pages\Client\Alert;
 
 
 class Costumer extends Page
@@ -48,11 +49,36 @@ class Costumer extends Page
         return parent::getPage('Listagem de Usuarios', $content);
     }
 
+    /**
+     * método responsável por retornar a mensagem de status
+     * @param request $request
+     * @return string
+     */
+    private static function getStatus($request)
+    {
+        //query params
+        $queryParamns = $request->getQueryParams();
+
+        //status
+        if (!isset($queryParamns['status'])) return '';
+
+        //Mensagem de Status
+        switch ($queryParamns['status']) {
+            case 'created':
+                return Alert::getSuccess('Usuario criado com sucesso!');
+                break;
+            case 'updated':
+                return Alert::getSuccess('Usuario atualizado com sucesso!');
+                break;
+        }
+    }
+
     /** metodo para realizar update dos dados da pagina de usuario (view)
      * @return string
      *  */
     public static function getUpdateCostumer($request, $id)
     {
+        
         //obtem os dados de usuarios no banco de dados
         $obCostumer = EntityCostumer::getCostumerById($id);
 
@@ -69,6 +95,8 @@ class Costumer extends Page
             'phone_number' => $obCostumer->phone_number,
             'address' => $obCostumer->address,
             'email' => $obCostumer->email,
+            'status' => self::getStatus($request)
+
         ]);
 
         //retorna a view da pagina

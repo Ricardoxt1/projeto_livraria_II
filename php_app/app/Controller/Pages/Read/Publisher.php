@@ -4,7 +4,7 @@ namespace App\Controller\Pages\Read;
 
 use \App\Utils\View;
 use \App\Model\Entity\Publisher as EntityPublisher;
-
+use \App\Controller\Pages\Client\Alert;
 
 class Publisher extends Page
 {
@@ -44,6 +44,30 @@ class Publisher extends Page
         return parent::getPage('Listagem de Editoras',$content);
     }
 
+    /**
+     * método responsável por retornar a mensagem de status
+     * @param request $request
+     * @return string
+     */
+    private static function getStatus($request)
+    {
+        //query params
+        $queryParamns = $request->getQueryParams();
+
+        //status
+        if (!isset($queryParamns['status'])) return '';
+
+        //Mensagem de Status
+        switch ($queryParamns['status']) {
+            case 'created':
+                return Alert::getSuccess('Editora criado com sucesso!');
+                break;
+            case 'updated':
+                return Alert::getSuccess('Editora atualizado com sucesso!');
+                break;
+        }
+    }
+
     /** metodo para realizar update dos dados da pagina de editora (view)
      * @return string
      *  */
@@ -62,6 +86,7 @@ class Publisher extends Page
             //view publisher
             'id' => $obPublisher->id,
             'name' => $obPublisher->name,
+            'status' => self::getStatus($request)
         ]);
 
         //retorna a view da pagina

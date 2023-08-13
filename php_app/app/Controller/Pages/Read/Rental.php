@@ -7,7 +7,7 @@ use \App\Model\Entity\Rental as EntityRental;
 use \App\Model\Entity\Costumer as EntityCostumer;
 use \App\Model\Entity\Book as EntityBook;
 use \App\Model\Entity\Employee as EntityEmployee;
-
+use \App\Controller\Pages\Client\Alert;
 
 
 class Rental extends Page
@@ -55,6 +55,30 @@ class Rental extends Page
 
         //retorna a view da pagina
         return parent::getPage('Listagem de Alugueis', $content);
+    }
+
+    /**
+     * método responsável por retornar a mensagem de status
+     * @param request $request
+     * @return string
+     */
+    private static function getStatus($request)
+    {
+        //query params
+        $queryParamns = $request->getQueryParams();
+
+        //status
+        if (!isset($queryParamns['status'])) return '';
+
+        //Mensagem de Status
+        switch ($queryParamns['status']) {
+            case 'created':
+                return Alert::getSuccess('Aluguel criado com sucesso!');
+                break;
+            case 'updated':
+                return Alert::getSuccess('Aluguel atualizado com sucesso!');
+                break;
+        }
     }
 
     /**
@@ -152,6 +176,7 @@ class Rental extends Page
             'optionCostumer' => self::getRentalOpCostumer($request),
             'optionBook' => self::getRentalOpBook($request),
             'optionEmployee' => self::getRentalOpEmployee($request),
+            'status' => self::getStatus($request),
         ]);
 
         //retorna a view da pagina

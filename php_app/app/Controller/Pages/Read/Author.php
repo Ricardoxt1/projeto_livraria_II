@@ -4,7 +4,7 @@ namespace App\Controller\Pages\Read;
 
 use \App\Utils\View;
 use \App\Model\Entity\Author as EntityAuthor;
-
+use \App\Controller\Pages\Client\Alert;
 
 class Author extends Page
 {
@@ -52,6 +52,29 @@ class Author extends Page
         return parent::getPage('Listagem de Autores', $content);
     }
 
+    /**
+     * método responsável por retornar a mensagem de status
+     * @param request $request
+     * @return string
+     */
+    private static function getStatus($request)
+    {
+        //query params
+        $queryParamns = $request->getQueryParams();
+
+        //status
+        if (!isset($queryParamns['status'])) return '';
+
+        //Mensagem de Status
+        switch ($queryParamns['status']) {
+            case 'created':
+                return Alert::getSuccess('Autor criado com sucesso!');
+                break;
+            case 'updated':
+                return Alert::getSuccess('Autor atualizado com sucesso!');
+                break;
+        }
+    }
 
     /** metodo para realizar busca de dados para realizar update autores (view)
      * @return string
@@ -75,6 +98,7 @@ class Author extends Page
             'title' => 'Editar Autores',
             'id' => $obAuthor->id,
             'name' => $obAuthor->name,
+            'status' => self::getStatus($request)
         ]);
 
         //retorna a view da pagina
@@ -105,6 +129,6 @@ class Author extends Page
         $obAuthor->atualizar();
 
         //redireciona para editagem
-        $request->getRouter()->redirect('/'. 'updateAuthor/'.$obAuthor->id.'/edit?status=updated');
+        $request->getRouter()->redirect('/' . 'updateAuthor/' . $obAuthor->id . '/edit?status=updated');
     }
 }

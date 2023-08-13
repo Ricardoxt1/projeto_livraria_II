@@ -8,11 +8,12 @@
                 <main>
                     <div class="py-5 ml-2">
                         <h2>{{title}}</h2>
-                        <form class="row g-3 needs-validation was-validated my-5" method="post" novalidate="">
+                        <div class="mt-5">{{status}}</div>
+                        <form class="row g-3 needs-validation was-validated my-4" method="post" novalidate="">
                             <div class="col-md-4">
                                 <label for="validationCustom01" class="form-label">Nome do autor</label>
-                                <input type="text" class="form-control" id="validationCustom01"
-                                  name="name"  placeholder="Digite seu nome" value="{{name}}" required="">
+                                <input type="text" class="form-control" id="validationCustom01" name="name"
+                                    placeholder="Digite seu nome" value="{{name}}" required="">
                                 <div class="valid-feedback">
                                     Nome preenchido!
                                 </div>

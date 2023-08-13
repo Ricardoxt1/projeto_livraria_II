@@ -13,6 +13,7 @@
 
                         <div class="col-md-7 col-lg-12">
                             <h5 class="mb-3">Informações revelantes sobre o livro</h5>
+                            <div class="my-5">{{status}}</div>
                             <form class="needs-validation was-validated" method="post" novalidate="">
                                 <div class="row g-3">
                                     <div class="col-sm-6">
@@ -43,8 +44,8 @@
                                     <div class="col-sm-3">
                                         <label for="validationCustom03" class="form-label">Data de
                                             lançamento</label>
-                                        <input type="number" min="1800" id="validationCustom03" name="realese_date"
-                                            max="" step="1" class="form-control" placeholder="1800" value="{{realese_date}}" required>
+                                        <input type="number" min="" id="validationCustom03" name="realese_date"
+                                            max="" step="1" class="form-control" placeholder="1901" value="{{realese_date}}" required>
                                         <div class="valid-feedback">
                                             Data de lançamento preenchido!
                                         </div>
@@ -107,7 +108,7 @@
                                     onclick="submitForm()">Enviar
                                 </button>
 
-                                <!-- validação upload de arquivo -->
+                                <!-- validação upload de arquivo
                                 <script>
                                     function submitForm() {
                                         // Verifica se o input do arquivo é válido
@@ -121,7 +122,7 @@
                                             invalidFeedback.style.display = 'block';
                                         }
                                     }
-                                </script>
+                                </script> -->
                             </form>
                         </div>
                     </div>
