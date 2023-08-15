@@ -3,6 +3,7 @@
 use \App\Http\Response;
 use \App\Controller\Pages\Read;
 use \App\Controller\Pages\Create;
+use \App\Controller\Pages\Delete;
 //ROTA AUTHOR
 //LISTAGEM
 $obRouter->get('/author', [
@@ -39,30 +40,30 @@ $obRouter->get('/updateAuthor/{id}/edit', [
         'required-admin-login'
     ],
     function ($request, $id) {
-        return new Response(200, Read\Author::getUpdateAuthor($request,$id));
+        return new Response(200, Read\Author::getUpdateAuthor($request, $id));
     }
 ]);
 
 $obRouter->post('/updateAuthor/{id}/edit', [
-    function ($request,$id) {
-        return new Response(200, Read\Author::setUpdateAuthor($request,$id));
+    function ($request, $id) {
+        return new Response(200, Read\Author::setUpdateAuthor($request, $id));
     }
 ]);
 
 //DELETE
-$obRouter->get('/author/{id}/delete', [
-    'middlewares' => [
-        'required-admin-login', 'mainteance'
-    ],
-    function ($request, $id) {
-        return new Response(200, Read\Author::getDeleteAuthor($request,$id));
-    }
-]);
-$obRouter->post('/author/{id}/delete', [
+$obRouter->get('/deleteAuthor/{id}/delete', [
     'middlewares' => [
         'required-admin-login'
     ],
     function ($request, $id) {
-        return new Response(200, Read\Author::setDeleteAuthor($request,$id));
+        return new Response(200, Delete\Author::getDeleteAuthor($request, $id));
+    }
+]);
+$obRouter->post('/deleteAuthor/{id}/delete', [
+    'middlewares' => [
+        'required-admin-login'
+    ],
+    function ($request, $id) {
+        return new Response(200, Delete\Author::setDeleteAuthor($request, $id));
     }
 ]);

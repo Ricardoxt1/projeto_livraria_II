@@ -3,6 +3,8 @@
 use \App\Http\Response;
 use \App\Controller\Pages\Read;
 use \App\Controller\Pages\Create;
+use \App\Controller\Pages\Delete;
+
 //ROTA RENTAL
 //LISTAGEM
 $obRouter->get('/rental', [
@@ -47,19 +49,19 @@ $obRouter->post('/updateRental/{id}/edit', [
 ]);
 
 //DELETE
-$obRouter->get('/rental/{id}/delete', [
+$obRouter->get('/deleteRental/{id}/delete', [
     'middlewares' => [
-        'required-admin-login', 'mainteance'
+        'required-admin-login'
     ],
     function ($request, $id) {
-        return new Response(200, Read\Rental::getDeleteRental($request,$id));
+        return new Response(200, Delete\Rental::getDeleteRental($request,$id));
     }
 ]);
-$obRouter->post('/rental/{id}/delete', [
+$obRouter->post('/deleteRental/{id}/delete', [
     'middlewares' => [
-        'required-admin-login', 'mainteance'
+        'required-admin-login'
     ],
     function ($request, $id) {
-        return new Response(200, Read\Rental::setDeleteRental($request,$id));
+        return new Response(200, Delete\Rental::setDeleteRental($request,$id));
     }
 ]);

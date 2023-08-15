@@ -3,6 +3,7 @@
 use \App\Http\Response;
 use \App\Controller\Pages\Read;
 use \App\Controller\Pages\Create;
+use \App\Controller\Pages\Delete;
 //ROTA BOOK
 //LISTAGEM
 $obRouter->get('/book', [
@@ -47,19 +48,19 @@ $obRouter->post('/updateBook/{id}/edit', [
 ]);
 
 //DELETE
-$obRouter->get('/book/{id}/delete', [
-    'middlewares' => [
-        'required-admin-login', 'mainteance'
-    ],
-    function ($request, $id) {
-        return new Response(200, Read\Book::getDeleteBook($request,$id));
-    }
-]);
-$obRouter->post('/book/{id}/delete', [
+$obRouter->get('/deleteBook/{id}/delete', [
     'middlewares' => [
         'required-admin-login'
     ],
     function ($request, $id) {
-        return new Response(200, Read\Book::setDeleteBook($request,$id));
+        return new Response(200, Delete\Book::getDeleteBook($request,$id));
+    }
+]);
+$obRouter->post('/deleteBook/{id}/delete', [
+    'middlewares' => [
+        'required-admin-login'
+    ],
+    function ($request, $id) {
+        return new Response(200, Delete\Book::setDeleteBook($request,$id));
     }
 ]);

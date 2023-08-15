@@ -3,6 +3,7 @@
 use \App\Http\Response;
 use \App\Controller\Pages\Read;
 use \App\Controller\Pages\Create;
+use \App\Controller\Pages\Delete;
 
 //ROTA COSTUMER
 //LISTAGEM
@@ -49,19 +50,19 @@ $obRouter->post('/updateCostumer/{id}/edit', [
 ]);
 
 //DELETE
-$obRouter->get('/costumer/{id}/delete', [
-    'middlewares' => [
-        'required-admin-login', 'mainteance'
-    ],
-    function ($request, $id) {
-        return new Response(200, Read\Costumer::getDeleteCostumer($request,$id));
-    }
-]);
-$obRouter->post('/costumer/{id}/delete', [
+$obRouter->get('/deleteCostumer/{id}/delete', [
     'middlewares' => [
         'required-admin-login'
     ],
     function ($request, $id) {
-        return new Response(200, Read\Costumer::setDeleteCostumer($request,$id));
+        return new Response(200, Delete\Costumer::getDeleteCostumer($request,$id));
+    }
+]);
+$obRouter->post('/deleteCostumer/{id}/delete', [
+    'middlewares' => [
+        'required-admin-login'
+    ],
+    function ($request, $id) {
+        return new Response(200, Delete\Costumer::setDeleteCostumer($request,$id));
     }
 ]);

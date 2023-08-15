@@ -3,6 +3,8 @@
 use \App\Http\Response;
 use \App\Controller\Pages\Read;
 use \App\Controller\Pages\Create;
+use \App\Controller\Pages\Delete;
+
 //ROTA PUBLISHER
 //LISTAGEM
 $obRouter->get('/publisher', [
@@ -47,19 +49,19 @@ $obRouter->post('/updatePublisher/{id}/edit', [
 ]);
 
 //DELETE
-$obRouter->get('/publisher/{id}/delete', [
-    'middlewares' => [
-        'required-admin-login', 'mainteance'
-    ],
-    function ($request, $id) {
-        return new Response(200, Read\Publisher::getDeletePublisher($request,$id));
-    }
-]);
-$obRouter->post('/publisher/{id}/delete', [
+$obRouter->get('/deletePublisher/{id}/delete', [
     'middlewares' => [
         'required-admin-login'
     ],
     function ($request, $id) {
-        return new Response(200, Read\Publisher::setDeletePublisher($request,$id));
+        return new Response(200, Delete\Publisher::getDeletePublisher($request,$id));
+    }
+]);
+$obRouter->post('/deletePublisher/{id}/delete', [
+    'middlewares' => [
+        'required-admin-login'
+    ],
+    function ($request, $id) {
+        return new Response(200, Delete\Publisher::setDeletePublisher($request,$id));
     }
 ]);

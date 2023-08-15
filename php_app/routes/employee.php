@@ -4,6 +4,8 @@ use \App\Http\Response;
 use \App\Controller\Pages;
 use \App\Controller\Pages\Read;
 use \App\Controller\Pages\Create;
+use \App\Controller\Pages\Delete;
+
 //ROTA EMPLOYEE
 //LISTAGEM
 $obRouter->get('/employee', [
@@ -48,19 +50,19 @@ $obRouter->post('/updateEmployee/{id}/edit', [
 ]);
 
 //DELETE
-$obRouter->get('/employee/{id}/delete', [
-    'middlewares' => [
-        'required-admin-login', 'mainteance'
-    ],
-    function ($request, $id) {
-        return new Response(200, Read\Employee::getDeleteEmployee($request,$id));
-    }
-]);
-$obRouter->post('/employee/{id}/delete', [
+$obRouter->get('/deleteEmployee/{id}/delete', [
     'middlewares' => [
         'required-admin-login'
     ],
     function ($request, $id) {
-        return new Response(200, Read\Employee::setDeleteEmployee($request,$id));
+        return new Response(200, Delete\Employee::getDeleteEmployee($request,$id));
+    }
+]);
+$obRouter->post('/deleteEmployee/{id}/delete', [
+    'middlewares' => [
+        'required-admin-login'
+    ],
+    function ($request, $id) {
+        return new Response(200, Delete\Employee::setDeleteEmployee($request,$id));
     }
 ]);
