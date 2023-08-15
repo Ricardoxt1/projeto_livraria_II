@@ -211,45 +211,4 @@ class Book extends Page
         //redireciona para editagem
         $request->getRouter()->redirect('/' . 'updateBook/' . $obBook->id . '/edit?status=updated');
     }
-
-    /** metodo para realizar exclusão dos dados da pagina de livros
-     * @return string
-     * @param integer $id
-     * @param Request $request
-     * 
-     *  */
-    public static function getDeleteBook($request, $id)
-    {
-        //obtem os dados de livros no banco de dados
-        $obBook = EntityBook::getBookById($id);
-
-
-        //valida a instancia
-        if (!$obBook instanceof EntityBook) {
-            $request->getRouter()->redirect('/book');
-        }
-    }
-
-    /** metodo para realizar exclusão dos dados da pagina de livros
-     * @return string
-     * @param integer $id
-     * @param Request $request
-     * 
-     *  */
-    public static function setDeleteBook($request, $id)
-    {
-        //obtem os dados dos livros no banco de dados
-        $obBook = EntityBook::getBookById($id);
-
-        //valida a instancia
-        if (!$obBook instanceof EntityBook) {
-            $request->getRouter()->redirect('/book');
-        }
-
-        //excluir um livro
-        $obBook->excluir();
-
-        //redireciona para editagem
-        $request->getRouter()->redirect('/book?status=deleted');
-    }
 }

@@ -219,45 +219,4 @@ class Rental extends Page
         //redireciona para editagem
         $request->getRouter()->redirect('/' . 'updateRental/' . $obRental->id . '/edit?status=updated');
     }
-
-    /** metodo para realizar exclusão dos dados da pagina de autores
-     * @return string
-     * @param integer $id
-     * @param Request $request
-     * 
-     *  */
-    public static function getDeleteRental($request, $id)
-    {
-        //obtem os dados de aluguel no banco de dados
-        $obRental = EntityRental::getRentalById($id);
-
-
-        //valida a instancia
-        if (!$obRental instanceof EntityRental) {
-            $request->getRouter()->redirect('/rental');
-        }
-    }
-
-    /** metodo para realizar exclusão dos dados da pagina de aluguel 
-     * @return string
-     * @param integer $id
-     * @param Request $request
-     * 
-     *  */
-    public static function setDeleteRental($request, $id)
-    {
-        //obtem os dados do alguel no banco de dados
-        $obRental = EntityRental::getRentalById($id);
-
-        //valida a instancia
-        if (!$obRental instanceof EntityRental) {
-            $request->getRouter()->redirect('/rental');
-        }
-
-        //excluir um alguel
-        $obRental->excluir();
-
-        //redireciona para editagem
-        $request->getRouter()->redirect('/rental?status=deleted');
-    }
 }

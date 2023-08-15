@@ -127,44 +127,4 @@ class Publisher extends Page
         //redireciona para editagem
         $request->getRouter()->redirect('/' . 'updatePublisher/' . $obPublisher->id . '/edit?status=updated');
     }
-
-    /** metodo para realizar exclusão dos dados da pagina de editora
-     * @return string
-     * @param integer $id
-     * @param Request $request
-     * 
-     *  */
-    public static function getDeletePublisher($request, $id)
-    {
-        //obtem os dados de editora no banco de dados
-        $obPublisher = EntityPublisher::getPublisherById($id);
-
-
-        //valida a instancia
-        if (!$obPublisher instanceof EntityPublisher) {
-            $request->getRouter()->redirect('/publisher');
-        }
-    }
-
-    /** metodo para realizar exclusão dos dados da pagina de editoras (view)
-     * @return string
-     * @param integer $id
-     * @param Request $request
-     * 
-     *  */
-    public static function setDeletePublisher($request, $id)
-    {
-        //obtem os dados de editoras no banco de dados
-        $obPublisher = EntityPublisher::getPublisherById($id);
-
-        //valida a instancia
-        if (!$obPublisher instanceof EntityPublisher) {
-            $request->getRouter()->redirect('/publisher');
-        }
-
-        //excluir uma editora
-        $obPublisher->excluir();
-        //redireciona para editagem
-        $request->getRouter()->redirect('/publisher?status=deleted');
-    }
 }

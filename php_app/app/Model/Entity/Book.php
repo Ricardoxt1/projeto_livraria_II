@@ -90,7 +90,7 @@ class Book
         return true;
     }
 
-        /**
+    /**
      * método responsável por deletar um livro no banco de dados
      * @return boolean
      */

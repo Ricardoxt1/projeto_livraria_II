@@ -12,7 +12,7 @@ class registerAuthor extends registerPage
     /** metodo para envio de dados da pagina registro autores (view)
      * @return string
      *  */
-    public static function getRegisterAuthor()
+    public static function getRegisterAuthor($request)
     {
 
         $content = View::render('pages/register/registerAuthor', [

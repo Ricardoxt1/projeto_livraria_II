@@ -61,6 +61,7 @@ class Author
         //deletar um autor no banco de dados
         return (new Database('authors'))->delete('id = ' . $this->id);
 
+        return true;
     }
 
     /**

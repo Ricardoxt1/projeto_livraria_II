@@ -139,44 +139,4 @@ class Employee extends Page
         //redireciona para editagem
         $request->getRouter()->redirect('/' . 'updateEmployee/' . $obEmployee->id . '/edit?status=updated');
     }
-
-    /** metodo para realizar exclusão dos dados da pagina de funcionários
-     * @return string
-     * @param integer $id
-     * @param Request $request
-     * 
-     *  */
-    public static function getDeleteEmployee($request, $id)
-    {
-        //obtem os dados de funcionario no banco de dados
-        $obEmployee = EntityEmployee::getEmployeeById($id);
-
-
-        //valida a instancia
-        if (!$obEmployee instanceof EntityEmployee) {
-            $request->getRouter()->redirect('/employee');
-        }
-    }
-
-    /** metodo para realizar exclusão dos dados da pagina de funcionário
-     * @return string
-     * @param integer $id
-     * @param Request $request
-     * 
-     *  */
-    public static function setDeleteEmployee($request, $id)
-    {
-        //obtem os dados de funcionário no banco de dados
-        $obEmployee = EntityEmployee::getEmployeeById($id);
-
-        //valida a instancia
-        if (!$obEmployee instanceof EntityEmployee) {
-            $request->getRouter()->redirect('/employee');
-        }
-
-        //excluir um funcionário
-        $obEmployee->excluir();
-        //redireciona para editagem
-        $request->getRouter()->redirect('/employee?status=deleted');
-    }
 }

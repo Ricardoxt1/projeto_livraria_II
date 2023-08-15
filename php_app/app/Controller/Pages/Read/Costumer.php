@@ -139,44 +139,4 @@ class Costumer extends Page
         //redireciona para editagem
         $request->getRouter()->redirect('/' . 'updateCostumer/' . $obCostumer->id . '/edit?status=updated');
     }
-
-    /** metodo para realizar exclusão dos dados da pagina de autores
-     * @return string
-     * @param integer $id
-     * @param Request $request
-     * 
-     *  */
-    public static function getDeleteCostumer($request, $id)
-    {
-        //obtem os dados de consumidores no banco de dados
-        $obCostumer = EntityCostumer::getCostumerById($id);
-
-
-        //valida a instancia
-        if (!$obCostumer instanceof EntityCostumer) {
-            $request->getRouter()->redirect('/costumer');
-        }
-    }
-
-    /** metodo para realizar exclusão dos dados da pagina de consumidores
-     * @return string
-     * @param integer $id
-     * @param Request $request
-     * 
-     *  */
-    public static function setDeleteCostumer($request, $id)
-    {
-        //obtem os dados de consumidores no banco de dados
-        $obCostumer = EntityCostumer::getCostumerById($id);
-
-        //valida a instancia
-        if (!$obCostumer instanceof EntityCostumer) {
-            $request->getRouter()->redirect('/costumer');
-        }
-
-        //excluir um consumidor
-        $obCostumer->excluir();
-        //redireciona para editagem
-        $request->getRouter()->redirect('/costumer?status=deleted');
-    }
 }
