@@ -46,6 +46,6 @@ $obRouter->get('/register', [
 //REGISTRO
 $obRouter->post('/register', [
     function ($request) {
-        return new Response(200, Client\Register::insertRegister($request));
+        return new Response(200, Client\Register::setRegister($request));
     }
 ]);
