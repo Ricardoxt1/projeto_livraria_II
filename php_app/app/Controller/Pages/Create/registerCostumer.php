@@ -2,6 +2,7 @@
 
 namespace App\Controller\Pages\Create;
 
+use App\Http\Request;
 use \App\Utils\View;
 use \App\Model\Entity\Costumer;
 use \Exception;
@@ -11,9 +12,9 @@ class registerCostumer extends registerPage
 {
 
     /** metodo para envio de dados da pagina registro usuario (view)
-     * @return string
+     * @return string parent:getPage
      *  */
-    public static function getRegisterCostumer()
+    public static function getRegisterCostumer(): string
     {
 
         $content = View::render('pages/register/registerCostumer', [
@@ -27,10 +28,10 @@ class registerCostumer extends registerPage
 
     /**
      * método responsavel por cadastrar um usuario
-     * @return boolean
+     * @return string updateCostumer
      * @param Request $request
      */
-    public static function setRegisterCostumer($request)
+    public static function setRegisterCostumer(Request $request): string
     {
         try {
             //dados do post
@@ -43,16 +44,16 @@ class registerCostumer extends registerPage
             $obCostumer->phone_number = $postVars['phone_number'];
             $obCostumer->address = $postVars['address'];
             $obCostumer->email = $postVars['email'];
-            
+
 
             // Cadastrar o cliente
-            $obCostumer->cadastrar();
+            $obCostumer->register();
 
             //redireciona para pagina de editagem
-            $request->getRouter()->redirect('/'. 'updateCostumer/'.$obCostumer->id.'/edit?status=created');
+            $request->getRouter()->redirect('/' . 'updateCostumer/' . $obCostumer->id . '/edit?status=created');
         } catch (Exception $e) {
             // Tratar o erro
-            return "Erro ao inserir cliente: " . $e->getMessage();
+            $e->$request->getRouter()->redirect('registerCostumer/?status=error');
         }
     }
 }

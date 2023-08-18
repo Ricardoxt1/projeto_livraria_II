@@ -10,49 +10,49 @@ class Book
      * id do livro
      * @var integer
      */
-    public $id;
+    public int $id;
 
     /**
      * titulo do livro
      * @var string
      */
-    public $titule;
+    public string $titule;
 
     /**
      * pagina do livro
      * @var string
      */
-    public $page;
+    public string $page;
 
     /**
      * data de lançamento do livro
      * @var string
      */
-    public $realese_date;
+    public string $realese_date;
 
     /** 
      * id do autor
      * @var string
      */
-    public $author_id;
+    public string $author_id;
 
     /**
      * id da livraria
      * @var string
      */
-    public $library_id;
+    public string $library_id;
 
     /**
      * id da editora
      * @var string
      */
-    public $publisher_id;
+    public string $publisher_id;
 
     /**
      * método responsável por cadastrar livro com a instancia atual
      * @return boolean
      */
-    public function cadastrar()
+    public function register(): bool
     {
         //inseri um livro no banco de dados
         $this->id = (new Database('books'))->insert([
@@ -73,7 +73,7 @@ class Book
      * método responsável por atualizar um livro com a instancia atual
      * @return boolean
      */
-    public function atualizar()
+    public function update(): bool
     {
 
         //atualiza um livro no banco de dados
@@ -94,11 +94,10 @@ class Book
      * método responsável por deletar um livro no banco de dados
      * @return boolean
      */
-    public function excluir()
+    public function delete(): bool
     {
         //deletar um livro no banco de dados
         return (new Database('books'))->delete('id = ' . $this->id);
-
     }
 
 
@@ -107,7 +106,7 @@ class Book
      * @param integer $id
      * @return Book
      */
-    public static function getBookById($id)
+    public static function getBookById(int $id): Book
     {
         return self::getBook('id =' . $id)->fetchObject(self::class);
     }
@@ -119,7 +118,7 @@ class Book
      * @param string $field
      * @return PDOStatement
      */
-    public static function getBook($where = null, $order = null, $limit = null, $fields = '*')
+    public static function getBook(string $where = null, string $order = null, string $limit = null, string $fields = '*')
     {
         return (new Database('books'))->select($where, $order, $limit, $fields);
     }
@@ -130,7 +129,7 @@ class Book
      * @param string $limit
      * @return PDOStatement
      */
-    public static function getBookJoin($where = null, $order = null, $limit = null)
+    public static function getBookJoin(string $where = null, string $order = null, string $limit = null)
     {
         return (new Database('books'))->selectBook($where, $order, $limit);
     }

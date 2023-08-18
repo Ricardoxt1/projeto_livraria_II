@@ -8,21 +8,21 @@ use \App\Model\Entity\Costumer as EntityCostumer;
 use \App\Model\Entity\Book as EntityBook;
 use \App\Model\Entity\Employee as EntityEmployee;
 use \App\Controller\Pages\Client\Alert;
-
+use App\Http\Request;
 
 class Rental extends Page
 {
     /** 
      * método responsavel por retornar itens alocados no banco de dados redenrizando a pagina
-     * @return string
+     * @return string $itens
      */
-    private function getRentalItems($request)
+    private function getRentalItems(): string
     {
         // dados de aluguel
         $itens = '';
 
         // resultados da pagina
-        $results = EntityRental::getRentalJoin(null, null, null);
+        $results = EntityRental::getRentalJoin();
 
         // renderiza o item
         while ($obRental = $results->fetchObject(EntityRental::class)) {
@@ -41,9 +41,10 @@ class Rental extends Page
     }
 
     /** metodo para resgatar os dados da pagina de alugueis (view)
-     * @return string
+     * @param Request $request
+     * @return string View::render 
      *  */
-    public static function getRental($request)
+    public static function getRental(Request $request): string
     {
 
         $content = View::render('pages/list/listRentals', [
@@ -60,10 +61,10 @@ class Rental extends Page
 
     /**
      * método responsável por retornar a mensagem de status
-     * @param request $request
-     * @return string
+     * @param Request $request
+     * @return string $queryParamns
      */
-    private static function getStatus($request)
+    private static function getStatus(Request $request): string
     {
         //query params
         $queryParamns = $request->getQueryParams();
@@ -89,7 +90,7 @@ class Rental extends Page
      * renderiza os dados de consumidor na pagina de aluguel
      * @return string $optionCostumer
      */
-    public static function getRentalOpCostumer()
+    public static function getRentalOpCostumer(): string
     {
 
         //dados dos consumidores
@@ -112,7 +113,7 @@ class Rental extends Page
      * renderiza os dados de livros na pagina de aluguel
      * @return string $optionBook
      */
-    public static function getRentalOpBook()
+    public static function getRentalOpBook(): string
     {
 
         //dados dos livros
@@ -135,7 +136,7 @@ class Rental extends Page
      * renderiza os dados de funcionario na pagina de aluguel
      * @return string $optionEmployee
      */
-    public static function getRentalOpEmployee()
+    public static function getRentalOpEmployee(): string
     {
 
         //dados dos livros
@@ -157,9 +158,11 @@ class Rental extends Page
 
 
     /** metodo para realizar update dos dados da pagina de alguel (view)
-     * @return string
+     * @return string parent::getPage
+     * @param integer $id
+     * @param Request $request
      *  */
-    public static function getUpdateRental($request, $id)
+    public static function getUpdateRental(Request $request, int $id): string
     {
 
         $content = '';
@@ -188,12 +191,12 @@ class Rental extends Page
     }
 
     /** metodo para realizar update dos dados da pagina de aluguel (view)
-     * @return string
-     * @param integer $id
+     * @return string updateRental
      * @param Request $request
+     * @param integer $id
      * 
      *  */
-    public static function setUpdateRental($request, $id)
+    public static function setUpdateRental(Request $request, int $id): string
     {
         //obtem os dados de livros no banco de dados
         $obRental = EntityRental::getRentalById($id);
@@ -213,7 +216,7 @@ class Rental extends Page
         $obRental->book_id = $postVars['book_id'] ?? $obRental->book_id;
         $obRental->employee_id = $postVars['employee_id'] ?? $obRental->employee_id;
 
-        $obRental->atualizar();
+        $obRental->update();
 
 
         //redireciona para editagem

@@ -5,10 +5,14 @@ namespace App\Controller\Pages\Read;
 use \App\Utils\View;
 use \App\Model\Entity\Publisher as EntityPublisher;
 use \App\Controller\Pages\Client\Alert;
+use App\Http\Request;
 
 class Publisher extends Page
 {
-    private function getPublisherItems()
+    /** metodo para resgatar os dados de editoras (view)
+     * @return string $itens
+     *  */
+    private function getPublisherItems(): string
     {
 
         // dados da editora
@@ -30,9 +34,10 @@ class Publisher extends Page
 
 
     /** metodo para resgatar os dados da pagina de editora (view)
-     * @return string
+     * @param Request $request
+     * @return string parent::getPage
      *  */
-    public static function getPublisher($request)
+    public static function getPublisher(Request $request): string
     {
 
         $content = View::render('pages/list/listPublishers', [
@@ -48,10 +53,10 @@ class Publisher extends Page
 
     /**
      * método responsável por retornar a mensagem de status
-     * @param request $request
-     * @return string
+     * @param Request $request
+     * @return string $queryParamns
      */
-    private static function getStatus($request)
+    private static function getStatus(Request $request): string
     {
         //query params
         $queryParamns = $request->getQueryParams();
@@ -74,9 +79,11 @@ class Publisher extends Page
     }
 
     /** metodo para realizar update dos dados da pagina de editora (view)
-     * @return string
+     * @param Request $request
+     * @param integer $id
+     * @return string parent::getPage
      *  */
-    public static function getUpdatePublisher($request, $id)
+    public static function getUpdatePublisher(Request $request, int $id): string
     {
 
         //obtem os dados de editora no banco de dados
@@ -100,12 +107,12 @@ class Publisher extends Page
 
 
     /** metodo para realizar update dos dados da pagina de editora (view)
-     * @return string
+     * @return string updatePublisher
      * @param integer $id
      * @param Request $request
      * 
      *  */
-    public static function setUpdatePublisher($request, $id)
+    public static function setUpdatePublisher(Request $request, int $id): string
     {
         //obtem os dados de livros no banco de dados
         $obPublisher = EntityPublisher::getPublisherById($id);
@@ -121,7 +128,7 @@ class Publisher extends Page
         //atualiza a instancia
         $obPublisher->name = $postVars['name'] ?? $obPublisher->name;
 
-        $obPublisher->atualizar();
+        $obPublisher->update();
 
 
         //redireciona para editagem

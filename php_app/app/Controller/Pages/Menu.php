@@ -9,9 +9,9 @@ class Menu
 {
 
     /** metodo para resgatar os dados da pagina genérica (view)
-     * @return string
+     * @return string View::render
      *  */
-    public static function getMenu()
+    public static function getMenu(): string
     {
 
         return View::render('pages/menu');

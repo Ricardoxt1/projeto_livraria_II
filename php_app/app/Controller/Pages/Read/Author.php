@@ -2,6 +2,7 @@
 
 namespace App\Controller\Pages\Read;
 
+use \App\Http\Request;
 use \App\Utils\View;
 use \App\Model\Entity\Author as EntityAuthor;
 use \App\Controller\Pages\Client\Alert;
@@ -11,11 +12,9 @@ class Author extends Page
 
     /**
      * método responsavel por retornar itens alocados no banco de dados, renderizando na pagina.
-     * @return string
-     * @param Request $request
-     * @return string
+     * @return string $itens
      */
-    private function getAuthorItems($request)
+    private function getAuthorItems(): string
     {
         // dados do autor
         $itens = '';
@@ -36,10 +35,10 @@ class Author extends Page
     }
 
     /** metodo para resgatar os dados da pagina de autores (view)
-     * @param request $request
-     * @return string
+     * @param Request $request
+     * @return string parent::getPage
      *  */
-    public static function getAuthor($request)
+    public static function getAuthor(Request $request): string
     {
 
         $content = View::render('pages/list/listAuthors', [
@@ -55,10 +54,10 @@ class Author extends Page
 
     /**
      * método responsável por retornar a mensagem de status
-     * @param request $request
-     * @return string
+     * @param Request $request
+     * @return string $queryParamns 
      */
-    private static function getStatus($request)
+    private static function getStatus(Request $request): string
     {
         //query params
         $queryParamns = $request->getQueryParams();
@@ -81,16 +80,16 @@ class Author extends Page
     }
 
     /** metodo para realizar busca de dados para realizar update autores (view)
-     * @return string
+     * @return string parent::getPage
      * @param integer $id
      * @param Request $request
      * 
      *  */
-    public static function getUpdateAuthor($request, $id)
+    public static function getUpdateAuthor(Request $request, int $id): string
     {
         //obtem os dados de autores no banco de dados
         $obAuthor = EntityAuthor::getAuthorById($id);
-     
+
         //valida a instancia
         if (!$obAuthor instanceof EntityAuthor) {
             $request->getRouter()->redirect('/author');
@@ -115,7 +114,7 @@ class Author extends Page
      * @param Request $request
      * 
      *  */
-    public static function setUpdateAuthor($request, $id)
+    public static function setUpdateAuthor(Request $request, int $id): string
     {
         //obtem os dados de autores no banco de dados
         $obAuthor = EntityAuthor::getAuthorById($id);
@@ -130,7 +129,7 @@ class Author extends Page
 
         //atualiza a instancia
         $obAuthor->name = $postVars['name'] ?? $obAuthor->name;
-        $obAuthor->atualizar();
+        $obAuthor->update();
 
         //redireciona para editagem
         $request->getRouter()->redirect('/' . 'updateAuthor/' . $obAuthor->id . '/edit?status=updated');

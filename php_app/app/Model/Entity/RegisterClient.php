@@ -11,41 +11,42 @@ class RegisterClient
      * id do registro
      * @var integer
      */
-    public $id;
+    public int $id;
 
     /**
      * nome do registro
      * @var string
      */
-    public $username;
+    public string $username;
 
     /**
      * email do registro
      * @var string
      */
-    public $email;
+    public string $email;
 
     /**
      * password do registro
      * @var string
      */
-    public $password;
+    public string $password;
 
     /**
      * método responsável por retornar um usuário com base em seu email
      * @param string $email
-     * @return RegisterClient
+     * @return 
      */
-    public static function getRegisterByEmail($email){
-        return (new Database('register'))->select('email = "'.$email.'"')->fetchObject(self::class);
+    public static function getRegisterByEmail(string $email)
+    {
+        return (new Database('register'))->select('email = "' . $email . '"')->fetchObject(self::class);
     }
 
-        
+
     /**
      * método responsável por cadastrar com a instancia atual
      * @return boolean
      */
-    public function cadastrar()
+    public function register(): bool
     {
         $hashedPassword = password_hash($this->password, PASSWORD_BCRYPT);
         //inseri um registrar no banco de dados
@@ -64,10 +65,11 @@ class RegisterClient
      * @param string $where
      * @param string $order
      * @param string $limit
-     * @param integer $field
+     * @param string $field
      * @return PDOStatement
      */
-    public static function getRegister($where = null, $order = null, $limit = null, $fields = '*'){
+    public static function getRegister(string $where = null, string $order = null, string $limit = null, string $fields = '*')
+    {
         return (new Database('register'))->select($where, $order, $limit, $fields);
     }
 }

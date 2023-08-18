@@ -2,6 +2,9 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Request;
+use App\Http\Response;
+use Closure;
 
 class Queue
 {
@@ -10,32 +13,32 @@ class Queue
      * mapeamento de middleware
      * @var array
      */
-    private static $map = [];
+    private static array $map = [];
 
     /**
      * mapeamento de middleware que serão carregados em todas as rotas
      * @var array
      */
-    private static $default = [];
+    private static array $default = [];
 
 
     /**
      * fila de middlewares a serem executados
      * @var array 
      */
-    private $middlewares = [];
+    private array $middlewares = [];
 
     /**
      * função de execução do controlador
      * @var Closure
      */
-    private $controller;
+    private Closure $controller;
 
     /**
      * argumentos da função do controlador
      * @var array 
      */
-    private $controllerArgs = [];
+    private array $controllerArgs = [];
 
     /**
      * método responsavel por construir a classe de filme middlewares
@@ -43,7 +46,7 @@ class Queue
      * @param array $controllerArgs
      * @param array $middlewares
      */
-    public function __construct($middlewares, $controller, $controllerArgs)
+    public function __construct(array $middlewares, Closure $controller, array $controllerArgs)
     {
         $this->middlewares = array_merge(self::$default, $middlewares);
         $this->controller = $controller;
@@ -54,16 +57,16 @@ class Queue
      * método responsável por definir o mapeamento de middlewares
      * @param array $map
      */
-    public static function setMap($map)
+    public static function setMap(array $map): void
     {
         self::$map = $map;
     }
 
     /**
      * método responsável por definir o mapeamento de middlewares padrões
-     * @param array $map
+     * @param array $default
      */
-    public static function setDefault($default)
+    public static function setDefault(array $default): void
     {
         self::$default = $default;
     }
@@ -73,7 +76,7 @@ class Queue
      * @param Request $request
      * @return Response
      */
-    public function next($request)
+    public function next(Request $request): ?Response
     {
 
         //Valida instancia de controller

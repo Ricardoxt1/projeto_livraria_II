@@ -11,43 +11,43 @@ class Costumer
      * id do costumer
      * @var integer
      */
-    public $id;
+    public int $id;
 
     /**
      * nome do usuario
      * @var string
      */
-    public $name;
+    public string $name;
 
     /**
      * cpf do usuario
      * @var string
      */
-    public $cpf;
+    public string $cpf;
 
     /**
      * telefone do usuario
      * @var string
      */
-    public $phone_number;
+    public string $phone_number;
 
     /** 
      * endereço do usuario
      * @var string
      */
-    public $address;
+    public string $address;
 
     /**
      * email do usuario
      * @var string
      */
-    public $email;
+    public string $email;
 
     /**
      * método responsável por cadastrar usuario com a instancia atual
      * @return boolean
      */
-    public function cadastrar()
+    public function register(): bool
     {
 
         //inseri um usuario no banco de dados
@@ -67,7 +67,7 @@ class Costumer
      * método responsável por atualizar um usuario com a instancia atual
      * @return boolean
      */
-    public function atualizar()
+    public function update(): bool
     {
 
         //atualiza um consumidor no banco de dados
@@ -87,7 +87,7 @@ class Costumer
      * método responsável por deletar um consumidor no banco de dados
      * @return boolean
      */
-    public function excluir()
+    public function delete(): bool
     {
         //deletar um consumidor no banco de dados
         return (new Database('costumers'))->delete('id = ' . $this->id);
@@ -96,9 +96,9 @@ class Costumer
     /**
      * metodo responsável por retornar um autor com base no seu id
      * @param integer $id
-     * @return Author
+     * @return Costumer
      */
-    public static function getCostumerById($id)
+    public static function getCostumerById(int $id): Costumer
     {
         return self::getCostumer('id =' . $id)->fetchObject(self::class);
     }
@@ -107,10 +107,10 @@ class Costumer
      * @param string $where
      * @param string $order
      * @param string $limit
-     * @param integer $field
+     * @param string $field
      * @return PDOStatement
      */
-    public static function getCostumer($where = null, $order = null, $limit = null, $fields = '*')
+    public static function getCostumer(string $where = null, string $order = null, string $limit = null, string $fields = '*')
     {
         return (new Database('costumers'))->select($where, $order, $limit, $fields);
     }

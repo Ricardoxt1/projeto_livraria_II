@@ -11,43 +11,43 @@ class Employee
      * id do funcionario(a)
      * @var integer
      */
-    public $id;
+    public int $id;
 
     /**
      * nome do funcionario(a)
      * @var string
      */
-    public $name;
+    public string $name;
 
     /**
      * pis do funcionario(a)
      * @var string
      */
-    public $pis;
+    public string $pis;
 
     /**
      * cargo do funcionario(a)
      * @var string
      */
-    public $office;
+    public string $office;
 
     /** 
      * departamento do funcionario(a)
      * @var string
      */
-    public $departament;
+    public string $departament;
 
     /**
      * livraria do funcionario(a)
      * @var string
      */
-    public $library_id;
+    public string $library_id;
 
     /**
      * método responsável por cadastrar funcionario(a) com a instancia atual
      * @return boolean
      */
-    public function cadastrar()
+    public function register(): bool
     {
 
         //inseri um funcionario(a) no banco de dados
@@ -67,7 +67,7 @@ class Employee
      * método responsável por atualizar um funcionario com a instancia atual
      * @return boolean
      */
-    public function atualizar()
+    public function update(): bool
     {
 
         //atualiza um consumidor no banco de dados
@@ -87,7 +87,7 @@ class Employee
      * método responsável por deletar um funcionário no banco de dados
      * @return boolean
      */
-    public function excluir()
+    public function delete(): bool
     {
         //deletar um funcionario no banco de dados
         return (new Database('employees'))->delete('id = ' . $this->id);
@@ -98,7 +98,7 @@ class Employee
      * @param integer $id
      * @return Employee
      */
-    public static function getEmployeeById($id)
+    public static function getEmployeeById(int $id): Employee
     {
         return self::getEmployee('id =' . $id)->fetchObject(self::class);
     }
@@ -107,10 +107,10 @@ class Employee
      * @param string $where
      * @param string $order
      * @param string $limit
-     * @param integer $field
+     * @param string $field
      * @return PDOStatement
      */
-    public static function getEmployee($where = null, $order = null, $limit = null, $fields = '*')
+    public static function getEmployee(string $where = null, string $order = null, string $limit = null, string $fields = '*')
     {
         return (new Database('employees'))->select($where, $order, $limit, $fields);
     }

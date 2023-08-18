@@ -1,6 +1,8 @@
 <?php
+
 namespace App\Controller\Pages\Create;
 
+use App\Http\Request;
 use \App\Utils\View;
 use \App\Model\Entity\Author;
 use \Exception;
@@ -10,9 +12,9 @@ class registerAuthor extends registerPage
 {
 
     /** metodo para envio de dados da pagina registro autores (view)
-     * @return string
+     * @return string parent::getPage
      *  */
-    public static function getRegisterAuthor($request)
+    public static function getRegisterAuthor(): string
     {
 
         $content = View::render('pages/register/registerAuthor', [
@@ -26,10 +28,10 @@ class registerAuthor extends registerPage
 
     /**
      * método responsavel por cadastrar um autor
-     * @return boolean
+     * @return string
      * @param Request $request
      */
-    public static function setRegisterAuthor($request)
+    public static function setRegisterAuthor(Request $request): string
     {
         try {
             //dados do post
@@ -38,13 +40,13 @@ class registerAuthor extends registerPage
             //nova instancia de autor
             $obAuthor = new Author();
             $obAuthor->name = $postVars['name'];
-            $obAuthor->cadastrar();
+            $obAuthor->register();
 
             //redireciona para editagem
-            $request->getRouter()->redirect('/'. 'updateAuthor/'.$obAuthor->id.'/edit?status=created');
+            $request->getRouter()->redirect('/' . 'updateAuthor/' . $obAuthor->id . '/edit?status=created');
         } catch (Exception $e) {
             // Capturar e tratar exceções
-            return 'Erro ao inserir autor: ' . $e->getMessage();
+            $e->$request->getRouter()->redirect('registerAuthor/?status=error');
         }
     }
 }

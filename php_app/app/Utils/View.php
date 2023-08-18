@@ -8,13 +8,14 @@ class View
      * variaveis padrões da view
      * @var array
      */
-    private static $vars;
+    private static array $vars;
 
     /**
      * método responsável por definir os dados iniciais da class
      * @param array $vars
      */
-    public static function init($vars = []){
+    public static function init(array $vars = []): void
+    {
         self::$vars = $vars;
     }
 
@@ -23,7 +24,7 @@ class View
      * @param string $view 
      * @return string
      */
-    private static function getContentView($view)
+    private static function getContentView(string $view): string
     {
         $file = __DIR__ . '/../../resources/view/' . $view . '.html';
         return file_exists($file) ? file_get_contents($file) : '';
@@ -35,7 +36,7 @@ class View
      * @param array $vars (string ou $number)
      * @return string
      */
-    public static function render($view, $vars = [])
+    public static function render(string $view, array $vars = []): string
     {
         //conteudo da view
         $contentView = self::getContentView($view);
@@ -45,10 +46,10 @@ class View
 
         //identificando as chaves na view
         $keys = array_keys($vars);
-        $keys = array_map(function ($item){
-            return '{{'.$item.'}}';
+        $keys = array_map(function ($item) {
+            return '{{' . $item . '}}';
         }, $keys);
-        
+
         //retorna o conteúdo redenrizado
         return str_replace($keys, array_values($vars), $contentView);
     }

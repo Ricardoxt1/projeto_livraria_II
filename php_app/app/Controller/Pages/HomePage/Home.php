@@ -8,10 +8,9 @@ class Home extends PageH
 {
 
     /** metodo para resgatar os dados da pagina de tela inicial (view)
-     * @param Request $request
-     * @return string
+     * @return string parent::getPageH
      *  */
-    public static function getHome($request)
+    public static function getHome() : string
     {
         //contéudo da home
         $content = View::render('pages/homePage/home', [

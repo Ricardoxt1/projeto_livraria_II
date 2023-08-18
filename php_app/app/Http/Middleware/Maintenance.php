@@ -2,16 +2,19 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Request;
+use App\Http\Response;
+use Closure;
+
 class Maintenance
 {
-
     /**
      * método responsável por executar o middleware
      * @param Request $request
-     * @param Closure next
+     * @param Closure $next
      * @return Response
      */
-    public function handle($request, $next)
+    public function handle(Request $request, Closure $next): ?Response
     {
 
         //verifica o estado de manutenção da pagina

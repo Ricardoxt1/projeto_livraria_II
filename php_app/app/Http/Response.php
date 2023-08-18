@@ -9,40 +9,44 @@ class Response
      * código do status HTTP
      * @var integer
      */
-    private $httpCode = 200;
+    private int $httpCode = 200;
 
     /**
      * cabeçalho do response
      * @var array
      */
-    private $headers = [];
+    private array $headers = [];
 
     /**
      * tipo de dados a ser retornado
      * @var string
      */
-    private $contentType = 'text/html';
+    private string $contentType = 'text/html';
 
     /**
      * conteúdo do response
-     * @var mixed
+     * @var string
      */
-    private $content;
+    private string $content;
 
     /**
      * método responsavel por iniciar a classe e definir os valores 
      * @param string $content
      * @param string $contentType
-     * @param array $httpCode
+     * @param int $httpCode
      */
-    public function __construct($httpCode, $content, $contentType = 'text/html')
+    public function __construct(int $httpCode, string $content, string $contentType = 'text/html')
     {
         $this->httpCode = $httpCode;
         $this->content = $content;
         $this->setContentType($contentType);
     }
 
-    public function setContentType($contentType)
+    /**
+     * metodo responsavel por enviar o tipo do conteudo
+     * @param string $contentType
+     */
+    public function setContentType($contentType): void
     {
         $this->contentType = $contentType;
         $this->addHeader('Content-Type', $contentType);
@@ -51,18 +55,17 @@ class Response
     /**
      * metodo responsavel por adicionar um registro no cabeçalho de response
      * @param string $key
-     * @param mixed $value
+     * @param string $value
      */
-    public function addHeader($key, $value)
+    public function addHeader(string $key, string $value): void
     {
         $this->headers[$key] = $value;
     }
 
     /**
      * metodo responsavel por enviar os headers para o navegador
-     * 
      */
-    public function sendHeaders()
+    public function sendHeaders(): void
     {
         //STATUS
         http_response_code($this->httpCode);
@@ -75,9 +78,8 @@ class Response
 
     /**
      * método responsável por enviar a resposta para o usuario
-     * 
      */
-    public function sendResponse()
+    public function sendResponse(): void
     {
         // //ENVIA OS HEADERS
         $this->sendHeaders();

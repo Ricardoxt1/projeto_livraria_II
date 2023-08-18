@@ -2,6 +2,7 @@
 
 namespace App\Controller\Pages\Create;
 
+use \App\Http\Request;
 use \App\Utils\View;
 use \App\Model\Entity\Publisher;
 use \Exception;
@@ -10,9 +11,9 @@ class registerPublisher extends registerPage
 {
 
     /** metodo para envio de dados da pagina registro editora (view)
-     * @return string
+     * @return string parent::getPage
      *  */
-    public static function getRegisterPublisher()
+    public static function getRegisterPublisher(): string
     {
 
         $content = View::render('pages/register/registerPublisher', [
@@ -28,10 +29,10 @@ class registerPublisher extends registerPage
 
     /**
      * método responsavel por cadastrar um editora
-     * @return boolean
+     * @return string updatePublisher
      * @param Request $request
      */
-    public static function setRegisterPublisher($request)
+    public static function setRegisterPublisher(Request $request): string
     {
         try {
             //dados do post
@@ -40,13 +41,13 @@ class registerPublisher extends registerPage
             //nova instancia de editora
             $obPublisher = new Publisher();
             $obPublisher->name = $postVars['name'];
-            $obPublisher->cadastrar();
+            $obPublisher->register();
 
             //redireciona para pagina de editagem
-            $request->getRouter()->redirect('/'. 'updatePublisher/'.$obPublisher->id.'/edit?status=created');
+            $request->getRouter()->redirect('/' . 'updatePublisher/' . $obPublisher->id . '/edit?status=created');
         } catch (Exception $e) {
             // Tratar o erro
-            return "Erro ao cadastrar uma editora: " . $e->getMessage();
+            $e->$request->getRouter()->redirect('registerPublisher/?status=error');
         }
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Controller\Pages\Create;
 
+use App\Http\Request;
 use \App\Utils\View;
 use \App\Model\Entity\Book as EntityBook;
 use \App\Model\Entity\Author;
@@ -16,13 +17,14 @@ class registerBook extends registerPage
      * renderiza os dados de editora na pagina de livros
      * @return string $optionPublisher
      */
-    public static function getBookOpPublisher(){
-        
+    public static function getBookOpPublisher(): string
+    {
+
         //dados da editora
         $optionPublisher = '';
 
         // resultados de editora
-        $publisherResult = Publisher::getPublisher(null,null,null);
+        $publisherResult = Publisher::getPublisher();
         // renderiza o item
         while ($obPublisher = $publisherResult->fetchObject(Publisher::class)) {
             $optionPublisher .= View::render('pages/register/book/optionPublisher', [
@@ -30,7 +32,7 @@ class registerBook extends registerPage
                 'publisher' => $obPublisher->name,
             ]);
         }
-     
+
         return $optionPublisher;
     }
 
@@ -38,13 +40,14 @@ class registerBook extends registerPage
      * renderiza os dados de autores na pagina de livros
      * @return string $optionAuthor
      */
-    public static function getBookOpAuthor(){
+    public static function getBookOpAuthor(): string
+    {
 
         //dados dos autores
         $optionAuthor = '';
-      
+
         // resultados de autores
-        $authorResult = Author::getAuthor(null,null,null);
+        $authorResult = Author::getAuthor();
 
         // renderiza o item
         while ($obAuthor = $authorResult->fetchObject(Author::class)) {
@@ -52,16 +55,15 @@ class registerBook extends registerPage
                 'author_id' => $obAuthor->id,
                 'author' => $obAuthor->name,
             ]);
-
         }
 
         return $optionAuthor;
     }
 
     /** metodo para envio de dados da pagina registro livros (view)
-     * @return string
+     * @return string parent::getPage
      *  */
-    public static function getRegisterBook($request)
+    public static function getRegisterBook(Request $request): string
     {
 
         $content = View::render('pages/register/registerBook', [
@@ -78,15 +80,15 @@ class registerBook extends registerPage
 
     /**
      * método responsavel por cadastrar um livro
-     * @return boolean
+     * @return string updateBook
      * @param Request $request
      */
-    public static function setRegiterBook($request)
+    public static function setRegiterBook(Request $request): string
     {
         try {
             //dados do post
             $postVars = $request->getPostVars();
-            
+
             //nova instancia de livro
             $obBook = new EntityBook();
             $obBook->titule = $postVars['titule'];
@@ -95,13 +97,13 @@ class registerBook extends registerPage
             $obBook->author_id = $postVars['author_id'];
             $obBook->library_id = $postVars['library_id'];
             $obBook->publisher_id = $postVars['publisher_id'];
-            // $obBook->img = $postVars['img'];
-            $obBook->cadastrar();
+            
+            $obBook->register();
 
             //redireciona para pagina de editagem
-            $request->getRouter()->redirect('/'. 'updateBook/'.$obBook->id.'/edit?status=created');
+            $request->getRouter()->redirect('/' . 'updateBook/' . $obBook->id . '/edit?status=created');
         } catch (Exception $e) {
-            return "Erro ao inserir o livro: " . $e->getMessage();
+            $e->$request->getRouter()->redirect('registerBook/?status=error');
         }
     }
 }

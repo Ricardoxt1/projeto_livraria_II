@@ -8,9 +8,9 @@ class Album extends PageH
 {
 
     /** metodo para resgatar os dados da pagina de album (view)
-     * @return string
+     * @return string parent::getPageH
      *  */
-    public static function getJRR()
+    public static function getJRR(): string
     {
 
 
@@ -30,9 +30,9 @@ class Album extends PageH
     }
 
     /** metodo para resgatar os dados da pagina de album (view)
-     * @return string
+     * @return string parent::getPageH
      *  */
-    public static function getJK()
+    public static function getJK(): string
     {
 
 
@@ -52,9 +52,9 @@ class Album extends PageH
     }
 
     /** metodo para resgatar os dados da pagina de album (view)
-     * @return string
+     * @return string parent::getPageH
      *  */
-    public static function getJMaas()
+    public static function getJMaas(): string
     {
 
 

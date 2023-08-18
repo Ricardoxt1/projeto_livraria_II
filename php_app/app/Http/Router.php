@@ -13,25 +13,25 @@ class Router
      * url completa do projeto (raiz)
      * @var string
      */
-    private $url = '';
+    private string $url = '';
 
     /**
      * prefixo de todas as rotas
      * @var string
      */
-    private $prefix = '';
+    private string $prefix = '';
 
     /**
      * indice de todas as rotas
      * @var array
      */
-    private $routes = [];
+    private array $routes = [];
 
     /**
      * instancia de request
      * @var Request
      */
-    private $request;
+    private Request $request;
 
 
 
@@ -39,14 +39,17 @@ class Router
      * ( construção de do cosntructor) método responsavel por iniciar a classe 
      * @param string $url
      */
-    public function __construct($url)
+    public function __construct(string $url)
     {
         $this->request = new Request($this);
         $this->url = $url;
         $this->setPrefix();
     }
 
-    public function setPrefix()
+    /**
+     *  metódo utilizado para definir o prefixo da url
+     */
+    public function setPrefix(): void
     {
         //INFORMAÇÕES DA URL ATUAL
         $parseUrl = parse_url($this->url);
@@ -61,7 +64,7 @@ class Router
      * @param array $params
      * @param string $route
      */
-    private function addRoute($method, $route, $params = [])
+    private function addRoute(string $method, string $route, array $params = []): void
     {
 
         //VALIDAÇÃO DOS PARAMETROS
@@ -105,7 +108,7 @@ class Router
      * @param string $route
      * @param array $params
      */
-    public function get($route, $params = [])
+    public function get(string $route, array $params = [])
     {
         return $this->addRoute('GET', $route, $params);
     }
@@ -115,7 +118,7 @@ class Router
      * @param string $route
      * @param array $params
      */
-    public function post($route, $params = [])
+    public function post(string $route, array $params = [])
     {
         return $this->addRoute('POST', $route, $params);
     }
@@ -125,7 +128,7 @@ class Router
      * @param string $route
      * @param array $params
      */
-    public function put($route, $params = [])
+    public function put(string $route, array $params = [])
     {
         return $this->addRoute('PUT', $route, $params);
     }
@@ -135,7 +138,7 @@ class Router
      * @param string $route
      * @param array $params
      */
-    public function delete($route, $params = [])
+    public function delete(string $route, array $params = [])
     {
         return $this->addRoute('DELETE', $route, $params);
     }
@@ -144,7 +147,7 @@ class Router
      * método responsável por retornar a URI desconsiderando o prefixo
      * @return string
      */
-    private function getUri()
+    private function getUri(): string
     {
         //URI DA REQUEST
         $uri = $this->request->getUri();
@@ -163,7 +166,7 @@ class Router
      * método responsável por retornar os dados da rota atual
      * @return array
      */
-    private function getRoute()
+    private function getRoute(): array
     {
 
         //uri
@@ -207,6 +210,9 @@ class Router
         throw new Exception("Url não encontrada", 404);
     }
 
+    /**
+     * método responsavel por carregar a rota
+     */
     public function run()
     {
 
@@ -241,7 +247,7 @@ class Router
      * método responsavel por retornar a url atual
      * @return string
      */
-    public function getCurrentUrl()
+    public function getCurrentUrl(): string 
     {
         return $this->url . $this->getUri();
     }

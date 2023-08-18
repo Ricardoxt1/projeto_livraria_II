@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http;
+use \App\Http\Router;
 
 class Request
 {
@@ -14,7 +15,7 @@ class Request
      * metodo HTTP da requisição
      * @var string 
      */
-    private $httpMethod;
+    private string $httpMethod;
 
     /**
      * uri da pagina
@@ -25,20 +26,25 @@ class Request
      * parametros da url (GET_METHOD)
      * @var array
      */
-    private $queryParams = [];
+    private array $queryParams = [];
 
     /**
      * variaveis recebidas do post da pagina (POST_METHOD)
      * @var array
      */
-    private $postVars = [];
+    private array $postVars = [];
 
     /**
      * cabeçalho da requisição
+     * @var array
      */
-    private $headers = [];
+    private array $headers = [];
 
-    public function __construct($router)
+    /**
+     * metodo constructor
+     * @param Router $route
+     */
+    public function __construct(Router $router)
     {
         $this->router = $router;
         $this->queryParams =  $_GET ?? [];
@@ -51,10 +57,11 @@ class Request
     /**
      * método para definir a URI
      */
-    private function setUri(){
+    private function setUri(): void
+    {
         //URI COMPLETA (COM GETS)
         $this->uri = $_SERVER['REQUEST_URI'] ?? '';
-        
+
         //REMOVE GETS DA URI
         $xURI = explode('?', $this->uri);
         $this->uri = $xURI[0];
@@ -64,50 +71,52 @@ class Request
      * retorna uma instancia de router
      * @return Router
      */
-    public function getRouter(){
+    public function getRouter()
+    {
         return $this->router;
     }
 
     /**
      * metodo responsavel por retornar headers da requisição
-     * @return string
+     * @return array headers
      */
-    public function getHeaders(){
+    public function getHeaders(): array
+    {
         return $this->headers;
     }
 
     /**
      * metodo responsavel por retornar os parametos com seus resultados da requisição
-     * @return array
+     * @return array query parameters
      */
-    public function getQueryParams()
+    public function getQueryParams(): array
     {
         return $this->queryParams;
     }
 
     /**
      * metodo responsavel por retornar post das variaveis  da requisição
-     * @return array
+     * @return array postVars
      */
-    public function getPostVars()
+    public function getPostVars(): array
     {
         return $this->postVars;
     }
 
     /**
      * metodo responsavel por retornar metodo do HTTP da requisição
-     * @return string
+     * @return string httpMethod
      */
-    public function getHttpMethod()
+    public function getHttpMethod(): string
     {
         return $this->httpMethod;
     }
 
     /**
      * metodo responsavel por retornar url da requisição
-     * @return string
+     * @return string uri
      */
-    public function getUri()
+    public function getUri(): string
     {
         return $this->uri;
     }

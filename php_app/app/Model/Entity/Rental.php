@@ -2,6 +2,7 @@
 
 namespace App\Model\Entity;
 
+use DateTime;
 use \WilliamCosta\DatabaseManager\Database;
 
 
@@ -12,7 +13,7 @@ class Rental
      * id do funcionario(a)
      * @var integer
      */
-    public $id;
+    public int $id;
 
     /**
      * data do aluguel
@@ -30,25 +31,25 @@ class Rental
      * id do usuario que realizou o aluguel
      * @var integer
      */
-    public $costumer_id;
+    public int $costumer_id;
 
     /**
      * id do livro alugado
      * @var integer
      */
-    public $book_id;
+    public int $book_id;
 
     /**
      * id do funcionario que realizou o aluguel
      * @var integer
      */
-    public $employee_id;
+    public int $employee_id;
 
     /**
      * método responsável por cadastrar funcionario(a) com a instancia atual
      * @return boolean
      */
-    public function cadastrar()
+    public function register(): bool
     {
 
         //inseri um aluguel no banco de dados
@@ -69,7 +70,7 @@ class Rental
      * método responsável por atualizar um aluguel com a instancia atual
      * @return boolean
      */
-    public function atualizar()
+    public function update(): bool
     {
 
         //atualiza um consumidor no banco de dados
@@ -89,7 +90,7 @@ class Rental
      * método responsável por deletar um aluguel no banco de dados
      * @return boolean
      */
-    public function excluir()
+    public function delete(): bool
     {
         //deletar um aluguel no banco de dados
         return (new Database('rentals'))->delete('id = ' . $this->id);
@@ -100,7 +101,7 @@ class Rental
      * @param integer $id
      * @return Rental
      */
-    public static function getRentalById($id)
+    public static function getRentalById(int $id): Rental
     {
         return self::getRental('id =' . $id)->fetchObject(self::class);
     }
@@ -112,7 +113,7 @@ class Rental
      * @param string $field
      * @return PDOStatement
      */
-    public static function getRental($where = null, $order = null, $limit = null, $fields = '*')
+    public static function getRental(string $where = null, string $order = null, string $limit = null, string $fields = '*')
     {
         return (new Database('rentals'))->select($where, $order, $limit, $fields);
     }
@@ -124,7 +125,7 @@ class Rental
      * @param integer $field
      * @return PDOStatement
      */
-    public static function getRentalJoin($where = null, $order = null, $limit = null)
+    public static function getRentalJoin(string $where = null, string $order = null, string $limit = null)
     {
         return (new Database('rentals'))->selectRental($where, $order, $limit);
     }

@@ -5,10 +5,15 @@ namespace App\Controller\Pages\Read;
 use \App\Utils\View;
 use \App\Model\Entity\Employee as EntityEmployee;
 use \App\Controller\Pages\Client\Alert;
+use App\Http\Request;
 
 class Employee extends Page
 {
-    private function getEmployeeItems()
+    /**
+     * resgate de informações sobre os funcionários
+     * @return string $itens
+     */
+    private function getEmployeeItems(): string
     {
         // dados do usuario
         $itens = '';
@@ -35,9 +40,10 @@ class Employee extends Page
 
 
     /** metodo para resgatar os dados da pagina de funcionario (view)
-     * @return string
+     * @param Request $request
+     * @return string parent::getPage
      *  */
-    public static function getEmployee($request)
+    public static function getEmployee(Request $request): string
     {
 
         $content = View::render('pages/list/listEmployees', [
@@ -53,10 +59,10 @@ class Employee extends Page
 
     /**
      * método responsável por retornar a mensagem de status
-     * @param request $request
-     * @return string
+     * @param Request $request
+     * @return string $queryParamns
      */
-    private static function getStatus($request)
+    private static function getStatus(Request $request): string
     {
         //query params
         $queryParamns = $request->getQueryParams();
@@ -79,9 +85,11 @@ class Employee extends Page
     }
 
     /** metodo para realizar update dos dados da pagina de funcionario (view)
-     * @return string
+     * @param Request $request
+     * @param integer $id
+     * @return string parent::getPage
      *  */
-    public static function getUpdateEmployee($request, $id)
+    public static function getUpdateEmployee(Request $request, int $id): string
     {
 
         //obtem os dados de funcionarios no banco de dados
@@ -108,12 +116,12 @@ class Employee extends Page
     }
 
     /** metodo para realizar update dos dados da pagina de funcionario (view)
-     * @return string
+     * @return string updateEmployee
      * @param integer $id
      * @param Request $request
      * 
      *  */
-    public static function setUpdateEmployee($request, $id)
+    public static function setUpdateEmployee(Request $request, int $id): string
     {
         //obtem os dados de livros no banco de dados
         $obEmployee = EntityEmployee::getEmployeeById($id);
@@ -133,7 +141,7 @@ class Employee extends Page
         $obEmployee->departament = $postVars['departament'] ?? $obEmployee->departament;
         $obEmployee->library_id = $postVars['library_id'] ?? $obEmployee->library_id;
 
-        $obEmployee->atualizar();
+        $obEmployee->update();
 
 
         //redireciona para editagem

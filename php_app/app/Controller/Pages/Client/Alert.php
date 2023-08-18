@@ -9,9 +9,10 @@ class Alert{
     /**
      * método responsável por retornar uma mensagem de erro
      * @param string $message
-     * @return string
+     * @return string View::render
      */
-    public static function getError($message){
+    public static function getError(string $message) : string
+    {
         return View::render('pages/client/alert/status',[
             'tipo' => 'danger',
             'mensagem' => $message
@@ -21,9 +22,10 @@ class Alert{
     /**
      * método responsável por retornar uma mensagem de sucesso
      * @param string $message
-     * @return string
+     * @return string View::render
      */
-    public static function getSuccess($message){
+    public static function getSuccess(string $message) : string
+    {
         return View::render('pages/client/alert/status',[
             'tipo' => 'success',
             'mensagem' => $message

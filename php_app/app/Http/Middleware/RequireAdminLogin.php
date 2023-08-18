@@ -2,19 +2,24 @@
 
 namespace App\Http\Middleware;
 
+use App\Http\Request;
+use App\Http\Response;
 use \App\Session\Admin\Login as SessionAdminLogin;
+use Closure;
 
-class RequireAdminLogin{
+class RequireAdminLogin
+{
 
     /**
      * método responsável por executar o middleware
      * @param Request $request
-     * @param Closure next
-     * @return Response
+     * @param Closure $next
+     * @return Response $next($request)
      */
-    public function handle($request, $next){
+    public function handle(Request $request, Closure $next): ?Response
+    {
         //verifica se o usuario esta logado
-        if(!SessionAdminLogin::isLogged()){
+        if (!SessionAdminLogin::isLogged()) {
             $request->getRouter()->redirect('/login');
         }
 

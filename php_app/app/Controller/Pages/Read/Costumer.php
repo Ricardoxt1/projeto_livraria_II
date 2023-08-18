@@ -2,6 +2,7 @@
 
 namespace App\Controller\Pages\Read;
 
+use \App\Http\Request;
 use \App\Utils\View;
 use \App\Model\Entity\Costumer as EntityCostumer;
 use \App\Controller\Pages\Client\Alert;
@@ -10,7 +11,11 @@ use \App\Controller\Pages\Client\Alert;
 class Costumer extends Page
 {
 
-    private function getCostumerItems()
+    /**
+     * metodo para resgatar os itens dos consumidores
+     * @return string $itens
+     */
+    private function getCostumerItems(): string
     {
         // dados do usuario
         $itens = '';
@@ -34,9 +39,10 @@ class Costumer extends Page
     }
 
     /** metodo para resgatar os dados da pagina de consumidores (view)
-     * @return string
+     * @return string parent::getPage
+     * @param Request $request
      *  */
-    public static function getCostumer($request)
+    public static function getCostumer(Request $request): string
     {
 
         $content = View::render('pages/list/listCostumers', [
@@ -52,10 +58,10 @@ class Costumer extends Page
 
     /**
      * método responsável por retornar a mensagem de status
-     * @param request $request
-     * @return string
+     * @param Request $request
+     * @return string $queryParamns
      */
-    private static function getStatus($request)
+    private static function getStatus(Request $request): string
     {
         //query params
         $queryParamns = $request->getQueryParams();
@@ -78,9 +84,11 @@ class Costumer extends Page
     }
 
     /** metodo para realizar update dos dados da pagina de usuario (view)
-     * @return string
+     * @param Request $request
+     * @param integer $id
+     * @return string parent::getPage
      *  */
-    public static function getUpdateCostumer($request, $id)
+    public static function getUpdateCostumer(Request $request, int $id): string
     {
 
         //obtem os dados de usuarios no banco de dados
@@ -108,12 +116,12 @@ class Costumer extends Page
     }
 
     /** metodo para realizar update dos dados da pagina de consumidor (view)
-     * @return string
+     * @return string updateCostumer
      * @param integer $id
      * @param Request $request
      * 
      *  */
-    public static function setUpdateCostumer($request, $id)
+    public static function setUpdateCostumer(Request $request, int $id): string
     {
         //obtem os dados de livros no banco de dados
         $obCostumer = EntityCostumer::getCostumerById($id);
@@ -133,7 +141,7 @@ class Costumer extends Page
         $obCostumer->address = $postVars['address'] ?? $obCostumer->address;
         $obCostumer->email = $postVars['email'] ?? $obCostumer->email;
 
-        $obCostumer->atualizar();
+        $obCostumer->update();
 
 
         //redireciona para editagem

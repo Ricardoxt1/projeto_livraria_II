@@ -10,19 +10,19 @@ class Client
 
     /**
      * método responsável por redenrizar o rodapé da página
-     * @return string
+     * @return string View::render
      */
-    private static function getFooter()
+    private static function getFooter() :string
     {
         return View::render('pages/client/footer');
     }
 
     /** metodo para resgatar os dados da pagina genérica (view)
-     * @return string
+     * @return string View::render
      * @param string $titule
      * @param string $content
      *  */
-    public static function getClient($titule, $content)
+    public static function getClient(string $titule, string $content) : string
     {
 
         return View::render('pages/client/page', [

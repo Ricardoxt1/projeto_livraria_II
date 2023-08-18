@@ -2,6 +2,7 @@
 
 namespace App\Controller\Pages\Read;
 
+use \App\Http\Request;
 use \App\Utils\View;
 use \App\Model\Entity\Book as EntityBook;
 use \App\Model\Entity\Author;
@@ -15,11 +16,11 @@ class Book extends Page
 {
     /**
      * método responsavel por obter a renderização dos itens de liros para página
-     * @param request $request
-     * @param pagination $obPagination
-     * @return string
+     * @param Request $request
+     * @param Pagination $obPagination
+     * @return string $itens
      */
-    private function getBookItems($request, &$obPagination)
+    private function getBookItems(Request $request, &$obPagination): string
     {
         // dados do livro
         $itens = '';
@@ -55,10 +56,10 @@ class Book extends Page
     }
 
     /** metodo para resgatar os dados da pagina de livros (view)
-     * @param request $request
-     * @return string
+     * @param Request $request
+     * @return string parent::getPage
      *  */
-    public static function getBook($request)
+    public static function getBook(Request $request): string
     {
 
         $content = View::render('pages/list/listBooks', [
@@ -74,10 +75,10 @@ class Book extends Page
 
     /**
      * método responsável por retornar a mensagem de status
-     * @param request $request
-     * @return string
+     * @param Request $request
+     * @return string $queryParamns
      */
-    private static function getStatus($request)
+    private static function getStatus(Request $request): string
     {
         //query params
         $queryParamns = $request->getQueryParams();
@@ -103,14 +104,14 @@ class Book extends Page
      * renderiza os dados de autores na pagina de livros
      * @return string $optionAuthor
      */
-    public static function getBookOpAuthor()
+    public static function getBookOpAuthor(): string
     {
 
         //dados dos autores
         $optionAuthor = '';
 
         // resultados de autores
-        $authorResult = Author::getAuthor(null, null, null);
+        $authorResult = Author::getAuthor();
 
         // renderiza o item
         while ($obAuthor = $authorResult->fetchObject(Author::class)) {
@@ -127,14 +128,14 @@ class Book extends Page
      * renderiza os dados de editora na pagina de livros
      * @return string $optionPublisher
      */
-    public static function getBookOpPublisher()
+    public static function getBookOpPublisher(): string
     {
 
         //dados da editora
         $optionPublisher = '';
 
         // resultados de editora
-        $publisherResult = Publisher::getPublisher(null, null, null);
+        $publisherResult = Publisher::getPublisher();
         // renderiza o item
         while ($obPublisher = $publisherResult->fetchObject(Publisher::class)) {
             $optionPublisher .= View::render('pages/register/book/optionPublisher', [
@@ -147,9 +148,11 @@ class Book extends Page
     }
 
     /** metodo para realizar update dos dados da pagina de livro (view)
-     * @return string
+     * @return string parent::getPage
+     * @param Request $request
+     * @param integer $id
      *  */
-    public static function getUpdateBook($request, $id)
+    public static function getUpdateBook(Request $request, int $id): string
     {
 
         $content = '';
@@ -179,12 +182,12 @@ class Book extends Page
     }
 
     /** metodo para realizar update dos dados da pagina de livros (view)
-     * @return string
-     * @param integer $id
+     * @return string updateBook
      * @param Request $request
+     * @param integer $id
      * 
      *  */
-    public static function setUpdateBook($request, $id)
+    public static function setUpdateBook(Request $request, int $id): string
     {
         //obtem os dados de livros no banco de dados
         $obBook = EntityBook::getBookById($id);
@@ -205,7 +208,7 @@ class Book extends Page
         $obBook->library_id = $postVars['library_id'] ?? $obBook->library_id;
         $obBook->publisher_id = $postVars['publisher_id'] ?? $obBook->publisher_id;
 
-        $obBook->atualizar();
+        $obBook->update();
 
 
         //redireciona para editagem

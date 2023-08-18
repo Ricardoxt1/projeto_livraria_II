@@ -2,20 +2,22 @@
 
 namespace App\Controller\Pages\Delete;
 
+use \App\Http\Request;
 use \App\Utils\View;
 use \App\Model\Entity\Employee as EntityEmployee;
 use \App\Controller\Pages\Client\Alert;
 use \App\Controller\Pages\Read\Page;
+use PDOException;
 
 class Employee extends Page
 {
 
     /**
      * método responsável por retornar a mensagem de status
-     * @param request $request
-     * @return string
+     * @param Request $request
+     * @return string $queryParamns
      */
-    private static function getStatus($request)
+    private static function getStatus(Request $request): string
     {
         //query params
         $queryParamns = $request->getQueryParams();
@@ -25,25 +27,22 @@ class Employee extends Page
 
         //Mensagem de Status
         switch ($queryParamns['status']) {
-            case 'created':
-                return Alert::getSuccess('Funcionário(a) criado com sucesso!');
-                break;
-            case 'updated':
-                return Alert::getSuccess('Funcionário(a) atualizado com sucesso!');
-                break;
             case 'deleted':
                 return Alert::getSuccess('Funcionário(a) deletado com sucesso!');
+                break;
+            case 'error':
+                return Alert::getError('Não foi possível deletar esse funcionário!');
                 break;
         }
     }
 
     /** metodo para realizar exclusão dos dados da pagina de funcionários
-     * @return string
+     * @return string parent::getPageHome
      * @param integer $id
      * @param Request $request
      * 
      *  */
-    public static function getDeleteEmployee($request, $id)
+    public static function getDeleteEmployee(Request $request, int $id): string
     {
         //obtem os dados de funcionario no banco de dados
         $obEmployee = EntityEmployee::getEmployeeById($id);
@@ -71,12 +70,12 @@ class Employee extends Page
     }
 
     /** metodo para realizar exclusão dos dados da pagina de funcionário
-     * @return string
+     * @return string employee
      * @param integer $id
      * @param Request $request
      * 
      *  */
-    public static function setDeleteEmployee($request, $id)
+    public static function setDeleteEmployee(Request $request, int $id): string
     {
         //obtem os dados de funcionário no banco de dados
         $obEmployee = EntityEmployee::getEmployeeById($id);
@@ -86,10 +85,18 @@ class Employee extends Page
             $request->getRouter()->redirect('/employee');
         }
 
-        //excluir um funcionário
-        $obEmployee->excluir($id);
+        try {
+            //excluir um funcionário
+            $obEmployee->delete($id);
+        } catch (PDOException $e) {
+            // Captura o erro e exibe uma mensagem personalizada
+            if (strpos($e->getMessage(), 'ERROR: SQLSTATE[23000]:') || (!$obEmployee->delete($id))) {
+                // Tratar o erro de chave estrangeira
+                $request->getRouter()->redirect('/employee?status=error');
+            }
+        }
+
         //redireciona para editagem
         $request->getRouter()->redirect('/employee?status=deleted');
     }
-
 }

@@ -2,46 +2,47 @@
 
 namespace App\Controller\Pages\Read;
 
+use App\Http\Request;
 use \App\Utils\View;
-
+use WilliamCosta\DatabaseManager\Pagination;
 
 class Page
 {
 
     /**
      * método responsável por redenrizar o topo da página com a navbar
-     * @return string
+     * @return string View::render
      */
-    private static function getNavBar()
+    private static function getNavBar(): string
     {
         return View::render('pages/list/navbar');
     }
 
     /**
      * método responsável por redenrizar a sidebar da página
-     * @return string
+     * @return string View::render
      */
-    private static function getSideBar()
+    private static function getSideBar(): string
     {
         return View::render('pages/list/sidebar');
     }
 
     /**
      * método responsável por redenrizar o rodapé da página
-     * @return string
+     * @return string View::render
      */
-    private static function getFooter()
+    private static function getFooter(): string
     {
         return View::render('pages/list/footer');
     }
 
     /**
      * método responsável por redenrizar o layout de paginação
-     * @param request $request
-     * @param pagination $obPagination
-     * @return string
+     * @param Request $request
+     * @param Pagination $obPagination
+     * @return string View::render
      */
-    public static function getPagination($request, $obPagination)
+    public static function getPagination(Request $request, Pagination $obPagination): string
     {
         //páginas
         $pages = $obPagination->getPages();
@@ -82,9 +83,11 @@ class Page
     }
 
     /** metodo para resgatar os dados da pagina genérica (view)
-     * @return string
+     * @return string View::render
+     * @param string $titule
+     * @param string $content
      *  */
-    public static function getPage($titule, $content)
+    public static function getPage(string $titule, string $content): string
     {
 
         return View::render('pages/list/page', [
@@ -103,9 +106,11 @@ class Page
     }
 
     /** metodo para resgatar os dados da pagina genérica (view)
-     * @return string
+     * @return string View::render
+     * @param string $titule
+     * @param string $content
      *  */
-    public static function getPageHome($titule, $content)
+    public static function getPageHome(string $titule, string $content): string
     {
 
         return View::render('pages/list/page', [

@@ -2,21 +2,22 @@
 
 namespace App\Controller\Pages\Delete;
 
+use \App\Http\Request;
 use \App\Utils\View;
 use \App\Model\Entity\Book as EntityBook;
 use \App\Controller\Pages\Client\Alert;
 use \App\Controller\Pages\Read\Page;
+use PDOException;
 
 
 class Book extends Page
 {
-
-     /**
+    /**
      * método responsável por retornar a mensagem de status
-     * @param request $request
-     * @return string
+     * @param Request $request
+     * @return string $queryParams
      */
-    private static function getStatus($request)
+    private static function getStatus(Request $request): string
     {
         //query params
         $queryParamns = $request->getQueryParams();
@@ -26,26 +27,23 @@ class Book extends Page
 
         //Mensagem de Status
         switch ($queryParamns['status']) {
-            case 'created':
-                return Alert::getSuccess('Autor criado com sucesso!');
-                break;
-            case 'updated':
-                return Alert::getSuccess('Autor atualizado com sucesso!');
-                break;
             case 'deleted':
-                return Alert::getSuccess('Autor deletado com sucesso!');
+                return Alert::getSuccess('Livro deletado com sucesso!');
+                break;
+            case 'error':
+                return Alert::getError('Não foi possível deletar esse livro!');
                 break;
         }
     }
 
 
     /** metodo para realizar exclusão dos dados da pagina de livros
-     * @return string
+     * @return string parent::getPageHome
      * @param integer $id
      * @param Request $request
      * 
      *  */
-    public static function getDeleteBook($request, $id)
+    public static function getDeleteBook(Request $request, int $id): string
     {
         //obtem os dados de livros no banco de dados
         $obBook = EntityBook::getBookById($id);
@@ -72,28 +70,35 @@ class Book extends Page
     }
 
     /** metodo para realizar exclusão dos dados da pagina de livros (view)
-     * @return string
+     * @return string book
      * @param integer $id
      * @param Request $request
      * 
      *  */
-    public static function setDeleteBook($request, $id)
+    public static function setDeleteBook(Request $request, int $id): string
     {
-       
 
         //obtem os dados de livros no banco de dados
         $obBook = EntityBook::getBookById($id);
-        
+
         //valida a instancia
         if (!$obBook instanceof EntityBook) {
             $request->getRouter()->redirect('/book');
         }
 
-        //excluir livros
-        $obBook->excluir($id);
+        //condição para exclusão do item
+        try {
+            //excluir livros
+            $obBook->delete($id);
+        } catch (PDOException $e) {
+            // Captura o erro e exibe uma mensagem personalizada
+            if (strpos($e->getMessage(), 'ERROR: SQLSTATE[23000]:') || (!$obBook->delete($id))) {
+                // Tratar o erro de chave estrangeira
+                $request->getRouter()->redirect('/employee?status=error');
+            }
+        }
 
         //redireciona para editagem
         $request->getRouter()->redirect('/book?status=deleted');
     }
-    
 }

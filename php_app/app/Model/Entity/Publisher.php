@@ -11,20 +11,20 @@ class Publisher
      * id do editora
      * @var integer
      */
-    public $id;
+    public int $id;
 
     /**
      * nome do editora
      * @var string
      */
-    public $name;
+    public string $name;
 
 
     /**
      * método responsável por cadastrar editora com a instancia atual
      * @return boolean
      */
-    public function cadastrar()
+    public function register(): bool
     {
 
         //inseri um editora no banco de dados
@@ -40,7 +40,7 @@ class Publisher
      * método responsável por atualizar uma editora com a instancia atual
      * @return boolean
      */
-    public function atualizar()
+    public function update(): bool
     {
 
         //atualiza um consumidor no banco de dados
@@ -56,7 +56,7 @@ class Publisher
      * método responsável por deletar uma editora no banco de dados
      * @return boolean
      */
-    public function excluir()
+    public function delete(): bool
     {
         //deletar uma editora no banco de dados
         return (new Database('publishers'))->delete('id = ' . $this->id);
@@ -67,7 +67,7 @@ class Publisher
      * @param integer $id
      * @return Publisher
      */
-    public static function getPublisherById($id)
+    public static function getPublisherById(int $id): Publisher
     {
         return self::getPublisher('id =' . $id)->fetchObject(self::class);
     }
@@ -76,10 +76,10 @@ class Publisher
      * @param string $where
      * @param string $order
      * @param string $limit
-     * @param integer $field
+     * @param string $field
      * @return PDOStatement
      */
-    public static function getPublisher($where = null, $order = null, $limit = null, $fields = '*')
+    public static function getPublisher(string $where = null, string $order = null, string $limit = null, string $fields = '*')
     {
         return (new Database('publishers'))->select($where, $order, $limit, $fields);
     }

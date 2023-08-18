@@ -2,20 +2,22 @@
 
 namespace App\Controller\Pages\Delete;
 
+use \App\Http\Request;
 use \App\Utils\View;
 use \App\Model\Entity\Costumer as EntityCostumer;
 use \App\Controller\Pages\Client\Alert;
 use \App\Controller\Pages\Read\Page;
+use PDOException;
 
 class Costumer extends Page
 {
 
     /**
      * método responsável por retornar a mensagem de status
-     * @param request $request
-     * @return string
+     * @param Request $request
+     * @return string $queryParamns
      */
-    private static function getStatus($request)
+    private static function getStatus(Request $request): string
     {
         //query params
         $queryParamns = $request->getQueryParams();
@@ -25,25 +27,22 @@ class Costumer extends Page
 
         //Mensagem de Status
         switch ($queryParamns['status']) {
-            case 'created':
-                return Alert::getSuccess('Livro criado com sucesso!');
-                break;
-            case 'updated':
-                return Alert::getSuccess('Livro atualizado com sucesso!');
-                break;
             case 'deleted':
-                return Alert::getSuccess('Livro deletado com sucesso!');
+                return Alert::getSuccess('Consumidor deletado com sucesso!');
+                break;
+            case 'error':
+                return Alert::getError('Não foi possível deletar esse consumidor!');
                 break;
         }
     }
 
     /** metodo para realizar exclusão dos dados da pagina de consumidores
-     * @return string
+     * @return string  parent::getPageHome
      * @param integer $id
      * @param Request $request
      * 
      *  */
-    public static function getDeleteCostumer($request, $id)
+    public static function getDeleteCostumer(Request $request, int $id): string
     {
         //obtem os dados de consumidores no banco de dados
         $obCostumer = EntityCostumer::getCostumerById($id);
@@ -70,12 +69,12 @@ class Costumer extends Page
     }
 
     /** metodo para realizar exclusão dos dados da pagina de consumidores
-     * @return string
+     * @return string costumer
      * @param integer $id
      * @param Request $request
      * 
      *  */
-    public static function setDeleteCostumer($request, $id)
+    public static function setDeleteCostumer(Request $request, int $id): string
     {
         //obtem os dados de consumidores no banco de dados
         $obCostumer = EntityCostumer::getCostumerById($id);
@@ -85,8 +84,17 @@ class Costumer extends Page
             $request->getRouter()->redirect('/costumer');
         }
 
-        //excluir um consumidor
-        $obCostumer->excluir($id);
+        //condição para exclusão do item
+        try {
+            //excluir um consumidor
+            $obCostumer->delete($id);
+        } catch (PDOException $e) {
+            // Captura o erro e exibe uma mensagem personalizada
+            if (strpos($e->getMessage(), 'ERROR: SQLSTATE[23000]:') || (!$obCostumer->delete($id))) {
+                // Tratar o erro de chave estrangeira
+                $request->getRouter()->redirect('/costumer?status=error');
+            }
+        }
 
         //redireciona para editagem
         $request->getRouter()->redirect('/costumer?status=deleted');

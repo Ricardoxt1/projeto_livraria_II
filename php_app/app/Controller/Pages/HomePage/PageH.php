@@ -7,29 +7,28 @@ use \App\Utils\View;
 
 class PageH
 {
-
     /**
      * método responsável por redenrizar o topo da página com a navbar
-     * @return string
+     * @return string View::render
      */
-    private static function getNavBar()
+    private static function getNavBar(): string
     {
         return View::render('pages/homePage/navbar');
     }
 
     /**
      * método responsável por redenrizar o rodapé da página
-     * @return string
+     * @return string View::render
      */
-    private static function getFooter()
+    private static function getFooter(): string
     {
         return View::render('pages/list/footer');
     }
 
     /** metodo para resgatar os dados da pagina genérica (view)
-     * @return string
+     * @return string View::render
      *  */
-    public static function getPageH($titule, $content)
+    public static function getPageH(string $titule, string $content) : string
     {
 
         return View::render('pages/homePage/page', [
@@ -44,5 +43,4 @@ class PageH
 
         ]);
     }
-
 }

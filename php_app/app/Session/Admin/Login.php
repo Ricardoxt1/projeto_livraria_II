@@ -2,12 +2,14 @@
 
 namespace App\Session\Admin;
 
+use App\Model\Entity\RegisterClient;
+
 class Login
 {
     /**
      * método responsável por iniciar a sessão
      */
-    private static function init()
+    private static function init(): void
     {
         //verifica se a sessão não está ativa
         if (session_status() != PHP_SESSION_ACTIVE) {
@@ -16,10 +18,10 @@ class Login
     }
     /**
      * método responsável por criar o login do usuário
-     * @param Register @obRegister
+     * @param RegisterClient @obRegister
      * @return boolean 
      */
-    public static function login($obRegister)
+    public static function login(RegisterClient $obRegister): bool
     {
         //inicia a sessão
         self::init();
@@ -39,16 +41,17 @@ class Login
      * método responsável por verificar se o usuário está logado
      * @return boolean
      */
-    public static function isLogged(){
+    public static function isLogged(): bool
+    {
         //inicia a sessão
         self::init();
 
         //retorna a verificação
         return isset($_SESSION['client']['register']['id']);
-
     }
 
-    public static function logout(){
+    public static function logout(): bool
+    {
         //inicia a sessão
         self::init();
 

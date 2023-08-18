@@ -2,19 +2,21 @@
 
 namespace App\Controller\Pages\Delete;
 
+use \App\Http\Request;
 use \App\Utils\View;
 use \App\Model\Entity\Publisher as EntityPublisher;
 use \App\Controller\Pages\Client\Alert;
 use \App\Controller\Pages\Read\Page;
+use PDOException;
 
 class Publisher extends Page
 {
-     /**
+    /**
      * método responsável por retornar a mensagem de status
      * @param request $request
-     * @return string
+     * @return string $queryParamns
      */
-    private static function getStatus($request)
+    private static function getStatus(Request $request): string
     {
         //query params
         $queryParamns = $request->getQueryParams();
@@ -24,25 +26,22 @@ class Publisher extends Page
 
         //Mensagem de Status
         switch ($queryParamns['status']) {
-            case 'created':
-                return Alert::getSuccess('Editora criado com sucesso!');
-                break;
-            case 'updated':
-                return Alert::getSuccess('Editora atualizado com sucesso!');
-                break;
             case 'deleted':
                 return Alert::getSuccess('Editora deletada com sucesso!');
+                break;
+            case 'error':
+                return Alert::getError('Não foi possível deletar essa editora!');
                 break;
         }
     }
 
     /** metodo para realizar exclusão dos dados da pagina de editora
-     * @return string
+     * @return string parent::getPageHome
      * @param integer $id
      * @param Request $request
      * 
      *  */
-    public static function getDeletePublisher($request, $id)
+    public static function getDeletePublisher(Request $request, int $id): string
     {
         //obtem os dados de editora no banco de dados
         $obPublisher = EntityPublisher::getPublisherById($id);
@@ -67,12 +66,12 @@ class Publisher extends Page
     }
 
     /** metodo para realizar exclusão dos dados da pagina de editoras (view)
-     * @return string
+     * @return string publisher
      * @param integer $id
      * @param Request $request
      * 
      *  */
-    public static function setDeletePublisher($request, $id)
+    public static function setDeletePublisher(Request $request, int $id): string
     {
         //obtem os dados de editoras no banco de dados
         $obPublisher = EntityPublisher::getPublisherById($id);
@@ -82,8 +81,17 @@ class Publisher extends Page
             $request->getRouter()->redirect('/publisher');
         }
 
-        //excluir uma editora
-        $obPublisher->excluir();
+        try {
+            //excluir uma editora
+            $obPublisher->delete();
+        } catch (PDOException $e) {
+            // Captura o erro e exibe uma mensagem personalizada
+            if (strpos($e->getMessage(), 'ERROR: SQLSTATE[23000]:') || (!$obPublisher->delete($id))) {
+                // Tratar o erro de chave estrangeira
+                $request->getRouter()->redirect('/publisher?status=error');
+            }
+        }
+
         //redireciona para editagem
         $request->getRouter()->redirect('/publisher?status=deleted');
     }
