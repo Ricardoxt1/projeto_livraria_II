@@ -20,8 +20,8 @@ $obRouter->get('/registerAuthor', [
     'middlewares' => [
         'required-admin-login'
     ],
-    function ($request,$model) {
-        return new Response(200, Create\registerAuthor::getRegisterAuthor($request,$model));
+    function ($request) {
+        return new Response(200, Create\registerAuthor::getRegisterAuthor($request));
     }
 ]);
 

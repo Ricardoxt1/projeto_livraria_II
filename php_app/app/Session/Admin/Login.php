@@ -18,10 +18,10 @@ class Login
     }
     /**
      * método responsável por criar o login do usuário
-     * @param RegisterClient @obRegister
      * @return boolean 
+     * @param RegisterClient
      */
-    public static function login(RegisterClient $obRegister): bool
+    public static function login($obRegister): bool
     {
         //inicia a sessão
         self::init();
