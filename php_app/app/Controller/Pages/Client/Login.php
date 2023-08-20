@@ -2,7 +2,7 @@
 
 namespace App\Controller\Pages\Client;
 
-use App\Http\Request;
+use \App\Http\Request;
 use \App\Utils\View;
 use \App\Model\Entity\RegisterClient;
 use \App\Session\Admin\Login as SessionAdminLogin;
